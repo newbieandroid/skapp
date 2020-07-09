@@ -1,3 +1,9 @@
+<p align="center"><a href="https://github.com/Mockingbird1234/skapp"><img width="200" src="./images/icon.png" alt="sk-logo"></a></p>
+
+<p align="center">
+  <a href="https://github.com/Mockingbird1234/skapp/releases"><img src="https://img.shields.io/github/v/release/Mockingbird1234/skapp.svg" alt="Release version"></a>
+</p>
+
 ## SKAPP
 
 <hr />
@@ -10,7 +16,16 @@ web端访问地址：[sk.ncer.top](http://sk.ncer.top)
 
 ### 源码使用方法
 
-使用本源码需要具有flutter的完整环境
+使用方法请参考：[源码使用方法](https://github.com/Mockingbird1234/skapp/blob/master/INSTALL.md)
+
+### 使用技术栈
+
+dart,flutter
+
+### 支持平台
+
+1.安卓设备
+2.ios设备未进行测试
 
 ### UI界面
 
@@ -34,8 +49,3 @@ web端访问地址：[sk.ncer.top](http://sk.ncer.top)
 请尊重版权，支持正版。<br>
 
 若对此有疑问请 mail to: 1768385508+qq.com (请将`+`替换成`@`)。
-
-
-### 支持平台
-
-目前暂时只支持android平台，暂时没有支持ios的打算。
