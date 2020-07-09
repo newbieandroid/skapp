@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/Mockingbird1234/skapp"><img width="200" src="./images/icon.png" alt="sk-logo"></a></p>
+<p align="center"><a href="https://github.com/Mockingbird1234/skapp"><img width="80" src="./images/icon.png" alt="sk-logo"></a></p>
 
 <p align="center">
   <a href="https://github.com/Mockingbird1234/skapp/releases"><img src="https://img.shields.io/github/v/release/Mockingbird1234/skapp.svg" alt="Release version"></a>
