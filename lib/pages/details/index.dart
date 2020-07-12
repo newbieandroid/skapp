@@ -67,7 +67,8 @@ class _DetailsState extends State<Details> {
                       color: Colors.black,
                       child: Stack(
                         children: <Widget>[
-                          store.currentUrl.indexOf('.m3u8') >= 0
+                          (store.currentUrl.indexOf('.m3u8') >= 0) ||
+                                  (store.currentUrl.indexOf('.mp4') >= 0)
                               ? WindowVideoPage(
                                   store: store,
                                 )
