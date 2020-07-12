@@ -6,44 +6,57 @@ part of 'type.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Type on TypeMobx, Store {
   final _$isLoadingAtom = Atom(name: 'TypeMobx.isLoading');
 
   @override
   bool get isLoading {
-    _$isLoadingAtom.context.enforceReadPolicy(_$isLoadingAtom);
-    _$isLoadingAtom.reportObserved();
+    _$isLoadingAtom.reportRead();
     return super.isLoading;
   }
 
   @override
   set isLoading(bool value) {
-    _$isLoadingAtom.context.conditionallyRunInAction(() {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
-      _$isLoadingAtom.reportChanged();
-    }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
+    });
   }
 
   final _$typeAtom = Atom(name: 'TypeMobx.type');
 
   @override
   SkType get type {
-    _$typeAtom.context.enforceReadPolicy(_$typeAtom);
-    _$typeAtom.reportObserved();
+    _$typeAtom.reportRead();
     return super.type;
   }
 
   @override
   set type(SkType value) {
-    _$typeAtom.context.conditionallyRunInAction(() {
+    _$typeAtom.reportWrite(value, super.type, () {
       super.type = value;
-      _$typeAtom.reportChanged();
-    }, _$typeAtom, name: '${_$typeAtom.name}_set');
+    });
   }
 
-  final _$fetchDataAsyncAction = AsyncAction('fetchData');
+  final _$currentSearchTypeIndexAtom =
+      Atom(name: 'TypeMobx.currentSearchTypeIndex');
+
+  @override
+  int get currentSearchTypeIndex {
+    _$currentSearchTypeIndexAtom.reportRead();
+    return super.currentSearchTypeIndex;
+  }
+
+  @override
+  set currentSearchTypeIndex(int value) {
+    _$currentSearchTypeIndexAtom
+        .reportWrite(value, super.currentSearchTypeIndex, () {
+      super.currentSearchTypeIndex = value;
+    });
+  }
+
+  final _$fetchDataAsyncAction = AsyncAction('TypeMobx.fetchData');
 
   @override
   Future<dynamic> fetchData() {
@@ -54,7 +67,8 @@ mixin _$Type on TypeMobx, Store {
 
   @override
   void changeLoading() {
-    final _$actionInfo = _$TypeMobxActionController.startAction();
+    final _$actionInfo =
+        _$TypeMobxActionController.startAction(name: 'TypeMobx.changeLoading');
     try {
       return super.changeLoading();
     } finally {
@@ -63,9 +77,22 @@ mixin _$Type on TypeMobx, Store {
   }
 
   @override
+  void changeCurrentSearchTypeIndex(int index) {
+    final _$actionInfo = _$TypeMobxActionController.startAction(
+        name: 'TypeMobx.changeCurrentSearchTypeIndex');
+    try {
+      return super.changeCurrentSearchTypeIndex(index);
+    } finally {
+      _$TypeMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
-    final string =
-        'isLoading: ${isLoading.toString()},type: ${type.toString()}';
-    return '{$string}';
+    return '''
+isLoading: ${isLoading},
+type: ${type},
+currentSearchTypeIndex: ${currentSearchTypeIndex}
+    ''';
   }
 }
