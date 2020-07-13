@@ -32,6 +32,21 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
     });
   }
 
+  final _$showAdAtom = Atom(name: 'DetailsStoreMobx.showAd');
+
+  @override
+  bool get showAd {
+    _$showAdAtom.reportRead();
+    return super.showAd;
+  }
+
+  @override
+  set showAd(bool value) {
+    _$showAdAtom.reportWrite(value, super.showAd, () {
+      super.showAd = value;
+    });
+  }
+
   final _$vodIdAtom = Atom(name: 'DetailsStoreMobx.vodId');
 
   @override
@@ -149,6 +164,17 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
       ActionController(name: 'DetailsStoreMobx');
 
   @override
+  void changeShowAd(bool showAd) {
+    final _$actionInfo = _$DetailsStoreMobxActionController.startAction(
+        name: 'DetailsStoreMobx.changeShowAd');
+    try {
+      return super.changeShowAd(showAd);
+    } finally {
+      _$DetailsStoreMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void formatPD(String vodPlayUrl) {
     final _$actionInfo = _$DetailsStoreMobxActionController.startAction(
         name: 'DetailsStoreMobx.formatPD');
@@ -218,6 +244,7 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
+showAd: ${showAd},
 vodId: ${vodId},
 vod: ${vod},
 players: ${players},

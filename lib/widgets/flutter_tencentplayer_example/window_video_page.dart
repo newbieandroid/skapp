@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:skapp/store/details/details.dart';
+import 'package:skapp/store/root.dart';
 // import './full_video_page.dart';
 import './widget/tencent_player_bottom_widget.dart';
 import './widget/tencent_player_gesture_cover.dart';
@@ -18,6 +19,7 @@ import 'full_video_page.dart';
 
 class WindowVideoPage extends StatefulWidget {
   final DetailsStore store;
+  final Global global;
   PlayType playType;
 
   //UI
@@ -28,6 +30,7 @@ class WindowVideoPage extends StatefulWidget {
     this.showBottomWidget = true,
     this.showClearBtn = true,
     this.playType = PlayType.network,
+    this.global,
     this.store,
   });
 
@@ -82,17 +85,27 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
     dataSource = widget.store.currentUrl;
     switch (widget.playType) {
       case PlayType.network:
-        controller = TencentPlayerController.network(dataSource);
+        controller = TencentPlayerController.network(
+          dataSource,
+          playerConfig: PlayerConfig(autoPlay: false),
+        );
         break;
       case PlayType.asset:
-        controller = TencentPlayerController.asset(dataSource);
+        controller = TencentPlayerController.asset(
+          dataSource,
+          playerConfig: PlayerConfig(autoPlay: false),
+        );
         break;
       case PlayType.file:
-        controller = TencentPlayerController.file(dataSource);
+        controller = TencentPlayerController.file(
+          dataSource,
+          playerConfig: PlayerConfig(autoPlay: false),
+        );
         break;
       case PlayType.fileId:
         controller = TencentPlayerController.network(null,
             playerConfig: PlayerConfig(
+                autoPlay: false,
                 auth: {"appId": 1252463788, "fileId": dataSource}));
         break;
     }
@@ -138,12 +151,25 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
                 alignment: Alignment.center,
                 children: <Widget>[
                   /// 视频
-                  controller.value.initialized
-                      ? AspectRatio(
-                          aspectRatio: controller.value.aspectRatio,
-                          child: TencentPlayer(controller),
+                  /// 加广告位
+                  widget.store.showAd
+                      ? CountDownWidget(
+                          timer: widget.global.appAds.prestrain.timer,
+                          onCountDownFinishCallBack: (bool value) {
+                            if (value) {
+                              widget.store.changeShowAd(false);
+                            }
+                          },
                         )
-                      : SizedBox(),
+                      : Container(
+                          child: Text('播放电影'),
+                        ),
+                  // controller.value.initialized
+                  //     ? AspectRatio(
+                  //         aspectRatio: controller.value.aspectRatio,
+                  //         child: TencentPlayer(controller),
+                  //       )
+                  //     : SizedBox(),
 
                   /// 支撑全屏
                   Container(),
@@ -324,5 +350,58 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
         });
       });
     }
+  }
+}
+
+class CountDownWidget extends StatefulWidget {
+  final onCountDownFinishCallBack;
+  final int timer;
+
+  CountDownWidget(
+      {Key key, @required this.timer, @required this.onCountDownFinishCallBack})
+      : super(key: key);
+
+  @override
+  _CountDownWidgetState createState() => _CountDownWidgetState();
+}
+
+class _CountDownWidgetState extends State<CountDownWidget> {
+  Timer _timer;
+  int _seconds;
+  @override
+  void initState() {
+    super.initState();
+    _seconds = widget.timer;
+    _startTimer();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        child: Container(
+          width: 0,
+          height: 0,
+        ));
+  }
+
+  /// 启动倒计时的计时器。
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (mounted) {
+        setState(() {});
+      }
+      if (_seconds <= 1) {
+        widget.onCountDownFinishCallBack(true);
+        _cancelTimer();
+        return;
+      }
+      _seconds--;
+    });
+  }
+
+  /// 取消倒计时的计时器。
+  void _cancelTimer() {
+    _timer?.cancel();
   }
 }

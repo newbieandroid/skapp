@@ -4,8 +4,8 @@ typedef RequestCallBack<T> = void Function(T value);
 
 class API {
   static SharedPreferences _prefs;
-  static const BASE_SK_URL = 'http://sk.ncer.top';
-  // static const BASE_SK_URL = 'http://192.168.5.190:8000';
+  // static const BASE_SK_URL = 'http://sk.ncer.top';
+  static const BASE_SK_URL = 'http://192.168.5.191:8000';
   // static const BASE_SK_URL = 'http://192.168.2.201:8000';
   // static const BASE_SK_URL = 'http://192.168.2.127:8000';
   // static const BASE_SK_URL = 'http://192.168.43.237:8000';
@@ -20,6 +20,7 @@ class API {
   static const MUSIC_DOWNLOAD_URL = '/vod/musicurl?songInfoStr='; // 音乐详情页
   // app配置
   static const APP_CONFIG = '/app/config';
+  static const APP_ADS = '/app/ads';
   static const APP_SECRET_LIVE_KEY = 'app/secretlivecheck';
   // app更新配置
   static const APP_UPDATE_URL = '/assets/app/appcast.xml';

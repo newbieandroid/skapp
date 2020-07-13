@@ -84,6 +84,21 @@ mixin _$Global on GlobalMobx, Store {
     });
   }
 
+  final _$appAdsAtom = Atom(name: 'GlobalMobx.appAds');
+
+  @override
+  AppAdsDao get appAds {
+    _$appAdsAtom.reportRead();
+    return super.appAds;
+  }
+
+  @override
+  set appAds(AppAdsDao value) {
+    _$appAdsAtom.reportWrite(value, super.appAds, () {
+      super.appAds = value;
+    });
+  }
+
   final _$titleAtom = Atom(name: 'GlobalMobx.title');
 
   @override
@@ -149,6 +164,13 @@ mixin _$Global on GlobalMobx, Store {
   @override
   Future<dynamic> getAppConfig() {
     return _$getAppConfigAsyncAction.run(() => super.getAppConfig());
+  }
+
+  final _$getAppAdsAsyncAction = AsyncAction('GlobalMobx.getAppAds');
+
+  @override
+  Future<dynamic> getAppAds() {
+    return _$getAppAdsAsyncAction.run(() => super.getAppAds());
   }
 
   final _$GlobalMobxActionController = ActionController(name: 'GlobalMobx');
@@ -226,6 +248,7 @@ showAd: ${showAd},
 updataApp: ${updataApp},
 isAllowProtocol: ${isAllowProtocol},
 appConfig: ${appConfig},
+appAds: ${appAds},
 title: ${title},
 theme: ${theme},
 isDark: ${isDark},

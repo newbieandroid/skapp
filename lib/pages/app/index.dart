@@ -168,7 +168,10 @@ class _App extends State<App> {
                     );
                   },
                 )
-              : Container(),
+              : Container(
+                  width: 0,
+                  height: 0,
+                ),
           ListTile(
             title: Text('自定义片源'),
             leading: Icon(Icons.extension),
@@ -255,7 +258,10 @@ class _App extends State<App> {
     Global _global = Provider.of<Global>(context);
 
     return store.isLoading
-        ? Container()
+        ? Container(
+            width: 0,
+            height: 0,
+          )
         : Scaffold(
             drawer: renderDrawer(context, _global),
             appBar: renderAppBar(),

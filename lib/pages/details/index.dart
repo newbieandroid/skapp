@@ -69,9 +69,7 @@ class _DetailsState extends State<Details> {
                         children: <Widget>[
                           (store.currentUrl.indexOf('.m3u8') >= 0) ||
                                   (store.currentUrl.indexOf('.mp4') >= 0)
-                              ? WindowVideoPage(
-                                  store: store,
-                                )
+                              ? WindowVideoPage(store: store, global: _global)
                               : WebViewPage(
                                   store: store,
                                 ),
@@ -103,7 +101,10 @@ class _DetailsState extends State<Details> {
                                   global: _global,
                                 );
                               default:
-                                return Container();
+                                return Container(
+                                  width: 0,
+                                  height: 0,
+                                );
                             }
                           },
                           separatorBuilder: (context, index) {

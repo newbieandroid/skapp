@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,9 @@ import './../app/index.dart';
 import './../../utils/screen_utils.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import './../../store/root.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:transparent_image/transparent_image.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 enum Action { Ok, Cancel }
 
@@ -68,7 +72,16 @@ class _SplashWidgetState extends State<SplashWidget> {
   Widget build(BuildContext context) {
     final Global _global = Provider.of<Global>(context);
     Timer(Duration(seconds: 1), () => _checkProtocol(_global, context));
-
+    if (_global.appAds != null &&
+        _global.appAds.loading.show == false &&
+        _global.appAds.splash.show == false) {
+      _global.changeShowAd(false);
+    }
+    // if (_global.appAds.loading == null) {
+    //   return Container(
+    //     child: Text('2222'),
+    //   );
+    // }
     return Stack(
       children: <Widget>[
         Observer(
@@ -77,78 +90,144 @@ class _SplashWidgetState extends State<SplashWidget> {
             offstage: _global.showAd,
           ),
         ),
-        Observer(
-          builder: (_) => Offstage(
-            child: Container(
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment(0.0, 0.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+        Observer(builder: (_) {
+          if (_global.appAds != null) {
+            if (_global.appAds.splash.show == true) {
+              return Offstage(
+                  offstage: !_global.showAd,
+                  child: SafeArea(
+                    child: Stack(
                       children: <Widget>[
-                        CircleAvatar(
-                          radius: ScreenUtils.screenW(context) / 4,
-                          backgroundImage: AssetImage('assets/images/home.png'),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 20.0,
-                            top: 20.0,
-                            right: 20.0,
-                            bottom: 0,
+                        Container(
+                          width: ScreenUtils.screenW(context),
+                          height: ScreenUtils.screenH(context),
+                          child: GestureDetector(
+                            onTap: () {
+                              if (_global.appAds.splash.href != '') {
+                                launch(_global.appAds.splash.href);
+                              }
+                            },
+                            child: _global.appAds.splash.type == 'img'
+                                ? ClipRRect(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(0)),
+                                    child: FadeInImage(
+                                      placeholder:
+                                          MemoryImage(kTransparentImage),
+                                      image: CachedNetworkImageProvider(
+                                        _global.appAds.splash.src,
+                                      ),
+                                      fit: BoxFit.fill,
+                                    ))
+                                : Container(
+                                    color: Colors.black,
+                                    child: WebView(
+                                      initialUrl:
+                                          _global.appAds.splash.src, // 加载的url
+                                    ),
+                                  ),
                           ),
-                          child: Text(
-                              '    所以我选择了你，因为强者的力量与生俱来，他们失去了对力量的敬畏，而弱者才懂得力量的价值。有爱心，懂得怜悯。',
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.caption),
-                        )
-                      ],
-                    ),
-                  ),
-                  SafeArea(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        CountDownWidget(
-                          onCountDownFinishCallBack: (bool value) {
-                            if (value) {
-                              _global.changeShowAd(false);
-                            }
-                          },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 40.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/ic_launcher.png',
-                                width: 50.0,
-                                height: 50.0,
+                        Positioned(
+                            top: 10,
+                            right: 10,
+                            child: GestureDetector(
+                              onTap: () {
+                                _global.changeShowAd(false);
+                              },
+                              child: CountDownWidget(
+                                timer: _global.appAds.splash.timer,
+                                onCountDownFinishCallBack: (bool value) {
+                                  if (value) {
+                                    _global.changeShowAd(false);
+                                  }
+                                },
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0),
-                                child: Text(
-                                  'SK',
-                                  style: Theme.of(context).textTheme.title,
-                                ),
-                              )
-                            ],
-                          ),
-                        )
+                            )),
                       ],
                     ),
-                  )
-                ],
-              ),
-              width: ScreenUtils.screenW(context),
-              height: ScreenUtils.screenH(context),
-            ),
-            offstage: !_global.showAd,
-          ),
-        )
+                  ));
+            } else if (_global.appAds.loading.show == true) {
+              return Offstage(
+                child: Container(
+                  child: Stack(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment(0.0, 0.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: ScreenUtils.screenW(context) / 4,
+                              backgroundImage:
+                                  AssetImage('assets/images/home.png'),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 20.0,
+                                top: 20.0,
+                                right: 20.0,
+                                bottom: 0,
+                              ),
+                              child: Text(
+                                  '    所以我选择了你，因为强者的力量与生俱来，他们失去了对力量的敬畏，而弱者才懂得力量的价值。有爱心，懂得怜悯。',
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.caption),
+                            )
+                          ],
+                        ),
+                      ),
+                      SafeArea(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            CountDownWidget(
+                              timer: _global.appAds.splash.timer,
+                              onCountDownFinishCallBack: (bool value) {
+                                if (value) {
+                                  _global.changeShowAd(false);
+                                }
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 40.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Image.asset(
+                                    'assets/images/ic_launcher.png',
+                                    width: 50.0,
+                                    height: 50.0,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Text(
+                                      'SK',
+                                      style: Theme.of(context).textTheme.title,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  width: ScreenUtils.screenW(context),
+                  height: ScreenUtils.screenH(context),
+                ),
+                offstage: !_global.showAd,
+              );
+            }
+          } else {
+            return Container(
+              width: 0,
+              height: 0,
+            );
+          }
+        })
       ],
     );
   }
@@ -156,8 +235,10 @@ class _SplashWidgetState extends State<SplashWidget> {
 
 class CountDownWidget extends StatefulWidget {
   final onCountDownFinishCallBack;
+  final int timer;
 
-  CountDownWidget({Key key, @required this.onCountDownFinishCallBack})
+  CountDownWidget(
+      {Key key, @required this.timer, @required this.onCountDownFinishCallBack})
       : super(key: key);
 
   @override
@@ -165,18 +246,27 @@ class CountDownWidget extends StatefulWidget {
 }
 
 class _CountDownWidgetState extends State<CountDownWidget> {
-  var _seconds = 2;
   Timer _timer;
-
+  int _seconds;
   @override
   void initState() {
     super.initState();
+    _seconds = widget.timer;
     _startTimer();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Text('');
+    return ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        child: Container(
+          padding: EdgeInsets.all(4),
+          color: Theme.of(context).primaryColor,
+          child: Text(
+            '跳过(${_seconds}s)',
+            style: TextStyle(fontSize: 12, color: Colors.white),
+          ),
+        ));
   }
 
   /// 启动倒计时的计时器。

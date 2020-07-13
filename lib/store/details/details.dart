@@ -30,6 +30,9 @@ abstract class DetailsStoreMobx with Store {
   bool isLoading = true;
 
   @observable
+  bool showAd = true; // 是否显示loading
+
+  @observable
   String vodId;
 
   @observable
@@ -53,6 +56,11 @@ abstract class DetailsStoreMobx with Store {
   @computed
   String get currentUrl {
     return players[currentTabs][currentPlayers]['url'] ?? '';
+  }
+
+  @action
+  void changeShowAd(bool showAd) {
+    this.showAd = showAd;
   }
 
   @action

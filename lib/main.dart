@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final Global _global = Provider.of<Global>(context);
     _global.getAppConfig();
+    _global.getAppAds();
     Upgrader().clearSavedSettings();
     // Upgrader().isUpdateAvailable();
     final cfg =
@@ -83,7 +84,10 @@ class MyApp extends StatelessWidget {
                   buttonTitleUpdate: '立即更新',
                   debugAlwaysUpgrade: true,
                   child: Center(
-                    child: Container(),
+                    child: Container(
+                      width: 0,
+                      height: 0,
+                    ),
                   )
                   // debugLogging: true,
                   )

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import './../dao/app_config_dao.dart';
+import './../dao/app_ads_dao.dart';
 import './../http/API.dart';
 import './../http/http_request.dart';
 
@@ -46,6 +47,7 @@ abstract class GlobalMobx with Store {
   ];
 
   String url = API.APP_CONFIG;
+  String adsUrl = API.APP_ADS;
 
   Future getThemeIndex() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -65,6 +67,9 @@ abstract class GlobalMobx with Store {
 
   @observable
   AppConfigDao appConfig;
+
+  @observable
+  AppAdsDao appAds;
 
   @observable
   String title = 'SK'; // 标题
@@ -137,6 +142,13 @@ abstract class GlobalMobx with Store {
     var req = HttpRequest(API.BASE_SK_URL);
     final res = await req.get(url);
     this.appConfig = AppConfigDao.fromJson(res);
+  }
+
+  @action
+  Future<dynamic> getAppAds() async {
+    var req = HttpRequest(API.BASE_SK_URL);
+    final res = await req.get(adsUrl);
+    this.appAds = AppAdsDao.fromJson(res);
   }
 
   @action
