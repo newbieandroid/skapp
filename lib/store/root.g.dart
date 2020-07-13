@@ -242,6 +242,17 @@ mixin _$Global on GlobalMobx, Store {
   }
 
   @override
+  void changeAppAdsPause(bool v) {
+    final _$actionInfo = _$GlobalMobxActionController.startAction(
+        name: 'GlobalMobx.changeAppAdsPause');
+    try {
+      return super.changeAppAdsPause(v);
+    } finally {
+      _$GlobalMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 showAd: ${showAd},

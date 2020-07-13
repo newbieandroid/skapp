@@ -230,7 +230,10 @@ class CustomIJKControllerWidgetState extends State<CustomIJKControllerWidget>
 
   Widget buildContent() {
     if (!isShow) {
-      return Container();
+      return Container(
+        width: 0,
+        height: 0,
+      );
     }
     // 在此处定义定时器，隐藏下面的bar 等待 6000ms
     Future.delayed(const Duration(milliseconds: 6000)).then((_) {
@@ -241,7 +244,10 @@ class CustomIJKControllerWidgetState extends State<CustomIJKControllerWidget>
       builder: (context, snapshot) {
         var info = snapshot.data;
         if (info == null || !info.hasData) {
-          return Container();
+          return Container(
+            width: 0,
+            height: 0,
+          );
         }
         return buildPortrait(info);
       },
@@ -250,7 +256,10 @@ class CustomIJKControllerWidgetState extends State<CustomIJKControllerWidget>
 
   Widget _buildFullScreenButton(context) {
     if (widget.showFullScreenButton != true) {
-      return Container();
+      return Container(
+        width: 0,
+        height: 0,
+      );
     }
     var isFull = widget.currentFullScreenState;
 
@@ -619,7 +628,10 @@ class PortraitController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!info.hasData) {
-      return Container();
+      return Container(
+        width: 0,
+        height: 0,
+      );
     }
     Widget bottomBar = buildBottomBar(context);
     return Stack(
@@ -646,7 +658,12 @@ class PortraitController extends StatelessWidget {
         Align(
           //对齐底部
           alignment: Alignment.bottomCenter,
-          child: isClock ? Container() : bottomBar,
+          child: isClock
+              ? Container(
+                  width: 0,
+                  height: 0,
+                )
+              : bottomBar,
         ),
       ],
     );
@@ -709,7 +726,10 @@ class PortraitController extends StatelessWidget {
                   padding: const EdgeInsets.all(6.0),
                   child: buildSpeed(context, info),
                 )
-              : Container(),
+              : Container(
+                  width: 0,
+                  height: 0,
+                ),
           fullScreenButton,
         ],
       ),
@@ -729,7 +749,10 @@ class PortraitController extends StatelessWidget {
 
   Widget buildSpeed(context, VideoInfo info) {
     if (!info.hasData || info.duration == 0) {
-      return Container();
+      return Container(
+        width: 0,
+        height: 0,
+      );
     }
     return Theme(
       data: Theme.of(context).copyWith(
@@ -759,7 +782,10 @@ class PortraitController extends StatelessWidget {
 
   Widget buildProgress(context, VideoInfo info) {
     if (!info.hasData || info.duration == 0) {
-      return Container();
+      return Container(
+        width: 0,
+        height: 0,
+      );
     }
     return Container(
       height: 16,
@@ -808,7 +834,10 @@ class PortraitController extends StatelessWidget {
             TimeHelper.getTimeText(info.currentPosition),
             style: TextStyle(color: Colors.white),
           )
-        : Container();
+        : Container(
+            width: 0,
+            height: 0,
+          );
   }
 
   buildMaxTimeText(context) {
@@ -869,7 +898,11 @@ class PortraitController extends StatelessWidget {
   }
 
   Widget buildFullScreenButton(context) {
-    return fullScreenWidget ?? Container();
+    return fullScreenWidget ??
+        Container(
+          width: 0,
+          height: 0,
+        );
   }
 }
 

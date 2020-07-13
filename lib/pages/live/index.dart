@@ -72,7 +72,10 @@ class _LiveState extends State<Live> with SingleTickerProviderStateMixin {
       body: Observer(
         builder: (_) => store.isPass
             ? (store.isAllLoading
-                ? Container()
+                ? Container(
+                    width: 0,
+                    height: 0,
+                  )
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[

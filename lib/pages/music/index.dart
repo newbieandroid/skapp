@@ -234,7 +234,10 @@ class _MusicState extends State<Music> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Observer(
         builder: (_) => store.isLoading
-            ? Container()
+            ? Container(
+                width: 0,
+                height: 0,
+              )
             : Stack(
                 children: <Widget>[
                   new Scaffold(

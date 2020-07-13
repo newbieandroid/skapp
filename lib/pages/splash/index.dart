@@ -112,6 +112,8 @@ class _SplashWidgetState extends State<SplashWidget> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(0)),
                                     child: FadeInImage(
+                                      fadeInDuration:
+                                          Duration(milliseconds: 100),
                                       placeholder:
                                           MemoryImage(kTransparentImage),
                                       image: CachedNetworkImageProvider(
@@ -136,6 +138,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                 _global.changeShowAd(false);
                               },
                               child: CountDownWidget(
+                                show: true,
                                 timer: _global.appAds.splash.timer,
                                 onCountDownFinishCallBack: (bool value) {
                                   if (value) {
@@ -183,7 +186,8 @@ class _SplashWidgetState extends State<SplashWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             CountDownWidget(
-                              timer: _global.appAds.splash.timer,
+                              show: false,
+                              timer: _global.appAds.loading.timer,
                               onCountDownFinishCallBack: (bool value) {
                                 if (value) {
                                   _global.changeShowAd(false);
@@ -220,6 +224,16 @@ class _SplashWidgetState extends State<SplashWidget> {
                 ),
                 offstage: !_global.showAd,
               );
+            } else {
+              return CountDownWidget(
+                show: false,
+                timer: 0,
+                onCountDownFinishCallBack: (bool value) {
+                  if (value) {
+                    _global.changeShowAd(false);
+                  }
+                },
+              );
             }
           } else {
             return Container(
@@ -236,9 +250,13 @@ class _SplashWidgetState extends State<SplashWidget> {
 class CountDownWidget extends StatefulWidget {
   final onCountDownFinishCallBack;
   final int timer;
+  final bool show;
 
   CountDownWidget(
-      {Key key, @required this.timer, @required this.onCountDownFinishCallBack})
+      {Key key,
+      @required this.timer,
+      @required this.onCountDownFinishCallBack,
+      @required this.show})
       : super(key: key);
 
   @override
@@ -257,16 +275,18 @@ class _CountDownWidgetState extends State<CountDownWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-        child: Container(
-          padding: EdgeInsets.all(4),
-          color: Theme.of(context).primaryColor,
-          child: Text(
-            '跳过(${_seconds}s)',
-            style: TextStyle(fontSize: 12, color: Colors.white),
-          ),
-        ));
+    return widget.show
+        ? ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            child: Container(
+              padding: EdgeInsets.all(4),
+              color: Theme.of(context).primaryColor,
+              child: Text(
+                '跳过(${_seconds}s)',
+                style: TextStyle(fontSize: 12, color: Colors.white),
+              ),
+            ))
+        : Text('');
   }
 
   /// 启动倒计时的计时器。

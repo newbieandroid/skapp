@@ -87,7 +87,10 @@ class _DialogPanelState extends State<DialogPanel> {
               );
             } else {
               return SimpleDialogOption(
-                child: Container(),
+                child: Container(
+                  width: 0,
+                  height: 0,
+                ),
                 onPressed: () {},
               );
             }

@@ -61,7 +61,12 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (_) => store.live.length > 0 ? renderBody() : Container(),
+      builder: (_) => store.live.length > 0
+          ? renderBody()
+          : Container(
+              width: 0,
+              height: 0,
+            ),
     );
   }
 }

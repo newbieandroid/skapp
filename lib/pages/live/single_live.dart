@@ -34,7 +34,10 @@ class _SingleVideoWidgetState extends State<SingleVideoWidget> {
       horizontalGesture: false,
       verticalGesture: false,
       fullscreenControllerWidgetBuilder: (IJKControllerWidgetBuilder) {
-        return Container();
+        return Container(
+          width: 0,
+          height: 0,
+        );
       },
     );
     // 初始化

@@ -96,7 +96,10 @@ class _SearchState extends State<Search> {
                         ),
                       ),
                     )
-                  : Container(),
+                  : Container(
+                      width: 0,
+                      height: 0,
+                    ),
               GestureDetector(
                 onTap: () {
                   search(searchController.text, _global);

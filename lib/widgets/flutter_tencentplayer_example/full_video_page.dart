@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:skapp/utils/screen_utils.dart';
+import 'package:transparent_image/transparent_image.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import './widget/tencent_player_bottom_widget.dart';
 import './widget/tencent_player_gesture_cover.dart';
 import './widget/tencent_player_loading.dart';
@@ -9,8 +13,11 @@ import 'package:screen/screen.dart';
 import 'package:flutter_tencentplayer/flutter_tencentplayer.dart';
 import './main.dart';
 import './util/forbidshot_util.dart';
+import 'package:skapp/store/root.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FullVideoPage extends StatefulWidget {
+  final Global global;
   PlayType playType;
   String dataSource;
   TencentPlayerController controller;
@@ -20,7 +27,8 @@ class FullVideoPage extends StatefulWidget {
   bool showClearBtn;
 
   FullVideoPage(
-      {this.controller,
+      {this.global,
+      this.controller,
       this.showBottomWidget = true,
       this.showClearBtn = true,
       this.dataSource,
@@ -133,7 +141,10 @@ class _FullVideoPageState extends State<FullVideoPage> {
                   : SizedBox(),
 
               /// 支撑全屏
-              Container(),
+              Container(
+                width: 0,
+                height: 0,
+              ),
 
               /// 半透明浮层
               showCover ? Container(color: Color(0x7f000000)) : SizedBox(),
@@ -254,6 +265,69 @@ class _FullVideoPageState extends State<FullVideoPage> {
                   ),
                 ),
               ),
+
+              controller.value.isPlaying
+                  ? Container(
+                      width: 0,
+                      height: 0,
+                    )
+                  : widget.global.showPause
+                      ? Center(
+                          child: Stack(
+                          children: <Widget>[
+                            Container(
+                              width: ScreenUtils.screenW(context) / 2,
+                              height: ScreenUtils.screenW(context) / 3,
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (widget.global.appAds.pause.href != '') {
+                                    launch(widget.global.appAds.pause.href);
+                                  }
+                                },
+                                child: widget.global.appAds.pause.type == 'img'
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(0)),
+                                        child: FadeInImage(
+                                          placeholder:
+                                              MemoryImage(kTransparentImage),
+                                          image: CachedNetworkImageProvider(
+                                            widget.global.appAds.pause.src,
+                                          ),
+                                          fit: BoxFit.fill,
+                                        ))
+                                    : Container(
+                                        color: Colors.black,
+                                        child: WebView(
+                                          initialUrl: widget.global.appAds.pause
+                                              .src, // 加载的url
+                                        ),
+                                      ),
+                              ),
+                            ),
+                            Positioned(
+                              right: -8,
+                              top: -8,
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: IconButton(
+                                  iconSize: 18,
+                                  icon: Icon(
+                                    Icons.close,
+                                  ),
+                                  padding: EdgeInsets.all(0.0),
+                                  onPressed: () {
+                                    widget.global.changeAppAdsPause(false);
+                                  },
+                                ),
+                              ),
+                            )
+                          ],
+                        ))
+                      : Container(
+                          width: 0,
+                          height: 0,
+                        )
             ],
           ),
         ),

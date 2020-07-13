@@ -133,7 +133,10 @@ class _SubtitleState extends State<Subtitle> {
   @override
   Widget build(BuildContext context) {
     if (widget.data == null || widget.data.slices.length == 0) {
-      return Container();
+      return Container(
+        width: 0,
+        height: 0,
+      );
     }
     int currentIndex = _getCurrentIndex(widget.inSeconds, widget.data.slices);
     return ListWheelScrollView.useDelegate(

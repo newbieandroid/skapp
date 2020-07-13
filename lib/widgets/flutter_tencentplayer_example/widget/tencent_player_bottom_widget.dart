@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tencentplayer/flutter_tencentplayer.dart';
+import 'package:skapp/store/root.dart';
 import '../full_video_page.dart';
 import '../main.dart';
 import '../util/common_util.dart';
@@ -12,6 +13,7 @@ import '../widget/triangle_painter.dart';
 const List<double> rateList = [1.0, 1.2, 1.5, 2.0];
 
 class TencentPlayerBottomWidget extends StatefulWidget {
+  final Global global;
   final isShow;
   final showCover;
   final currentUrl;
@@ -24,6 +26,7 @@ class TencentPlayerBottomWidget extends StatefulWidget {
   final bool showClearBtn;
 
   TencentPlayerBottomWidget({
+    this.global,
     this.isShow,
     this.showCover,
     this.currentUrl,
@@ -80,6 +83,9 @@ class _TencentPlayerBottomWidgetState extends State<TencentPlayerBottomWidget> {
                     onTap: () {
                       if (controller.value.isPlaying) {
                         controller.pause();
+                        if (widget.global.appAds.pause.show) {
+                          widget.global.changeAppAdsPause(true);
+                        }
                       } else {
                         controller.play();
                       }
@@ -165,7 +171,8 @@ class _TencentPlayerBottomWidgetState extends State<TencentPlayerBottomWidget> {
                                       builder: (_) => FullVideoPage(
                                           controller: controller,
                                           playType: PlayType.network,
-                                          dataSource: widget.currentUrl),
+                                          dataSource: widget.currentUrl,
+                                          global: widget.global),
                                     ),
                                   )
                                 : Navigator.pop(context);

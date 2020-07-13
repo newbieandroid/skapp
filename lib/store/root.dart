@@ -95,6 +95,9 @@ abstract class GlobalMobx with Store {
   @observable
   bool isMusic;
 
+  @observable
+  bool showPause;
+
   GlobalMobx(this.prefs) {
     if (this.prefs != null) {
       theme = colorList[prefs.getInt('themeIndex') ?? 4];
@@ -154,5 +157,10 @@ abstract class GlobalMobx with Store {
   @action
   void changeUpdataApp() {
     updataApp = true;
+  }
+
+  @action
+  void changeAppAdsPause(bool v) {
+    this.showPause = v;
   }
 }

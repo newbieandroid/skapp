@@ -213,7 +213,10 @@ class PlayerState extends State<Player> {
   List<Widget> _controllers(BuildContext context) {
     return [
       widget.isTopic && lyric != null
-          ? Container()
+          ? Container(
+              width: 0,
+              height: 0,
+            )
           : Positioned.fill(
               child: GestureDetector(
                 onTap: () {
@@ -243,7 +246,10 @@ class PlayerState extends State<Player> {
                       this.lyric,
                       inSeconds ?? 0,
                     )
-                  : Container(),
+                  : Container(
+                      width: 0,
+                      height: 0,
+                    ),
               new Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: new Row(

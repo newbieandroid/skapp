@@ -68,7 +68,10 @@ class _ClassifyState extends State<Classify>
   Widget build(BuildContext context) {
     return Observer(
         builder: (_) => store.isLoading
-            ? Container()
+            ? Container(
+                width: 0,
+                height: 0,
+              )
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

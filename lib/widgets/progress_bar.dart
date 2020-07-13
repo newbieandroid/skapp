@@ -77,7 +77,10 @@ class _ProgressBarState extends State<ProgressBar> {
   }
 
   _buildEmpty() {
-    return Container();
+    return Container(
+      width: 0,
+      height: 0,
+    );
   }
 
   int get flex => (widget.progressFlex * 100).toInt();
@@ -85,7 +88,12 @@ class _ProgressBarState extends State<ProgressBar> {
   Widget buildProgress(double left, double mid, double right) {
     return Column(
       children: <Widget>[
-        Flexible(child: Container(), flex: 100 - flex ~/ 2),
+        Flexible(
+            child: Container(
+              width: 0,
+              height: 0,
+            ),
+            flex: 100 - flex ~/ 2),
         Flexible(
           flex: flex,
           child: Row(
@@ -97,7 +105,12 @@ class _ProgressBarState extends State<ProgressBar> {
             ],
           ),
         ),
-        Flexible(child: Container(), flex: 100 - flex ~/ 2),
+        Flexible(
+            child: Container(
+              width: 0,
+              height: 0,
+            ),
+            flex: 100 - flex ~/ 2),
       ],
     );
   }
@@ -109,7 +122,10 @@ class _ProgressBarState extends State<ProgressBar> {
       flex = 0;
     }
     if (flex == 0) {
-      return Container();
+      return Container(
+        width: 0,
+        height: 0,
+      );
     }
     return Expanded(
       flex: (flex * 1000).toInt(),

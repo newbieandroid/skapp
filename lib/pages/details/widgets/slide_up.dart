@@ -115,7 +115,10 @@ class SlideUpPage extends StatelessWidget {
                 ),
               );
             default:
-              return Container();
+              return Container(
+                width: 0,
+                height: 0,
+              );
           }
         },
         separatorBuilder: (context, index) {
