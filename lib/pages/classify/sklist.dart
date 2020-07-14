@@ -64,6 +64,7 @@ class _SKListState extends State<SKList> with AutomaticKeepAliveClientMixin {
     final Global _global = Provider.of<Global>(context);
     return Observer(
       builder: (_) => Container(
+        color: Theme.of(context).cardColor,
         child: RefreshIndicator(
           onRefresh: this.onRefresh,
           child: store.isVodLoading

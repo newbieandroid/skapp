@@ -230,27 +230,30 @@ class _App extends State<App> {
 
   renderBottomNavigationBar() {
     return BottomNavigationBar(
-        items: itemList,
-        onTap: (int index) {
-          if (mounted) {
-            setState(() {
-              _selectIndex = index;
-            });
-          }
-          //点击下面tabbar的时候执行动画跳转方法
-          _pageController.animateToPage(index,
-              duration: new Duration(milliseconds: 500),
-              curve: new ElasticOutCurve(4));
-        },
-        //图标大小
-        iconSize: 24,
-        //当前选中的索引
-        currentIndex: _selectIndex,
-        //选中后，底部BottomNavigationBar内容的颜色(选中时，默认为主题色)（仅当type: BottomNavigationBarType.fixed,时生效）
-        fixedColor: Theme.of(context).primaryColor,
-        type: BottomNavigationBarType.fixed,
-        selectedFontSize: 10,
-        unselectedFontSize: 10);
+      backgroundColor: Theme.of(context).cardColor,
+      elevation: 0,
+      items: itemList,
+      onTap: (int index) {
+        if (mounted) {
+          setState(() {
+            _selectIndex = index;
+          });
+        }
+        //点击下面tabbar的时候执行动画跳转方法
+        _pageController.animateToPage(index,
+            duration: new Duration(milliseconds: 500),
+            curve: new ElasticOutCurve(4));
+      },
+      //图标大小
+      iconSize: 24,
+      //当前选中的索引
+      currentIndex: _selectIndex,
+      //选中后，底部BottomNavigationBar内容的颜色(选中时，默认为主题色)（仅当type: BottomNavigationBarType.fixed,时生效）
+      fixedColor: Theme.of(context).primaryColor,
+      type: BottomNavigationBarType.fixed,
+      selectedFontSize: 10,
+      unselectedFontSize: 10,
+    );
   }
 
   @override

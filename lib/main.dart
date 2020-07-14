@@ -74,6 +74,7 @@ class MyApp extends StatelessWidget {
         ),
         home: Scaffold(
           resizeToAvoidBottomPadding: false,
+          backgroundColor: Theme.of(context).cardColor,
           body: _global.updataApp
               ? UpgradeAlert(
                   appcastConfig: cfg,

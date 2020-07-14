@@ -58,7 +58,7 @@ class _SKItemState extends State<SKItem> {
       },
       child: Container(
         color: Theme.of(context).cardColor,
-        height: 148,
+        //height: 142,
         //margin: EdgeInsets.only(bottom: 10.0),
         padding: EdgeInsets.only(
           left: 15,
@@ -70,7 +70,7 @@ class _SKItemState extends State<SKItem> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              width: 86,
+              width: 94,
               child: AspectRatio(
                 aspectRatio: 0.73, // 宽高比
                 child: NetworkImgWidget(
@@ -82,7 +82,7 @@ class _SKItemState extends State<SKItem> {
             Expanded(
               flex: 2,
               child: Padding(
-                padding: EdgeInsets.only(left: 10, right: 8, top: 0, bottom: 8),
+                padding: EdgeInsets.only(left: 10, right: 8, top: 2, bottom: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -90,7 +90,7 @@ class _SKItemState extends State<SKItem> {
                     Text(
                       vod.vodName,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.subtitle,
+                      style: Theme.of(context).textTheme.subtitle2,
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 4, bottom: 4),
@@ -107,41 +107,50 @@ class _SKItemState extends State<SKItem> {
                     ),
                     Text(
                       //item.casts[0].name,
-                      '${vod.vodYear} / ${vod.vodClass} / ${vod.vodArea} ${vod.vodRemarks}/${vod.vodLang}',
+                      '${vod.vodArea} / ${vod.vodClass} / ${vod.vodYear} / ${vod.vodLang}',
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
+                      maxLines: 1,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      vod.vodContent,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
                       style: Theme.of(context).textTheme.caption,
                     ),
                   ],
                 ),
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  right: BorderSide(
-                      width: 0.2, color: Theme.of(context).dividerColor),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(left: 15, right: 0),
-                    child: Text(
-                      vod.vodActor,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 6,
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     border: Border(
+            //       right: BorderSide(
+            //           width: 0.2, color: Theme.of(context).dividerColor),
+            //     ),
+            //   ),
+            // ),
+            // Expanded(
+            //   flex: 1,
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: <Widget>[
+            //       Padding(
+            //         padding: EdgeInsets.only(left: 15, right: 0),
+            //         child: Text(
+            //           vod.vodActor,
+            //           overflow: TextOverflow.ellipsis,
+            //           maxLines: 6,
+            //           style: Theme.of(context).textTheme.caption,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

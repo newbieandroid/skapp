@@ -75,17 +75,20 @@ class _ClassifyState extends State<Classify>
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  TabBar(
-                    indicatorColor: Theme.of(context).primaryColorDark,
-                    controller: tabController,
-                    isScrollable: true,
-                    labelColor: Theme.of(context).primaryColorDark,
-                    unselectedLabelColor:
-                        Theme.of(context).textTheme.title.color,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorWeight: 1,
-                    // labelStyle: TextStyle(fontSize: 12),
-                    tabs: myTabs,
+                  Material(
+                    color: Theme.of(context).cardColor,
+                    child: TabBar(
+                      indicatorColor: Theme.of(context).primaryColorDark,
+                      controller: tabController,
+                      isScrollable: true,
+                      labelColor: Theme.of(context).primaryColorDark,
+                      unselectedLabelColor:
+                          Theme.of(context).textTheme.subtitle2.color,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicatorWeight: 2,
+                      // labelStyle: TextStyle(fontSize: 12),
+                      tabs: myTabs,
+                    ),
                   ),
                   Expanded(
                     flex: 1,
