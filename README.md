@@ -10,13 +10,17 @@
 
 ### 项目介绍
 
-此项目是一个基于[MACCMS](https://github.com/magicblack/maccms10/)和[lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)实现的影视播放及音乐助手的软件。
+此项目是一个基于[MACCMS](https://github.com/magicblack/maccms10/)和[lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)实现的影视播放及音乐助手软件。
 
 web端访问地址：[sk.ncer.top](http://sk.ncer.top)
 
 ### 源码使用方法
 
 使用方法请参考：[源码使用方法](https://github.com/Mockingbird1234/skapp/blob/master/INSTALL.md)
+
+### 站长整合自己的苹果cms
+
+此项目可以完美对接站长自己的资源，具体使用方法请参考：[对接苹果cms](https://github.com/Mockingbird1234/skapp/blob/master/MACCMS.md)
 
 ### 使用技术栈
 
