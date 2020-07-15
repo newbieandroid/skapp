@@ -50,10 +50,16 @@ class _SKItemState extends State<SKItem> {
         } else {
           Application.router.navigateTo(
             context,
-            "/details?vodId=${vod.vodId}",
+            "/preview?vodId=${vod.vodId}",
             transition: TransitionType.native,
             transitionDuration: Duration(milliseconds: 300),
           );
+          // Application.router.navigateTo(
+          //   context,
+          //   "/details?vodId=${vod.vodId}",
+          //   transition: TransitionType.native,
+          //   transitionDuration: Duration(milliseconds: 300),
+          // );
         }
       },
       child: Container(

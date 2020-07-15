@@ -136,7 +136,6 @@ abstract class GlobalMobx with Store {
 
   @action
   void changeProtocol(bool value) {
-    isMusic = value;
     prefs.setBool('isAllowProtocol', value);
   }
 

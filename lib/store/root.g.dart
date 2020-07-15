@@ -159,6 +159,21 @@ mixin _$Global on GlobalMobx, Store {
     });
   }
 
+  final _$showPauseAtom = Atom(name: 'GlobalMobx.showPause');
+
+  @override
+  bool get showPause {
+    _$showPauseAtom.reportRead();
+    return super.showPause;
+  }
+
+  @override
+  set showPause(bool value) {
+    _$showPauseAtom.reportWrite(value, super.showPause, () {
+      super.showPause = value;
+    });
+  }
+
   final _$getAppConfigAsyncAction = AsyncAction('GlobalMobx.getAppConfig');
 
   @override
@@ -264,6 +279,7 @@ title: ${title},
 theme: ${theme},
 isDark: ${isDark},
 isMusic: ${isMusic},
+showPause: ${showPause},
 themeMode: ${themeMode},
 imageCasheSize: ${imageCasheSize}
     ''';

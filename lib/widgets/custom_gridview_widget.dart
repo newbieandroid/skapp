@@ -48,11 +48,18 @@ class CustomGridView extends StatelessWidget {
               } else {
                 Application.router.navigateTo(
                   context,
-                  "/details?vodId=${vod.vodId}",
+                  "/preview?vodId=${vod.vodId}",
                   transition: TransitionType.native,
                   transitionDuration: Duration(milliseconds: 300),
                   replace: true,
                 );
+                // Application.router.navigateTo(
+                //   context,
+                //   "/details?vodId=${vod.vodId}",
+                //   transition: TransitionType.native,
+                //   transitionDuration: Duration(milliseconds: 300),
+                //   replace: true,
+                // );
               }
             },
             child: Container(

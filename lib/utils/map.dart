@@ -1,56 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:skapp/iconfont/IconFont.dart';
 
 var typeMap = {
   'dianying': {
-    'activeIcon': Icon(Icons.movie_filter),
-    'normalIcon': Icon(Icons.movie_creation),
+    'activeIcon': IconFont(IconNames.icondianying),
+    'normalIcon': IconFont(IconNames.icondianying),
   },
   'lianxuju': {
-    'activeIcon': Icon(Icons.live_tv),
-    'normalIcon': Icon(Icons.subscriptions),
+    'activeIcon': IconFont(IconNames.icondianshiju),
+    'normalIcon': IconFont(IconNames.icondianshiju),
   },
   'zongyi': {
-    'activeIcon': Icon(Icons.library_music),
-    'normalIcon': Icon(Icons.music_video),
+    'activeIcon': IconFont(IconNames.iconzongyiyule),
+    'normalIcon': IconFont(IconNames.iconzongyiyule),
   },
   'dongman': {
-    'activeIcon': Icon(Icons.child_care),
-    'normalIcon': Icon(Icons.child_friendly),
+    'activeIcon': IconFont(IconNames.iconxiangmuicon_dongman),
+    'normalIcon': IconFont(IconNames.iconxiangmuicon_dongman),
   },
   'zixun': {
-    'activeIcon': Icon(Icons.fiber_new),
-    'normalIcon': Icon(Icons.explicit),
+    'activeIcon': IconFont(IconNames.iconxiangmuicon_dongman),
+    'normalIcon': IconFont(IconNames.iconxiangmuicon_dongman),
   },
   'normal': {
-    'activeIcon': Icon(Icons.hdr_strong),
-    'normalIcon': Icon(Icons.hdr_weak),
+    'activeIcon': IconFont(IconNames.iconshipinyingshi),
+    'normalIcon': IconFont(IconNames.iconshipinyingshi),
   },
   'kw': {
-    'activeIcon': Icon(Icons.music_note),
-    'normalIcon': Icon(Icons.music_video),
+    'activeIcon': IconFont(IconNames.iconzongyiyule),
+    'normalIcon': IconFont(IconNames.iconzongyiyule),
   },
   'kg': {
-    'activeIcon': Icon(Icons.music_note),
-    'normalIcon': Icon(Icons.music_video),
+    'activeIcon': IconFont(IconNames.iconzongyiyule),
+    'normalIcon': IconFont(IconNames.iconzongyiyule),
   },
   'tx': {
-    'activeIcon': Icon(Icons.music_note),
-    'normalIcon': Icon(Icons.music_video),
+    'activeIcon': IconFont(IconNames.iconzongyiyule),
+    'normalIcon': IconFont(IconNames.iconzongyiyule),
   },
   'wy': {
-    'activeIcon': Icon(Icons.music_note),
-    'normalIcon': Icon(Icons.music_video),
+    'activeIcon': IconFont(IconNames.iconzongyiyule),
+    'normalIcon': IconFont(IconNames.iconzongyiyule),
   },
   'mg': {
-    'activeIcon': Icon(Icons.music_note),
-    'normalIcon': Icon(Icons.music_video),
+    'activeIcon': IconFont(IconNames.iconzongyiyule),
+    'normalIcon': IconFont(IconNames.iconzongyiyule),
   },
   'xm': {
-    'activeIcon': Icon(Icons.music_note),
-    'normalIcon': Icon(Icons.music_video),
+    'activeIcon': IconFont(IconNames.iconzongyiyule),
+    'normalIcon': IconFont(IconNames.iconzongyiyule),
   },
   'bd': {
-    'activeIcon': Icon(Icons.queue_music),
-    'normalIcon': Icon(Icons.music_video),
+    'activeIcon': IconFont(IconNames.iconzongyiyule),
+    'normalIcon': IconFont(IconNames.iconzongyiyule),
   },
 };

@@ -33,6 +33,9 @@ abstract class DetailsStoreMobx with Store {
   bool showAd = true; // 是否显示loading
 
   @observable
+  bool pickColor = false;
+
+  @observable
   String vodId;
 
   @observable
@@ -104,6 +107,11 @@ abstract class DetailsStoreMobx with Store {
   @action
   void changeVodId(String vodId) {
     this.vodId = vodId;
+  }
+
+  @action
+  void changePickColor(bool v) {
+    this.pickColor = v;
   }
 
   @action

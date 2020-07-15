@@ -5,6 +5,7 @@ import './../pages/live/index.dart';
 import './../pages/live/show_lives.dart';
 import './../pages/custom/index.dart';
 import './../pages/music/index.dart';
+import './../pages/preview/index.dart';
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
@@ -49,4 +50,12 @@ Handler customRouteHandler = Handler(
 Handler musicRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return Music(songInfo: params['songInfo'].first);
+});
+
+Handler previewRouteHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return Preview(
+    vodId: params['vodId'].first,
+    // vodId: params['vodId'][0],
+  );
 });

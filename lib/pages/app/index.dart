@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:skapp/iconfont/IconFont.dart';
 import 'package:skapp/routers/application.dart';
 import 'package:skapp/utils/cache.dart';
 import 'package:skapp/widgets/restart_app.dart';
@@ -106,7 +107,7 @@ class _App extends State<App> {
                 Padding(
                   padding: EdgeInsets.only(left: 16),
                   child:
-                      Text('换肤', style: Theme.of(context).textTheme.subtitle),
+                      Text('换肤', style: Theme.of(context).textTheme.subtitle2),
                 ),
                 Expanded(
                   flex: 1,
@@ -132,8 +133,7 @@ class _App extends State<App> {
               _global.changeThemeMode(value);
             },
             title: Text('暗黑模式'),
-            secondary: Icon(
-                _global.isDark ? Icons.invert_colors : Icons.invert_colors_off),
+            secondary: IconFont(IconNames.iconyejianduoyun, size: 30),
             selected: _global.isDark,
           ),
           SwitchListTile(
@@ -143,13 +143,12 @@ class _App extends State<App> {
               RestartWidget.restartApp(context);
             },
             title: Text('音乐助手'),
-            secondary:
-                Icon(_global.isMusic ? Icons.music_video : Icons.video_library),
+            secondary: IconFont(IconNames.iconyinle, size: 30),
             selected: _global.isMusic,
           ),
           ListTile(
             title: Text('清除缓存($size)'),
-            leading: Icon(Icons.layers_clear),
+            leading: IconFont(IconNames.iconqingchu_1, size: 30),
             onTap: () {
               clearCache();
             },
@@ -157,7 +156,7 @@ class _App extends State<App> {
           _global.appConfig.showlive
               ? ListTile(
                   title: Text('直播'),
-                  leading: Icon(Icons.live_tv),
+                  leading: IconFont(IconNames.iconzhibo, size: 30),
                   onTap: () {
                     Navigator.of(context).pop();
                     Application.router.navigateTo(
@@ -174,7 +173,8 @@ class _App extends State<App> {
                 ),
           ListTile(
             title: Text('自定义片源'),
-            leading: Icon(Icons.extension),
+            // leading: Icon(Icons.extension),
+            leading: IconFont(IconNames.iconzidingyi_2, size: 30),
             onTap: () {
               Navigator.of(context).pop();
               Application.router.navigateTo(

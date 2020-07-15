@@ -279,6 +279,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.3"
+  flutter_svg:
+    dependency: "direct main"
+    description:
+      name: flutter_svg
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.17.4"
   flutter_tencentplayer:
     dependency: "direct main"
     description:
@@ -471,6 +478,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.4.0+17"
+  palette_generator:
+    dependency: "direct main"
+    description:
+      name: palette_generator
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.3"
   path:
     dependency: transitive
     description:
@@ -478,6 +492,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.6.4"
+  path_drawing:
+    dependency: transitive
+    description:
+      name: path_drawing
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.1"
+  path_parsing:
+    dependency: transitive
+    description:
+      name: path_parsing
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.4"
   path_provider:
     dependency: "direct main"
     description:
@@ -639,6 +667,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.3"
+  shimmer:
+    dependency: "direct main"
+    description:
+      name: shimmer
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -856,4 +891,4 @@ packages:
     version: "0.0.4"
 sdks:
   dart: ">=2.7.0 <3.0.0"
-  flutter: ">=1.12.13+hotfix.5 <1.18.0"
+  flutter: ">=1.15.21 <1.18.0"

@@ -47,6 +47,21 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
     });
   }
 
+  final _$pickColorAtom = Atom(name: 'DetailsStoreMobx.pickColor');
+
+  @override
+  bool get pickColor {
+    _$pickColorAtom.reportRead();
+    return super.pickColor;
+  }
+
+  @override
+  set pickColor(bool value) {
+    _$pickColorAtom.reportWrite(value, super.pickColor, () {
+      super.pickColor = value;
+    });
+  }
+
   final _$vodIdAtom = Atom(name: 'DetailsStoreMobx.vodId');
 
   @override
@@ -208,6 +223,17 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
   }
 
   @override
+  void changePickColor(bool v) {
+    final _$actionInfo = _$DetailsStoreMobxActionController.startAction(
+        name: 'DetailsStoreMobx.changePickColor');
+    try {
+      return super.changePickColor(v);
+    } finally {
+      _$DetailsStoreMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void changeCurrentTabs(int current) {
     final _$actionInfo = _$DetailsStoreMobxActionController.startAction(
         name: 'DetailsStoreMobx.changeCurrentTabs');
@@ -245,6 +271,7 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
     return '''
 isLoading: ${isLoading},
 showAd: ${showAd},
+pickColor: ${pickColor},
 vodId: ${vodId},
 vod: ${vod},
 players: ${players},
