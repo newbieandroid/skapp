@@ -177,7 +177,6 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                               slivers: <Widget>[
                                 sliverTitle(),
                                 sliverRating(),
-                                sliverTicket(),
                                 sliverDesc(),
                                 sliverCasts(),
                                 sliverBottom()
@@ -294,7 +293,9 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-
+                        SizedBox(
+                          height: 4,
+                        ),
                         Text(
                           '${store.vod.vodClass}',
                           style: TextStyle(fontSize: 10, color: Colors.white),
@@ -311,11 +312,11 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                         Row(
                           children: <Widget>[
                             Container(
-                                margin: EdgeInsets.only(right: 10),
+                                margin: EdgeInsets.only(right: 10, top: 10),
                                 child: BtnWidget(
-                                  icon: Icons.favorite_border,
-                                  text: '观看',
-                                )),
+                                    icon: Icons.play_arrow,
+                                    text: '立即观看',
+                                    vodId: store.vod.vodId)),
                           ],
                         )
                       ],
@@ -335,28 +336,14 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
         margin: padding(),
         child: ScoreStartWidget(
           score: store.vod.vodScore < 0 ? 0.0 : store.vod.vodScore,
+          scoreNum: store.vod.vodScoreNum,
+          hitsWeek: store.vod.vodHitsWeek,
+          hitsMonth: store.vod.vodHitsMonth,
           p1: 5 / 100,
-          p2: 15 / 100,
+          p2: store.vod.vodScoreNum / store.vod.vodScoreAll,
           p3: 20 / 100,
-          p4: 30 / 100,
+          p4: 1 - store.vod.vodScoreNum / store.vod.vodScoreAll,
           p5: 20 / 100,
-        ),
-      ),
-    );
-  }
-
-  SliverToBoxAdapter sliverTicket() {
-    return SliverToBoxAdapter(
-      child: Container(
-        margin: EdgeInsets.only(left: 13, right: 13, bottom: 13),
-        padding: EdgeInsets.only(bottom: 14),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              width: 0.2,
-              color: Colors.black38,
-            ),
-          ),
         ),
       ),
     );
@@ -370,7 +357,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 5),
+              padding: EdgeInsets.only(bottom: 5),
               child: Text('简介',
                   style: TextStyle(fontSize: 14, color: Colors.white)),
             ),
@@ -388,7 +375,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
         children: <Widget>[
           Padding(
             padding:
-                EdgeInsets.only(top: 25.0, bottom: 10.0, left: 14, right: 14),
+                EdgeInsets.only(top: 25.0, bottom: 16.0, left: 14, right: 14),
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -401,56 +388,62 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
             ),
           ),
           Container(
-            height: 186.0,
+            height: 196.0,
             child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              // physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               itemBuilder: ((BuildContext context, int index) {
-                GestureDetector(
-                  onTap: () {
-                    Application.router.navigateTo(
-                      context,
-                      "/preview?vodId=${classifyStore.vodDataLists[index]['vod_id']}",
-                      transition: TransitionType.native,
-                      transitionDuration: Duration(milliseconds: 300),
-                      replace: true,
-                    );
-                    // Application.router.navigateTo(
-                    //   context,
-                    //   "/details?vodId=${vod.vodId}",
-                    //   transition: TransitionType.native,
-                    //   transitionDuration: Duration(milliseconds: 300),
-                    //   replace: true,
-                    // );
-                  },
-                  child: Container(
-                    child: Column(
-                      children: <Widget>[
-                        AspectRatio(
-                          aspectRatio: 0.73, // 宽高比
-                          child: Container(
-                            child: NetworkImgWidget(
-                              imgUrl: classifyStore.vodDataLists[index]
-                                  ['vod_pic'],
-                              radius: 4,
-                            ),
+                return classifyStore.vodDataLists.length > 0
+                    ? GestureDetector(
+                        onTap: () {
+                          Application.router.navigateTo(
+                            context,
+                            "/preview?vodId=${classifyStore.vodDataLists[index].vodId}",
+                            transition: TransitionType.native,
+                            transitionDuration: Duration(milliseconds: 300),
+                            replace: true,
+                          );
+                        },
+                        child: Container(
+                          width: 100,
+                          margin: EdgeInsets.only(right: 14),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              AspectRatio(
+                                aspectRatio: 0.73, // 宽高比
+                                child: Container(
+                                  child: CacheImgRadius(
+                                    imgUrl: classifyStore
+                                        .vodDataLists[index].vodPic,
+                                    radius: 4,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: 8, left: 6, right: 6, bottom: 8),
+                                child: Text(
+                                  classifyStore.vodDataLists[index].vodName,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: 8, left: 6, right: 6, bottom: 8),
-                          child: Text(
-                            classifyStore.vodDataLists[index]['vod_name'],
-                            maxLines: 2,
-                            style: Theme.of(context).textTheme.bodyText2,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
+                      )
+                    : Container(
+                        width: 0,
+                        height: 0,
+                      );
               }),
               itemCount: guessCount,
-              //最多显示9个演员
-              scrollDirection: Axis.horizontal,
             ),
           )
         ],
@@ -496,7 +489,9 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
 class BtnWidget extends StatelessWidget {
   final IconData icon;
   final String text;
-  const BtnWidget({Key key, @required this.icon, this.text}) : super(key: key);
+  final vodId;
+  const BtnWidget({Key key, @required this.icon, this.text, this.vodId})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -508,7 +503,7 @@ class BtnWidget extends StatelessWidget {
           Icon(
             icon,
             color: Colors.orange,
-            size: 20,
+            size: 26,
           ),
           Container(
             margin: EdgeInsets.only(left: 4),
@@ -523,7 +518,12 @@ class BtnWidget extends StatelessWidget {
         ],
       ),
       onPressed: () {
-        // ...
+        Application.router.navigateTo(
+          context,
+          "/details?vodId=${this.vodId}",
+          transition: TransitionType.native,
+          transitionDuration: Duration(milliseconds: 300),
+        );
       },
     );
   }

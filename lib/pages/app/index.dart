@@ -228,7 +228,7 @@ class _App extends State<App> {
     );
   }
 
-  renderBottomNavigationBar() {
+  renderBottomNavigationBar(context, _global) {
     return BottomNavigationBar(
       backgroundColor: Theme.of(context).cardColor,
       elevation: 0,
@@ -249,7 +249,8 @@ class _App extends State<App> {
       //当前选中的索引
       currentIndex: _selectIndex,
       //选中后，底部BottomNavigationBar内容的颜色(选中时，默认为主题色)（仅当type: BottomNavigationBarType.fixed,时生效）
-      fixedColor: Theme.of(context).primaryColor,
+      fixedColor:
+          _global.isDark ? Colors.white : Theme.of(context).primaryColor,
       type: BottomNavigationBarType.fixed,
       selectedFontSize: 10,
       unselectedFontSize: 10,
@@ -271,7 +272,7 @@ class _App extends State<App> {
             body: SafeArea(
               child: renderBody(),
             ), // https://www.jianshu.com/p/86d29a939624
-            bottomNavigationBar: renderBottomNavigationBar(),
+            bottomNavigationBar: renderBottomNavigationBar(context, _global),
           );
   }
 }

@@ -18,13 +18,13 @@ class DetailLoadingShimmerWidget extends StatelessWidget {
               padding: EdgeInsets.all(10),
               margin: EdgeInsets.only(top: 30),
               child: Shimmer.fromColors(
-                baseColor: Colors.grey[300],
-                highlightColor: Colors.white54,
+                baseColor: Colors.grey[400],
+                highlightColor: Colors.white60,
                 child: Row(
                   children: <Widget>[
                     Expanded(
                       child: Container(
-                        color: Colors.black,
+                        color: Colors.black45,
                       ),
                       flex: 1,
                     ),
@@ -37,17 +37,17 @@ class DetailLoadingShimmerWidget extends StatelessWidget {
                             Container(
                               height: 10,
                               margin: EdgeInsets.only(bottom: 14),
-                              color: Colors.black,
+                              color: Colors.black45,
                             ),
                             Container(
                               height: 10,
                               margin: EdgeInsets.only(bottom: 14),
-                              color: Colors.black,
+                              color: Colors.black45,
                             ),
                             Container(
                               height: 10,
                               width: 80,
-                              color: Colors.black,
+                              color: Colors.black45,
                             )
                           ],
                         ),
@@ -62,46 +62,46 @@ class DetailLoadingShimmerWidget extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: Shimmer.fromColors(
                   baseColor: Colors.grey[200],
-                  highlightColor: Colors.white54,
+                  highlightColor: Colors.white60,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
                         margin: EdgeInsets.only(bottom: 14),
                         height: 180,
-                        color: Colors.black,
+                        color: Colors.black45,
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 16),
                         height: 10,
-                        color: Colors.black,
+                        color: Colors.black45,
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 16),
                         height: 10,
-                        color: Colors.black,
+                        color: Colors.black45,
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 16),
                         height: 10,
-                        color: Colors.black,
+                        color: Colors.black45,
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 16),
                         height: 10,
                         width: 150,
-                        color: Colors.black,
+                        color: Colors.black45,
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 16),
                         height: 10,
-                        color: Colors.black,
+                        color: Colors.black45,
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: 16),
                         height: 10,
                         width: 100,
-                        color: Colors.black,
+                        color: Colors.black45,
                       ),
                     ],
                   )),

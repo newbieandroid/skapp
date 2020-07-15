@@ -80,30 +80,49 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
         Expanded(
             child: TabBarView(
           children: <Widget>[
-            ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  children: <Widget>[
-                    Container(
-                      child: getItem(),
-                      padding: const EdgeInsets.only(left: 14, right: 14),
-                      color: Colors.white,
-                    ),
-                    Container(
-                      height: 10.0,
-                      color: Colors.transparent,
-                    )
-                  ],
-                );
-              },
-              physics: widget.scroll
-                  ? const ClampingScrollPhysics()
-                  : const NeverScrollableScrollPhysics(), //禁止滚动
-              // physics: const ClampingScrollPhysics(), // 滚动
-              itemCount: 10,
+            // ListView.builder(
+            //   itemBuilder: (BuildContext context, int index) {
+            //     return Column(
+            //       children: <Widget>[
+            //         Container(
+            //           child: getItem(),
+            //           padding: const EdgeInsets.only(left: 14, right: 14),
+            //           color: Colors.white,
+            //         ),
+            //         Container(
+            //           height: 10.0,
+            //           color: Colors.transparent,
+            //         )
+            //       ],
+            //     );
+            //   },
+            //   physics: widget.scroll
+            //       ? const ClampingScrollPhysics()
+            //       : const NeverScrollableScrollPhysics(), //禁止滚动
+            //   // physics: const ClampingScrollPhysics(), // 滚动
+            //   itemCount: 0,
+            // ),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                '暂无影评',
+                style: Theme.of(context).textTheme.caption,
+              ),
             ),
-            Text('话题，暂无数据~'),
-            Text('讨论，暂无数据~')
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                '暂无话题',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                '暂无讨论',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            )
           ],
           controller: controller,
         ))

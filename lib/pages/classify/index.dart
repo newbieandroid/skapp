@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
+import 'package:skapp/store/root.dart';
 import './../../store/classify/classify.dart';
 import './sklist.dart';
 
@@ -66,6 +68,7 @@ class _ClassifyState extends State<Classify>
 
   @override
   Widget build(BuildContext context) {
+    Global _global = Provider.of<Global>(context);
     return Observer(
         builder: (_) => store.isLoading
             ? Container(
@@ -78,10 +81,14 @@ class _ClassifyState extends State<Classify>
                   Material(
                     color: Theme.of(context).cardColor,
                     child: TabBar(
-                      indicatorColor: Theme.of(context).primaryColorDark,
+                      indicatorColor: _global.isDark
+                          ? Colors.white
+                          : Theme.of(context).primaryColorDark,
                       controller: tabController,
                       isScrollable: true,
-                      labelColor: Theme.of(context).primaryColorDark,
+                      labelColor: _global.isDark
+                          ? Colors.white
+                          : Theme.of(context).primaryColorDark,
                       unselectedLabelColor:
                           Theme.of(context).textTheme.subtitle2.color,
                       indicatorSize: TabBarIndicatorSize.label,

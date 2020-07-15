@@ -20,7 +20,7 @@ class Like extends StatelessWidget {
               padding: EdgeInsets.all(8),
               child: Text(
                 '猜你喜欢',
-                style: Theme.of(context).textTheme.subhead,
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
             CustomGridView(vodDataLists, global),

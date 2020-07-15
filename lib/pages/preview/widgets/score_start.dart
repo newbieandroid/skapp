@@ -8,16 +8,22 @@ class ScoreStartWidget extends StatefulWidget {
   final p3;
   final p2;
   final p1;
+  final scoreNum;
+  final hitsWeek;
+  final hitsMonth;
 
-  ScoreStartWidget(
-      {Key key,
-      @required this.score,
-      @required this.p1,
-      @required this.p2,
-      @required this.p3,
-      @required this.p4,
-      @required this.p5})
-      : super(key: key);
+  ScoreStartWidget({
+    Key key,
+    @required this.score,
+    @required this.p1,
+    @required this.p2,
+    @required this.p3,
+    @required this.p4,
+    @required this.p5,
+    this.scoreNum,
+    this.hitsWeek,
+    this.hitsMonth,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -45,11 +51,6 @@ class _ScoreStartState extends State<ScoreStartWidget> {
                 '评分',
                 style: TextStyle(fontSize: 12.0, color: Colors.white),
               )),
-              Icon(
-                Icons.chevron_right,
-                color: Color(0x66ffffff),
-                size: 26.0,
-              )
             ],
           ),
           Row(
@@ -87,7 +88,7 @@ class _ScoreStartState extends State<ScoreStartWidget> {
                   startsLine(2, widget.p2),
                   startsLine(1, widget.p1),
                   Text(
-                    '37928人评分',
+                    '${widget.scoreNum}人评分',
                     style: TextStyle(fontSize: 10, color: Colors.white),
                   )
                 ],
@@ -109,7 +110,7 @@ class _ScoreStartState extends State<ScoreStartWidget> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Text(
-                '9.2万人看过，8万人想看',
+                '周点击量：${widget.hitsWeek}  月点击量：${widget.hitsMonth}',
                 style: TextStyle(fontSize: 11, color: Colors.white),
               )
             ],
