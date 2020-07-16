@@ -523,6 +523,7 @@ class BtnWidget extends StatelessWidget {
           "/details?vodId=${this.vodId}",
           transition: TransitionType.native,
           transitionDuration: Duration(milliseconds: 300),
+          replace: true,
         );
       },
     );

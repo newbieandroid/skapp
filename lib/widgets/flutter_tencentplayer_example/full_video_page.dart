@@ -12,7 +12,7 @@ import './widget/tencent_player_loading.dart';
 import 'package:screen/screen.dart';
 import 'package:flutter_tencentplayer/flutter_tencentplayer.dart';
 import './main.dart';
-import './util/forbidshot_util.dart';
+// import './util/forbidshot_util.dart';
 import 'package:skapp/store/root.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -66,7 +66,7 @@ class _FullVideoPageState extends State<FullVideoPage> {
     _initController();
     controller.addListener(listener);
     hideCover();
-    ForbidShotUtil.initForbid(context);
+    // ForbidShotUtil.initForbid(context);
     Screen.keepOn(true);
   }
 
@@ -82,7 +82,7 @@ class _FullVideoPageState extends State<FullVideoPage> {
     if (widget.controller == null) {
       controller.dispose();
     }
-    ForbidShotUtil.disposeForbid();
+    //ForbidShotUtil.disposeForbid();
     Screen.keepOn(false);
   }
 

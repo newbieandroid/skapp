@@ -106,21 +106,21 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
               padding: EdgeInsets.all(10),
               child: Text(
                 '暂无影评',
-                style: Theme.of(context).textTheme.caption,
+                style: TextStyle(fontSize: 13, color: Colors.black87),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(10),
               child: Text(
                 '暂无话题',
-                style: Theme.of(context).textTheme.caption,
+                style: TextStyle(fontSize: 13, color: Colors.black87),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(10),
               child: Text(
                 '暂无讨论',
-                style: Theme.of(context).textTheme.caption,
+                style: TextStyle(fontSize: 13, color: Colors.black87),
               ),
             )
           ],

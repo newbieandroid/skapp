@@ -136,6 +136,7 @@ abstract class GlobalMobx with Store {
 
   @action
   void changeProtocol(bool value) {
+    isAllowProtocol = value;
     prefs.setBool('isAllowProtocol', value);
   }
 

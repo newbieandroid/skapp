@@ -16,7 +16,7 @@ import './widget/tencent_player_loading.dart';
 import 'package:screen/screen.dart';
 import 'package:flutter_tencentplayer/flutter_tencentplayer.dart';
 import './main.dart';
-import './util/forbidshot_util.dart';
+// import './util/forbidshot_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'full_video_page.dart';
 
@@ -71,7 +71,7 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
     controller.initialize();
     controller.addListener(listener);
     hideCover();
-    ForbidShotUtil.initForbid(context);
+    // ForbidShotUtil.initForbid(context);
     Screen.keepOn(true);
     widget.global.changeAppAdsPause(widget.global.appAds.pause.show);
   }
@@ -83,7 +83,7 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
     //     [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     controller.removeListener(listener);
     controller.dispose();
-    ForbidShotUtil.disposeForbid();
+    // ForbidShotUtil.disposeForbid();
     Screen.keepOn(false);
   }
 

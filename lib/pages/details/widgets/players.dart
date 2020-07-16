@@ -19,10 +19,10 @@ class Players extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(right: 8),
+                    padding: EdgeInsets.only(right: 8, left: 10),
                     child: Text(
-                      '选择播放源',
-                      style: Theme.of(context).textTheme.subhead,
+                      '播放源',
+                      style: Theme.of(context).textTheme.subtitle2,
                     ),
                   ),
                   DropdownButtonHideUnderline(
@@ -43,9 +43,9 @@ class Players extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 6, right: 6, top: 6, bottom: 16),
+                padding: EdgeInsets.only(left: 6, right: 6, top: 2, bottom: 16),
                 child: Container(
-                  height: 60,
+                  height: 44,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     // physics: NeverScrollableScrollPhysics(),
@@ -54,11 +54,11 @@ class Players extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) => Padding(
                       padding: EdgeInsets.only(right: 10),
                       child: MaterialButton(
-                        elevation: 0,
-                        color: Theme.of(context).dividerColor,
+                        elevation: 1,
+                        color: Theme.of(context).cardColor,
                         textColor: index == store.currentPlayers
                             ? Theme.of(context).primaryColorDark
-                            : Theme.of(context).textTheme.body2.color,
+                            : Theme.of(context).textTheme.bodyText2.color,
                         child: Text(
                             store.players[store.currentTabs][index]['label']),
                         onPressed: () {

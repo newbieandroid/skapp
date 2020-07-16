@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert' as Convert;
 import 'dart:io';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 typedef RequestCallBack = void Function(Map data);
@@ -36,6 +37,7 @@ class HttpRequest {
       return result;
     } on Exception catch (e) {
       print('[uri=$uri]exception e=${e.toString()}');
+      Fluttertoast.showToast(msg: e.toString());
       return '';
     }
   }
