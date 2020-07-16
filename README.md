@@ -10,7 +10,7 @@
 
 ### 项目介绍
 
-此项目是一个基于[MACCMS](https://github.com/magicblack/maccms10/)和[lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)实现的影视播放及音乐助手软件。
+此项目是一款基于[MACCMS](https://github.com/magicblack/maccms10/)和[lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)的影视播放软件。
 
 web端访问地址：[sk.ncer.top](http://sk.ncer.top)
 
@@ -31,15 +31,19 @@ dart,flutter
 1.安卓设备
 2.ios设备未进行测试
 
-### UI界面
+### screenshot
 
-![movie](./images/movie.png)
-
-![music](./images/music.png)
+<img width="300" src="./images/splash.jpg" alt="sk-splash" style="margin-right:10px"/>
+<img width="300" src="./images/index.jpg" alt="sk-index"  style="margin-right:10px"/>
+<img width="300" src="./images/preview.jpg" alt="sk-preview"  style="margin-right:10px"/>
+<img width="300" src="./images/details.jpg" alt="sk-details"  style="margin-right:10px"/>
+<img width="300" src="./images/slider.jpg" alt="sk-slider"  style="margin-right:10px"/>
+<img width="300" src="./images/music_index.jpg" alt="sk-music_index"  style="margin-right:10px"/>
+<img width="300" src="./images/music_play.jpg" alt="sk-music_play"  style="margin-right:10px"/>
 
 ### 版本更新历史
 
-##### 2.0.3
+##### V2.0.3
 
 - 修复暗黑模式下展示效果
 
