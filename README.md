@@ -8,6 +8,8 @@
 
 <hr />
 
+### 开源不易，喜欢的小伙伴给个star支持下吧~
+
 ### 项目介绍
 
 此项目是一款基于[MACCMS](https://github.com/magicblack/maccms10/)和[lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)的影视播放软件。
