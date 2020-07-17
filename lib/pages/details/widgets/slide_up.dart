@@ -107,7 +107,7 @@ class SlideUpPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.subtitle,
                       ),
                       Text(
-                        '${store.vod.vodContent}',
+                        '${store.vod.vodContent.replaceAll(RegExp(r"<\/?[^>]*>"), "")}',
                         style: Theme.of(context).textTheme.caption,
                       )
                     ],

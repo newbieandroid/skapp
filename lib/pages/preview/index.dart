@@ -361,7 +361,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
               child: Text('简介',
                   style: TextStyle(fontSize: 14, color: Colors.white)),
             ),
-            Text(store.vod.vodContent,
+            Text(store.vod.vodContent.replaceAll(RegExp(r"<\/?[^>]*>"), ""),
                 style: TextStyle(fontSize: 12, color: Colors.white))
           ],
         ),

@@ -122,7 +122,7 @@ class _SKItemState extends State<SKItem> {
                       height: 4,
                     ),
                     Text(
-                      vod.vodContent,
+                      vod.vodContent.replaceAll(RegExp(r"<\/?[^>]*>"), ""),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       style: Theme.of(context).textTheme.caption,
