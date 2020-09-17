@@ -4,6 +4,7 @@ import './../pages/search/index.dart';
 import './../pages/live/index.dart';
 import './../pages/live/show_lives.dart';
 import './../pages/custom/index.dart';
+import './../pages/vipvideo/index.dart';
 import './../pages/music/index.dart';
 import './../pages/preview/index.dart';
 
@@ -45,6 +46,11 @@ Handler showLivesRouteHandler = Handler(
 Handler customRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return Custom();
+});
+
+Handler vipvideoRouteHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return VipVideo();
 });
 
 Handler musicRouteHandler = Handler(

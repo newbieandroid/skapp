@@ -846,7 +846,10 @@ class PortraitController extends StatelessWidget {
             TimeHelper.getTimeText(info.duration),
             style: TextStyle(color: Colors.white),
           )
-        : Container();
+        : Container(
+            width: 0,
+            height: 0,
+          );
   }
 
   buildPlayButton(BuildContext context) {

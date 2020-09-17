@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import './../../../store/details/details.dart';
+// import './../../../store/details/details.dart';
 
 class WebViewPage extends StatefulWidget {
-  final DetailsStore store;
+  // final DetailsStore store;
+  final store;
   WebViewController _webViewController; // 添加一个controller
 
   WebViewPage({this.store});
@@ -38,7 +39,8 @@ class _WebViewState extends State<WebViewPage> {
                 color: Colors.black,
                 child: WebView(
                   initialUrl: widget.store.currentUrl, // 加载的url
-                  // userAgent: "your userAgent", // h5 可以通过navigator.userAgent判断当前环境
+                  userAgent:
+                      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36", // h5 可以通过navigator.userAgent判断当前环境
                   javascriptMode: JavascriptMode
                       .unrestricted, // 启用 js交互，默认不启用JavascriptMode.disabled
                   // javascriptChannels: <JavascriptChannel>[

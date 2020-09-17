@@ -213,7 +213,10 @@ class PlayerState extends State<Player> {
   List<Widget> _controllers(BuildContext context) {
     return [
       widget.isTopic && lyric != null
-          ? Container()
+          ? Container(
+              width: 0,
+              height: 0,
+            )
           : Positioned.fill(
               child: GestureDetector(
                 onTap: () {

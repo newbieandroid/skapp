@@ -223,7 +223,10 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                       ),
                       dragContainer: DragContainer(
                           drawer: hideBottomDrag
-                              ? Container()
+                              ? Container(
+                                  width: 0,
+                                  height: 0,
+                                )
                               : Container(
                                   child: OverscrollNotificationWidget(
                                     child: LongCommentWidget(

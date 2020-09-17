@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 enum IconNames {
-  icon_a, iconzidingyi_2, iconzidingyi_1, iconqingchu_1, iconshipinyingshi, icondianshiju, iconzongyiyule, iconxiangmuicon_dongman, icondianying, iconzidingyi, iconzhibo, iconqingchu, iconyinle, iconyejianduoyun
+  iconshishishipinliujiexi, icon_a, iconzidingyi_2, iconzidingyi_1, iconqingchu_1, iconshipinyingshi, icondianshiju, iconzongyiyule, iconxiangmuicon_dongman, icondianying, iconzidingyi, iconzhibo, iconqingchu, iconyinle, iconyejianduoyun
 }
 
 class IconFont extends StatelessWidget {
@@ -30,6 +30,20 @@ class IconFont extends StatelessWidget {
     String svgXml;
 
     switch (this.name) {
+      case IconNames.iconshishishipinliujiexi:
+        svgXml = '''
+          <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M845.568 923.328H172.16a92.8 92.8 0 0 1-92.672-92.672v-472.32H938.24v472.32a92.8 92.8 0 0 1-92.8 92.672zM130.496 96.192a31.104 31.104 0 0 0 2.112 5.824l91.776 190.08H79.488V179.008c0-36.16 20.8-67.456 51.008-82.816z m555.2 195.904L586.24 86.272h114.816l99.456 205.824h-114.816z m-188.352 0L397.888 86.272H512.64L612.16 292.032H497.344z m-199.36 0L198.656 86.272h125.696L423.808 292.032H297.984z m640.32-113.088V292.032h-64.256l-99.328-205.824h70.848c51.136 0 92.736 41.6 92.736 92.736zM845.44 6.848H172.288A172.352 172.352 0 0 0 0 178.944v651.648a172.352 172.352 0 0 0 172.16 172.16h673.408a172.352 172.352 0 0 0 172.16-172.16V179.008a172.416 172.416 0 0 0-172.16-172.16z"
+              fill="''' + getColor(0, color, colors, '#5584FF') + '''"
+            />
+            <path
+              d="M622.784 638.08L456.32 730.88a9.344 9.344 0 0 1-9.728-0.128 9.472 9.472 0 0 1-4.864-8.448V536.576c0-4.928 3.008-7.424 4.864-8.448a9.472 9.472 0 0 1 5.12-1.472c1.408 0 3.008 0.384 4.736 1.28L622.912 620.8a9.856 9.856 0 0 1-0.128 17.216m32.32-75.072l-166.464-92.8a75.392 75.392 0 0 0-75.52 0.768 75.328 75.328 0 0 0-37.504 65.536v185.6c0 27.264 14.08 51.776 37.504 65.536a75.072 75.072 0 0 0 75.52 0.896l166.464-92.8c24.128-13.44 39.04-38.976 39.04-66.56a76.736 76.736 0 0 0-39.04-66.176"
+              fill="''' + getColor(1, color, colors, '#5584FF') + '''"
+            />
+          </svg>
+        ''';
+        break;
       case IconNames.icon_a:
         svgXml = '''
           <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
