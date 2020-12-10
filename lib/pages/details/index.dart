@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pk_skeleton/pk_skeleton.dart';
 import 'package:provider/provider.dart';
+import 'package:skapp/pages/details/widgets/dlna.dart';
 import 'package:skapp/store/root.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import './../../store/details/details.dart';
@@ -88,14 +89,16 @@ class _DetailsState extends State<Details> {
                       child: Container(
                         child: ListView.separated(
                           padding: new EdgeInsets.all(5.0),
-                          itemCount: 3,
+                          itemCount: 4,
                           itemBuilder: (BuildContext context, int index) {
                             switch (index) {
                               case 0:
-                                return Desc(store: store, pc: pc);
+                                return DlnaPage(store: store);
                               case 1:
-                                return Players(store: store);
+                                return Desc(store: store, pc: pc);
                               case 2:
+                                return Players(store: store);
+                              case 3:
                                 return Like(
                                   vodDataLists: classifyStore.vodDataLists,
                                   global: _global,
