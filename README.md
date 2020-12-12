@@ -26,7 +26,7 @@ web 端访问地址：[sk.ncer.top](http://sk.ncer.top)
 
 ### 使用技术栈
 
-dart,flutter
+dart 2.7.0,flutter 1.22.5
 
 ### 支持平台
 

@@ -664,7 +664,7 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = AnimationController(
-        duration: const Duration(milliseconds: 220), vsync: this);
+        duration: const Duration(milliseconds: 220) /* , value: this */);
     animation = widget.direct == 'up'
         ? Tween<double>(begin: offset, end: 0).animate(controller)
         : Tween<double>(begin: 0, end: offset).animate(controller);

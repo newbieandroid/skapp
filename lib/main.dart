@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:package_info/package_info.dart';
 import 'package:skapp/widgets/restart_app.dart';
 import 'package:upgrader/upgrader.dart';
-import 'package:fluro/fluro.dart';
+import 'package:fluro/fluro.dart' as CustomRouter;
 import 'package:yin_umeng/yin_umeng.dart';
 import 'routers/routers.dart';
 import 'routers/application.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
 
   PackageInfo packageInfo;
   MyApp() {
-    final router = new Router();
+    final router = new CustomRouter.Router();
     Routes.configureRoutes(router);
     Application.router = router;
     //初始化友盟

@@ -80,8 +80,8 @@ class _DragContainerState extends State<DragContainer>
 
   @override
   void initState() {
-    animalController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 250));
+    animalController =
+        AnimationController(duration: const Duration(milliseconds: 250));
     maxOffsetDistance = (widget.height + widget.defaultShowHeight) * 0.5;
 
 //    if (controller != null) {
