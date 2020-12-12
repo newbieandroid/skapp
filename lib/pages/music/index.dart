@@ -210,13 +210,13 @@ class _MusicState extends State<Music> with TickerProviderStateMixin {
     requestAPI();
     requestMusicList();
     controller_record = new AnimationController(
-        duration: const Duration(milliseconds: 15000) /* , value: this */);
+        duration: const Duration(milliseconds: 15000), vsync: this);
     animation_record =
         new CurvedAnimation(parent: controller_record, curve: Curves.linear);
 
     controller_needle = new AnimationController(
       duration: const Duration(milliseconds: 500),
-      // value: this,
+      vsync: this,
     );
     animation_needle =
         new CurvedAnimation(parent: controller_needle, curve: Curves.linear);

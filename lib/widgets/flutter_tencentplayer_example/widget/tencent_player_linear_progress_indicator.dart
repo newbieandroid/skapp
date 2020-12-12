@@ -280,6 +280,7 @@ class _TencentLinearProgressIndicatorState
     super.initState();
     _controller = AnimationController(
       duration: const Duration(milliseconds: _kIndeterminateLinearDuration),
+      vsync: this,
       // value: this,
     );
     if (widget.value == null) _controller.repeat();
