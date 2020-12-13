@@ -210,7 +210,9 @@ class _MusicState extends State<Music> with TickerProviderStateMixin {
     requestAPI();
     requestMusicList();
     controller_record = new AnimationController(
-        duration: const Duration(milliseconds: 15000), vsync: this);
+      duration: const Duration(milliseconds: 15000),
+      vsync: this,
+    );
     animation_record =
         new CurvedAnimation(parent: controller_record, curve: Curves.linear);
 
@@ -233,195 +235,194 @@ class _MusicState extends State<Music> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Observer(
-        builder: (_) => store.isLoading
-            ? Container(
-                width: 0,
-                height: 0,
-              )
-            : Stack(
-                children: <Widget>[
-                  new Scaffold(
-                    endDrawer: renderDrawer(context),
+      builder: (_) => store.isLoading
+          ? Container(
+              width: 0,
+              height: 0,
+            )
+          : Stack(
+              children: <Widget>[
+                new Scaffold(
+                  endDrawer: renderDrawer(context),
+                  backgroundColor: Colors.transparent,
+                  appBar: new AppBar(
+                    iconTheme: IconThemeData(
+                      color: Colors.white, //修改颜色
+                    ),
+                    // automaticallyImplyLeading: false,
                     backgroundColor: Colors.transparent,
-                    appBar: new AppBar(
-                      iconTheme: IconThemeData(
-                        color: Colors.white, //修改颜色
+                    elevation: 0.0,
+                    title: Container(
+                      child: Text(
+                        json.decode(widget.songInfo)['name'] +
+                            ' - ' +
+                            json.decode(widget.songInfo)['singer'],
+                        style:
+                            new TextStyle(fontSize: 14.0, color: Colors.white),
                       ),
-                      // automaticallyImplyLeading: false,
-                      backgroundColor: Colors.transparent,
-                      elevation: 0.0,
-                      title: Container(
-                        child: Text(
-                          json.decode(widget.songInfo)['name'] +
-                              ' - ' +
-                              json.decode(widget.songInfo)['singer'],
-                          style: new TextStyle(
-                              fontSize: 14.0, color: Colors.white),
+                    ),
+                    actions: <Widget>[
+                      new IconButton(
+                        onPressed: () {
+                          var newType = List();
+                          newType.add({'type': 'progress', 'size': null});
+                          newType.addAll(
+                              json.decode(widget.songInfo)['types'].toList());
+                          showDialog<Null>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return DialogPanel(
+                                songInfo: widget.songInfo,
+                                types: newType,
+                              );
+                            },
+                          ).then((val) {
+                            print(val);
+                          });
+                        },
+                        icon: new Icon(
+                          Icons.file_download,
+                          size: 24.0,
+                          color: Colors.white,
                         ),
                       ),
-                      actions: <Widget>[
-                        new IconButton(
+                      Builder(
+                        builder: (context) => new IconButton(
                           onPressed: () {
-                            var newType = List();
-                            newType.add({'type': 'progress', 'size': null});
-                            newType.addAll(
-                                json.decode(widget.songInfo)['types'].toList());
-                            showDialog<Null>(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return DialogPanel(
-                                  songInfo: widget.songInfo,
-                                  types: newType,
-                                );
-                              },
-                            ).then((val) {
-                              print(val);
-                            });
+                            Scaffold.of(context).openEndDrawer();
                           },
                           icon: new Icon(
-                            Icons.file_download,
+                            Icons.menu,
                             size: 24.0,
                             color: Colors.white,
                           ),
                         ),
-                        Builder(
-                          builder: (context) => new IconButton(
-                            onPressed: () {
-                              Scaffold.of(context).openEndDrawer();
-                            },
-                            icon: new Icon(
-                              Icons.menu,
-                              size: 24.0,
-                              color: Colors.white,
+                      )
+                    ],
+                  ),
+                  body: new Stack(
+                    alignment: FractionalOffset(0.5, 0.0),
+                    children: <Widget>[
+                      new Stack(
+                        alignment: const FractionalOffset(0.7, 0.1),
+                        children: <Widget>[
+                          AnimatedOpacity(
+                            opacity: store.isTopic ? 1 : 0,
+                            duration: new Duration(milliseconds: 600), //过渡时间：1
+                            child: Container(
+                              child: RotateRecord(
+                                animation:
+                                    _commonTween.animate(controller_record),
+                                imgUrl: json.decode(widget.songInfo)['img'],
+                                onCusTap: () {
+                                  store.changeTopic(false);
+                                },
+                              ),
+                              margin: EdgeInsets.only(top: 80.0),
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                    body: new Stack(
-                      alignment: const FractionalOffset(0.5, 0.0),
-                      children: <Widget>[
-                        new Stack(
-                          alignment: const FractionalOffset(0.7, 0.1),
-                          children: <Widget>[
-                            AnimatedOpacity(
-                                opacity: store.isTopic ? 1 : 0,
-                                duration:
-                                    new Duration(milliseconds: 600), //过渡时间：1
-                                child: Container(
-                                  child: RotateRecord(
-                                    animation:
-                                        _commonTween.animate(controller_record),
-                                    imgUrl: json.decode(widget.songInfo)['img'],
-                                    onCusTap: () {
-                                      store.changeTopic(false);
-                                    },
-                                  ),
-                                  margin: EdgeInsets.only(top: 80.0),
-                                )),
-                            AnimatedOpacity(
-                                opacity: store.isTopic ? 1 : 0,
-                                duration:
-                                    new Duration(milliseconds: 600), //过渡时间：1
-                                child: Container(
-                                  child: new PivotTransition(
-                                    turns:
-                                        _rotateTween.animate(controller_needle),
-                                    alignment: FractionalOffset.topLeft,
-                                    child: new Container(
-                                      width: 100.0,
-                                      child: new Image.asset(
-                                          "assets/images/play_needle.png"),
-                                    ),
-                                  ),
-                                )),
-                          ],
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(bottom: 20.0),
-                          child: new Player(
-                            lyric: store.songInfo['data']['lrc'],
-                            interval:
-                                json.decode(widget.songInfo)['interval'] ??
-                                    "00:00",
-                            onError: (e) {
-                              Scaffold.of(context).showSnackBar(
-                                new SnackBar(
-                                  content: new Text(e),
+                          AnimatedOpacity(
+                            opacity: store.isTopic ? 1 : 0,
+                            duration: new Duration(milliseconds: 600), //过渡时间：1
+                            child: Container(
+                              child: new PivotTransition(
+                                turns: _rotateTween.animate(controller_needle),
+                                alignment: FractionalOffset.topLeft,
+                                child: new Container(
+                                  width: 100.0,
+                                  child: new Image.asset(
+                                      "assets/images/play_needle.png"),
                                 ),
-                              );
-                            },
-                            onPrevious: () {
-                              if (store.currentPlayIndex != 0) {
-                                var index = store.currentPlayIndex - 1;
-                                Application.router.navigateTo(context,
-                                    "/music?songInfo=${Uri.encodeComponent(store.musicLists[index])}",
-                                    // transition: TransitionType.native,
-                                    transitionDuration:
-                                        Duration(milliseconds: 300),
-                                    replace: true);
-                              }
-                            },
-                            onNext: () {
-                              var index = 0;
-                              if (store.currentPlayIndex == 0 &&
-                                  !store.isFavorite) {
-                                index = store.currentPlayIndex;
-                              } else {
-                                index = store.currentPlayIndex + 1;
-                              }
-                              if (index <= store.musicLists.length - 1) {
-                                Application.router.navigateTo(context,
-                                    "/music?songInfo=${Uri.encodeComponent(store.musicLists[index])}",
-                                    // transition: TransitionType.native,
-                                    transitionDuration:
-                                        Duration(milliseconds: 300),
-                                    replace: true);
-                              }
-                            },
-                            onCompleted: () {},
-                            onCollect: () async {
-                              if (store.isFavorite) {
-                                // 移除
-                                removeMusicList();
-                              } else {
-                                //加入
-                                setMusicList();
-                              }
-                            },
-                            changeMusic: (i) {
-                              store.changeCurrent(i);
-                              requestAPI();
-                            },
-                            onDownload: () {},
-                            onPlaying: (isPlaying) {
-                              if (isPlaying) {
-                                controller_record.forward();
-                                controller_needle.forward();
-                              } else {
-                                controller_record.stop(canceled: false);
-                                controller_needle.reverse();
-                              }
-                            },
-                            onTopicTap: () {
-                              store.changeTopic(true);
-                            },
-                            key: musicPlayerKey,
-                            color: Colors.white,
-                            audioUrl: store.mp3Url,
-                            types: [
-                              json.decode(widget.songInfo)['types'][0]
-                            ], //todo:目前只支持普通音质的音乐
-                            current: store.current,
-                            isTopic: store.isTopic,
-                            isFavorite: store.isFavorite,
+                              ),
+                            ),
                           ),
+                        ],
+                      ),
+                      new Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: new Player(
+                          lyric: store.songInfo['data']['lrc'],
+                          interval: json.decode(widget.songInfo)['interval'] ??
+                              "00:00",
+                          onError: (e) {
+                            Scaffold.of(context).showSnackBar(
+                              new SnackBar(
+                                content: new Text(e),
+                              ),
+                            );
+                          },
+                          onPrevious: () {
+                            if (store.currentPlayIndex != 0) {
+                              var index = store.currentPlayIndex - 1;
+                              Application.router.navigateTo(context,
+                                  "/music?songInfo=${Uri.encodeComponent(store.musicLists[index])}",
+                                  // transition: TransitionType.native,
+                                  transitionDuration:
+                                      Duration(milliseconds: 300),
+                                  replace: true);
+                            }
+                          },
+                          onNext: () {
+                            var index = 0;
+                            if (store.currentPlayIndex == 0 &&
+                                !store.isFavorite) {
+                              index = store.currentPlayIndex;
+                            } else {
+                              index = store.currentPlayIndex + 1;
+                            }
+                            if (index <= store.musicLists.length - 1) {
+                              Application.router.navigateTo(context,
+                                  "/music?songInfo=${Uri.encodeComponent(store.musicLists[index])}",
+                                  // transition: TransitionType.native,
+                                  transitionDuration:
+                                      Duration(milliseconds: 300),
+                                  replace: true);
+                            }
+                          },
+                          onCompleted: () {},
+                          onCollect: () async {
+                            if (store.isFavorite) {
+                              // 移除
+                              removeMusicList();
+                            } else {
+                              //加入
+                              setMusicList();
+                            }
+                          },
+                          changeMusic: (i) {
+                            store.changeCurrent(i);
+                            requestAPI();
+                          },
+                          onDownload: () {},
+                          onPlaying: (isPlaying) {
+                            if (isPlaying) {
+                              controller_record.forward();
+                              controller_needle.forward();
+                            } else {
+                              controller_record.stop(canceled: false);
+                              controller_needle.reverse();
+                            }
+                          },
+                          onTopicTap: () {
+                            store.changeTopic(true);
+                          },
+                          key: musicPlayerKey,
+                          color: Colors.white,
+                          audioUrl: store.mp3Url,
+                          types: [
+                            json.decode(widget.songInfo)['types'][0]
+                          ], //todo:目前只支持普通音质的音乐
+                          current: store.current,
+                          isTopic: store.isTopic,
+                          isFavorite: store.isFavorite,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ));
+                ),
+              ],
+            ),
+    );
   }
 
   @override
