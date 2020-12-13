@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 import 'package:skapp/iconfont/IconFont.dart';
 import 'package:skapp/routers/application.dart';
 import 'package:skapp/utils/cache.dart';
@@ -159,7 +160,7 @@ class _App extends State<App> {
               );
             },
           ),
-          _global.appConfig.showlive
+          /* _global.appConfig.showlive
               ? ListTile(
                   title: Text('直播'),
                   leading: IconFont(IconNames.iconzhibo, size: 30),
@@ -176,7 +177,7 @@ class _App extends State<App> {
               : Container(
                   width: 0,
                   height: 0,
-                ),
+                ), */
           ListTile(
             title: Text('自定义片源'),
             // leading: Icon(Icons.extension),
@@ -188,6 +189,15 @@ class _App extends State<App> {
                 "/custom",
                 transition: TransitionType.native,
                 transitionDuration: Duration(milliseconds: 300),
+              );
+            },
+          ),
+          ListTile(
+            title: Text('分享SK'),
+            leading: IconFont(IconNames.iconfenxiang, size: 30),
+            onTap: () {
+              Share.share(
+                '【SKAPP，一款视频播放软件】\n https://github.com/Mockingbird1234/skapp',
               );
             },
           ),

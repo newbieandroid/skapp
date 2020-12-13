@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 enum IconNames {
-  iconshishishipinliujiexi, icon_a, iconzidingyi_2, iconzidingyi_1, iconqingchu_1, iconshipinyingshi, icondianshiju, iconzongyiyule, iconxiangmuicon_dongman, icondianying, iconzidingyi, iconzhibo, iconqingchu, iconyinle, iconyejianduoyun
+  iconfenxiang, iconshishishipinliujiexi, icon_a, iconzidingyi_2, iconzidingyi_1, iconqingchu_1, iconshipinyingshi, icondianshiju, iconzongyiyule, iconxiangmuicon_dongman, icondianying, iconzidingyi, iconzhibo, iconqingchu, iconyinle, iconyejianduoyun
 }
 
 class IconFont extends StatelessWidget {
@@ -30,6 +30,20 @@ class IconFont extends StatelessWidget {
     String svgXml;
 
     switch (this.name) {
+      case IconNames.iconfenxiang:
+        svgXml = '''
+          <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M311.902041 457.665306c-6.269388 0-13.061224-3.134694-16.718368-8.881633-5.746939-9.404082-3.657143-21.420408 5.746939-27.689795l191.216327-124.865307c9.404082-5.746939 21.420408-3.657143 27.689796 5.746939 5.746939 9.404082 3.657143 21.420408-5.746939 27.689796L322.873469 454.008163c-3.657143 2.612245-7.314286 3.657143-10.971428 3.657143zM690.155102 762.77551c-3.134694 0-6.269388-0.522449-8.881633-2.089796L323.395918 574.693878c-9.926531-5.22449-13.583673-17.240816-8.359183-26.644898 5.22449-9.926531 17.240816-13.583673 26.644898-8.359184l357.355102 185.469388c9.926531 5.22449 13.583673 17.240816 8.359183 26.644898-3.134694 6.791837-10.44898 10.971429-17.240816 10.971428z"
+              fill="''' + getColor(0, color, colors, '#0B9682') + '''"
+            />
+            <path
+              d="M238.759184 635.820408C170.318367 635.820408 114.938776 580.440816 114.938776 512s55.379592-123.820408 123.820408-123.820408S363.102041 443.559184 363.102041 512s-55.902041 123.820408-124.342857 123.820408zM576.783673 363.102041c-68.440816 0-123.820408-55.379592-123.820408-123.820408S508.342857 114.938776 576.783673 114.938776s123.820408 55.379592 123.820409 123.820408-55.379592 124.342857-123.820409 124.342857zM785.240816 909.061224c-68.440816 0-123.820408-55.379592-123.820408-123.820408s55.379592-123.820408 123.820408-123.820408 123.820408 55.379592 123.820408 123.820408-55.379592 123.820408-123.820408 123.820408z"
+              fill="''' + getColor(1, color, colors, '#16C4AF') + '''"
+            />
+          </svg>
+        ''';
+        break;
       case IconNames.iconshishishipinliujiexi:
         svgXml = '''
           <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
