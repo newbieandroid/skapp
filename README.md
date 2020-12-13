@@ -74,6 +74,8 @@ Doctor summary (to see all details, run flutter doctor -v):
 
 - 优化视频播放
 
+- 加入分享功能
+
 ##### V2.0.3
 
 - 修复暗黑模式下展示效果
