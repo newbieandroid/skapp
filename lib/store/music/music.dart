@@ -57,7 +57,7 @@ abstract class MusicStoreMobx with Store {
   int current = 0;
 
   @observable
-  bool isTopic = true;
+  bool isTopic = false;
 
   @action
   Future<dynamic> fetchData(String song, String type) async {
@@ -130,7 +130,9 @@ abstract class MusicStoreMobx with Store {
 
   @action
   void changeTopic(bool c) {
-    isTopic = c;
+    // isTopic = c;
+    //  todo 写死
+    isTopic = false;
   }
 
   @action
