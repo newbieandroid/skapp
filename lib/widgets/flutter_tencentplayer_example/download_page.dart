@@ -17,7 +17,7 @@ class _DownloadPageState extends State<DownloadPage> {
   VoidCallback downloadListener;
 
   List<String> urlList = [
-    "http://1253131631.vod2.myqcloud.com/26f327f9vodgzp1253131631/f4bdff799031868222924043041/playlist.m3u8",
+    "https://www.nmgxwhz.com:65/20201102/pdq4CIbD/index.m3u8",
     "http://1252463788.vod2.myqcloud.com/95576ef5vodtransgzp1252463788/68e3febf4564972819220421305/v.f220.m3u8",
   ];
 

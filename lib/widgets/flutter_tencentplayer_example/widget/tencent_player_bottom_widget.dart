@@ -167,15 +167,16 @@ class _TencentPlayerBottomWidgetState extends State<TencentPlayerBottomWidget> {
                           onTap: () {
                             widget.showFullBtn
                                 ? Navigator.of(context).push(
-                                    CupertinoPageRoute(
-                                      builder: (_) => FullVideoPage(
-                                          controller: controller,
-                                          playType: PlayType.network,
-                                          dataSource: widget.currentUrl,
-                                          global: widget.global),
+                                    CustomRoute(
+                                      FullVideoPage(
+                                        controller: controller,
+                                        playType: PlayType.network,
+                                        dataSource: widget.currentUrl,
+                                        global: widget.global,
+                                      ),
                                     ),
                                   )
-                                : Navigator.pop(context);
+                                : Navigator.of(context).pop();
                           },
                           child: Container(
                             padding: EdgeInsets.only(right: 10),
@@ -477,4 +478,45 @@ class _Style {
   static double clearListContainerW = 65;
   static double clearItemContainerH = 36;
   static double clearItemContainerBottom = 36;
+}
+
+class CustomRoute extends PageRouteBuilder {
+  final Widget widget;
+
+  //构造方法
+  CustomRoute(this.widget)
+      : super(
+          transitionDuration: Duration(seconds: 2), //过渡时间
+          pageBuilder: (
+            //构造器
+            BuildContext context,
+            Animation<double> animation1,
+            Animation<double> animation2,
+          ) {
+            return widget;
+          },
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation1,
+              Animation<double> animation2,
+              Widget child) {
+            //旋转+缩放动画效果
+            // return RotationTransition(
+            //   turns: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            //       parent: animation1, curve: Curves.fastOutSlowIn)),
+            //   child: ScaleTransition(
+            //     scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            //         parent: animation1, curve: Curves.fastOutSlowIn)),
+            //     child: child,
+            //   ),
+            // );
+            // return FadeTransition(
+            //   opacity: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            //     parent: animation1,
+            //     curve: Curves.fastOutSlowIn, //动画曲线
+            //   )),
+            //   child: child,
+            // );
+            return child;
+          },
+        );
 }

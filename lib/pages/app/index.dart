@@ -146,24 +146,17 @@ class _App extends State<App> {
             secondary: IconFont(IconNames.iconyinle, size: 30),
             selected: _global.isMusic,
           ),
-          // ListTile(
-          //   title: Text('视频解析'),
-          //   leading: IconFont(IconNames.iconshishishipinliujiexi, size: 30),
-          //   onTap: () {
-          //     Navigator.of(context).pop();
-          //     Application.router.navigateTo(
-          //       context,
-          //       "/vipvideo",
-          //       transition: TransitionType.native,
-          //       transitionDuration: Duration(milliseconds: 300),
-          //     );
-          //   },
-          // ),
           ListTile(
-            title: Text('清除缓存($size)'),
-            leading: IconFont(IconNames.iconqingchu_1, size: 30),
+            title: Text('视频解析'),
+            leading: IconFont(IconNames.iconshishishipinliujiexi, size: 30),
             onTap: () {
-              clearCache();
+              Navigator.of(context).pop();
+              Application.router.navigateTo(
+                context,
+                "/vipvideo",
+                transition: TransitionType.native,
+                transitionDuration: Duration(milliseconds: 300),
+              );
             },
           ),
           _global.appConfig.showlive
@@ -196,6 +189,13 @@ class _App extends State<App> {
                 transition: TransitionType.native,
                 transitionDuration: Duration(milliseconds: 300),
               );
+            },
+          ),
+          ListTile(
+            title: Text('清除缓存($size)'),
+            leading: IconFont(IconNames.iconqingchu_1, size: 30),
+            onTap: () {
+              clearCache();
             },
           ),
         ],

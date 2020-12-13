@@ -54,7 +54,7 @@ class Players extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) => Padding(
                       padding: EdgeInsets.only(right: 10),
                       child: MaterialButton(
-                        elevation: 1,
+                        elevation: 0,
                         color: Theme.of(context).cardColor,
                         textColor: index == store.currentPlayers
                             ? Theme.of(context).primaryColorDark
