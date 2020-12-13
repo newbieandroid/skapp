@@ -22,6 +22,7 @@ class API {
   // app配置
   static const APP_CONFIG = '/app/config';
   static const APP_ADS = '/app/ads';
+  static const APP_VIDEO_INFO = '/app/vipvideoforapp';
   static const APP_SECRET_LIVE_KEY = 'app/secretlivecheck';
   // app更新配置
   static const APP_UPDATE_URL = '/assets/app/appcast.xml';

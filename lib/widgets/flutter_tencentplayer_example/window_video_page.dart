@@ -131,7 +131,7 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
       controller = TencentPlayerController.network(
         dataSource,
       );
-      controller?.initialize().then((_) {
+      controller?.initialize()?.then((_) {
         if (mounted) setState(() {});
       });
       controller?.addListener(listener);

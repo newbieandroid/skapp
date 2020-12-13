@@ -16,7 +16,7 @@ class _CustomState extends State<Custom> {
   bool isAvailableIp = false; // ip是否可用
   String currentIp = ''; // 当前输入的ip地址
   String desc =
-      "说明：如果你觉得片源太少可以自定义片源。\n\n需要满足以下条件：\n\n1.有maccms的整套环境；\n\n2.联系本app作者索要服务端源码，邮箱：1768385508@qq.com；\n\n";
+      "说明：如果你觉得片源太少可以自定义片源。\n需要满足以下条件：\n1.有maccms的数据库；\n2.联系本app作者获取后端源码，邮箱：1768385508@qq.com；\n";
 
   static bool isUrl(String value) {
     return RegExp(r"^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+").hasMatch(value);

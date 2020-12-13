@@ -69,7 +69,8 @@ class _DetailsState extends State<Details> {
                       child: Stack(
                         children: <Widget>[
                           (store.currentUrl.indexOf('.m3u8') >= 0) ||
-                                  (store.currentUrl.indexOf('.mp4') >= 0)
+                                  (store.currentUrl.indexOf('.mp4') >= 0) ||
+                                  (store.currentUrl.indexOf('rtmp') >= 0)
                               ? WindowVideoPage(store: store, global: _global)
                               : WebViewPage(
                                   store: store,

@@ -8,7 +8,7 @@
 
 <hr />
 
-### 开源不易，喜欢的小伙伴给个 star 支持下吧，目前 web 端在持续更新，APP 端有些滞后/(ㄒ o ㄒ)/~~
+### 项目持续更新，开源不易，喜欢的小伙伴给个 star 支持下吧/(ㄒ o ㄒ)/~~
 
 ### 项目介绍
 
@@ -28,6 +28,20 @@ web 端访问地址：[sk.ncer.top](http://sk.ncer.top)
 
 dart 2.7.0,flutter 1.22.5
 
+flutter doctor 信息
+
+```
+Doctor summary (to see all details, run flutter doctor -v):
+[√] Flutter (Channel stable, 1.22.5, on Microsoft Windows [Version 10.0.19042.685], locale zh-CN)
+
+[√] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+[√] Android Studio (version 3.6)
+[√] VS Code (version 1.52.0)
+[√] Connected device (1 available)
+
+• No issues found!
+```
+
 ### 支持平台
 
 1.安卓设备
@@ -45,7 +59,20 @@ dart 2.7.0,flutter 1.22.5
 <img width="300" src="./images/music_play.jpg" alt="sk-music_play"  style="margin-right:10px;display:inline-block;"/>
 </div>
 
+### 待开发功能
+
+- [x] 投屏
+- [x] 登录注册
+- [x] 收藏，历史记录
+- [x] 会员
+
 ### 版本更新历史
+
+##### V2.0.4
+
+- 增加视频解析功能
+
+- 优化视频播放
 
 ##### V2.0.3
 

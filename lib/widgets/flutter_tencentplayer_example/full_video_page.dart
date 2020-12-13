@@ -16,6 +16,7 @@ import './main.dart';
 import 'package:skapp/store/root.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class FullVideoPage extends StatefulWidget {
   final Global global;
   PlayType playType;
@@ -113,7 +114,8 @@ class _FullVideoPageState extends State<FullVideoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
+        body: SafeArea(
+      child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
           hideCover();
@@ -147,7 +149,7 @@ class _FullVideoPageState extends State<FullVideoPage> {
               ),
 
               /// 半透明浮层
-              showCover ? Container(color: Color(0x7f000000)) : SizedBox(),
+              showCover ? Container(color: Color(0x1f000000)) : SizedBox(),
 
               /// 处理滑动手势
               Offstage(
@@ -332,7 +334,7 @@ class _FullVideoPageState extends State<FullVideoPage> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   List<String> clearUrlList = [
@@ -347,7 +349,7 @@ class _FullVideoPageState extends State<FullVideoPage> {
     controller = TencentPlayerController.network(clearUrlList[urlIndex],
         playerConfig: PlayerConfig(
             startTime: startTime ?? controller.value.position.inSeconds));
-    controller?.initialize().then((_) {
+    controller?.initialize()?.then((_) {
       if (mounted) setState(() {});
     });
     controller?.addListener(listener);
