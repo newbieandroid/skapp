@@ -1,45 +1,68 @@
 PODS:
+  - audioplayers (0.0.1):
+    - Flutter
+  - device_info (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
+  - flutter_device_locale (0.0.1):
+    - Flutter
+  - flutter_forbidshot (0.0.1):
+    - Flutter
   - flutter_ijkplayer (0.0.1):
     - Flutter
     - FlutterIJK (~> 0.1.0)
   - flutter_statusbarcolor (0.0.1):
     - Flutter
+  - flutter_tencentplayer (0.0.2):
+    - Flutter
+    - TXLiteAVSDK_Player (= 7.2.8927)
   - FlutterIJK (0.1.1)
   - fluttertoast (0.0.2):
     - Flutter
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - package_info (0.0.1):
+    - Flutter
   - path_provider (0.0.1):
     - Flutter
-  - path_provider_macos (0.0.1):
+  - "permission_handler (5.0.1+1)":
+    - Flutter
+  - screen (0.0.1):
+    - Flutter
+  - share (0.0.1):
     - Flutter
   - shared_preferences (0.0.1):
-    - Flutter
-  - shared_preferences_macos (0.0.1):
-    - Flutter
-  - shared_preferences_web (0.0.1):
     - Flutter
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
+  - TXLiteAVSDK_Player (7.2.8927)
+  - url_launcher (0.0.1):
+    - Flutter
   - wakelock (0.0.1):
     - Flutter
   - webview_flutter (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - audioplayers (from `.symlinks/plugins/audioplayers/ios`)
+  - device_info (from `.symlinks/plugins/device_info/ios`)
   - Flutter (from `Flutter`)
+  - flutter_device_locale (from `.symlinks/plugins/flutter_device_locale/ios`)
+  - flutter_forbidshot (from `.symlinks/plugins/flutter_forbidshot/ios`)
   - flutter_ijkplayer (from `.symlinks/plugins/flutter_ijkplayer/ios`)
   - flutter_statusbarcolor (from `.symlinks/plugins/flutter_statusbarcolor/ios`)
+  - flutter_tencentplayer (from `.symlinks/plugins/flutter_tencentplayer/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
-  - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - screen (from `.symlinks/plugins/screen/ios`)
+  - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
-  - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
-  - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
   - wakelock (from `.symlinks/plugins/wakelock/ios`)
   - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
 
@@ -47,49 +70,72 @@ SPEC REPOS:
   trunk:
     - FlutterIJK
     - FMDB
+    - TXLiteAVSDK_Player
 
 EXTERNAL SOURCES:
+  audioplayers:
+    :path: ".symlinks/plugins/audioplayers/ios"
+  device_info:
+    :path: ".symlinks/plugins/device_info/ios"
   Flutter:
     :path: Flutter
+  flutter_device_locale:
+    :path: ".symlinks/plugins/flutter_device_locale/ios"
+  flutter_forbidshot:
+    :path: ".symlinks/plugins/flutter_forbidshot/ios"
   flutter_ijkplayer:
     :path: ".symlinks/plugins/flutter_ijkplayer/ios"
   flutter_statusbarcolor:
     :path: ".symlinks/plugins/flutter_statusbarcolor/ios"
+  flutter_tencentplayer:
+    :path: ".symlinks/plugins/flutter_tencentplayer/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  package_info:
+    :path: ".symlinks/plugins/package_info/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
-  path_provider_macos:
-    :path: ".symlinks/plugins/path_provider_macos/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+  screen:
+    :path: ".symlinks/plugins/screen/ios"
+  share:
+    :path: ".symlinks/plugins/share/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
-  shared_preferences_macos:
-    :path: ".symlinks/plugins/shared_preferences_macos/ios"
-  shared_preferences_web:
-    :path: ".symlinks/plugins/shared_preferences_web/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
   wakelock:
     :path: ".symlinks/plugins/wakelock/ios"
   webview_flutter:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
 SPEC CHECKSUMS:
+  audioplayers: 84f968cea3f2deab00ec4f8ff53358b3c0b3992c
+  device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_device_locale: 94fbcacb38980dc1a9e31eb4ee8ae6d1c3a73042
+  flutter_forbidshot: feac5273065c5b7b6b57a9c6ec4936e3be473523
   flutter_ijkplayer: ef9006131553deb6d8ae6d7fbd3bcbf93b135930
   flutter_statusbarcolor: 8afb1071ed8c58be929f1e32b36c629771fd2259
+  flutter_tencentplayer: e38a753197c226b8d4c11a746959ce1256c8591a
   FlutterIJK: f3c0ead9ca31b93d993d46dda53156fdc7b22d2c
   fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
-  path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
-  shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
-  shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
-  shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
+  package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
+  screen: abd91ca7bf3426e1cc3646d27e9b2358d6bf07b0
+  share: 0b2c3e82132f5888bccca3351c504d0003b3b410
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
+  TXLiteAVSDK_Player: d3025ba5cfe50e0debbffd94b15b018cf34fe201
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   wakelock: 0d4a70faf8950410735e3f61fb15d517c8a6efc4
-  webview_flutter: bec7599de6bfbe8008a739aa3ebd7b364ea9d0cd
+  webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
 
-PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
+PODFILE CHECKSUM: 760863adf19b0c43f2ef1a3a17f3b124f1c44f07
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0

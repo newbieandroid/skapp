@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -18,8 +18,12 @@ class SlideUpPage extends StatelessWidget {
     _panelHeightOpen = MediaQuery.of(context).size.height -
         ((MediaQuery.of(context).size.width / 16.0) * 9.0) -
         MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom -
         MediaQueryData.fromWindow(window).padding.top;
-
+    // if ios need -34 (unknown)
+    if(Platform.isIOS){
+      _panelHeightOpen = _panelHeightOpen - 34;
+    }
     return Observer(builder: (_) {
       return SingleChildScrollView(
         child: SlidingUpPanel(
