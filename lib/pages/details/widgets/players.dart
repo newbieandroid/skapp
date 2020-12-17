@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:skapp/iconfont/IconFont.dart';
+import 'package:skapp/store/root.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import './../../../store/details/details.dart';
 
 class Players extends StatelessWidget {
   final DetailsStore store;
+  final Global global;
+  final PanelController pc;
 
-  Players({Key key, this.store}) : super(key: key);
+  Players({Key key, this.store, this.global, this.pc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +45,26 @@ class Players extends StatelessWidget {
                       }).toList(),
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    // heightFactor: 2,
+                    widthFactor: 2,
+                    child: RaisedButton.icon(
+                      icon: IconFont(IconNames.icontouping, size: 18),
+                      color: Colors.transparent,
+                      elevation: 0,
+                      label: Text(
+                        '投屏',
+                        style: TextStyle(
+                            color: global.isDark
+                                ? Colors.white
+                                : Theme.of(context).primaryColorDark),
+                      ),
+                      onPressed: () {
+                        pc.open();
+                      },
+                    ),
+                  )
                 ],
               ),
               Padding(

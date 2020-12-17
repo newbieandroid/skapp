@@ -9,14 +9,6 @@ part of 'details.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DetailsStore on DetailsStoreMobx, Store {
-  Computed<String> _$currentUrlComputed;
-
-  @override
-  String get currentUrl =>
-      (_$currentUrlComputed ??= Computed<String>(() => super.currentUrl,
-              name: 'DetailsStoreMobx.currentUrl'))
-          .value;
-
   final _$isLoadingAtom = Atom(name: 'DetailsStoreMobx.isLoading');
 
   @override
@@ -44,6 +36,21 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
   set showAd(bool value) {
     _$showAdAtom.reportWrite(value, super.showAd, () {
       super.showAd = value;
+    });
+  }
+
+  final _$isDlnaAtom = Atom(name: 'DetailsStoreMobx.isDlna');
+
+  @override
+  bool get isDlna {
+    _$isDlnaAtom.reportRead();
+    return super.isDlna;
+  }
+
+  @override
+  set isDlna(bool value) {
+    _$isDlnaAtom.reportWrite(value, super.isDlna, () {
+      super.isDlna = value;
     });
   }
 
@@ -122,6 +129,21 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
     });
   }
 
+  final _$vipListsAtom = Atom(name: 'DetailsStoreMobx.vipLists');
+
+  @override
+  ObservableList<dynamic> get vipLists {
+    _$vipListsAtom.reportRead();
+    return super.vipLists;
+  }
+
+  @override
+  set vipLists(ObservableList<dynamic> value) {
+    _$vipListsAtom.reportWrite(value, super.vipLists, () {
+      super.vipLists = value;
+    });
+  }
+
   final _$currentTabsAtom = Atom(name: 'DetailsStoreMobx.currentTabs');
 
   @override
@@ -167,12 +189,35 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
     });
   }
 
+  final _$currentUrlAtom = Atom(name: 'DetailsStoreMobx.currentUrl');
+
+  @override
+  String get currentUrl {
+    _$currentUrlAtom.reportRead();
+    return super.currentUrl;
+  }
+
+  @override
+  set currentUrl(String value) {
+    _$currentUrlAtom.reportWrite(value, super.currentUrl, () {
+      super.currentUrl = value;
+    });
+  }
+
   final _$fetchVodDataAsyncAction =
       AsyncAction('DetailsStoreMobx.fetchVodData');
 
   @override
   Future<dynamic> fetchVodData() {
     return _$fetchVodDataAsyncAction.run(() => super.fetchVodData());
+  }
+
+  final _$setCurrentUrlAsyncAction =
+      AsyncAction('DetailsStoreMobx.setCurrentUrl');
+
+  @override
+  Future<dynamic> setCurrentUrl() {
+    return _$setCurrentUrlAsyncAction.run(() => super.setCurrentUrl());
   }
 
   final _$DetailsStoreMobxActionController =
@@ -267,15 +312,28 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
   }
 
   @override
+  void changeDlna(bool v) {
+    final _$actionInfo = _$DetailsStoreMobxActionController.startAction(
+        name: 'DetailsStoreMobx.changeDlna');
+    try {
+      return super.changeDlna(v);
+    } finally {
+      _$DetailsStoreMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 showAd: ${showAd},
+isDlna: ${isDlna},
 pickColor: ${pickColor},
 vodId: ${vodId},
 vod: ${vod},
 players: ${players},
 pTabs: ${pTabs},
+vipLists: ${vipLists},
 currentTabs: ${currentTabs},
 currentPlayers: ${currentPlayers},
 isClickPlayers: ${isClickPlayers},

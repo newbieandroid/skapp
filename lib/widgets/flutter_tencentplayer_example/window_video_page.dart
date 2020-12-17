@@ -137,6 +137,11 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
       controller?.addListener(listener);
     }
 
+    // 判断是否投屏
+    if (widget.store.isDlna) {
+      controller?.pause();
+    }
+
     return Observer(builder: (_) {
       return AspectRatio(
         aspectRatio: 16.0 / 9.0, // 宽高比

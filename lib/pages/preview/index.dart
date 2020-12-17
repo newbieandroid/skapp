@@ -76,16 +76,17 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
 
   Future<dynamic> requestAPI() async {
     await store.fetchVodData();
-    var paletteGenerator = await PaletteGenerator.fromImageProvider(
-        NetworkImage(store.vod.vodPic));
+    // var paletteGenerator = await PaletteGenerator.fromImageProvider(
+    //     NetworkImage(store.vod.vodPic));
     setState(() {
-      pickColor = paletteGenerator.darkVibrantColor != null
-          ? paletteGenerator.darkVibrantColor.color
-          : Color(0xff35374c);
+      // pickColor = paletteGenerator.darkVibrantColor != null
+      //     ? paletteGenerator.darkVibrantColor.color
+      //     : Color(0xff35374c);
+      pickColor = Theme.of(context).primaryColor;
     });
     store.changePickColor(true);
-    store.formatPDTbas(store.vod.vodPlayFrom);
-    store.formatPD(store.vod.vodPlayUrl);
+    // store.formatPDTbas(store.vod.vodPlayFrom);
+    // store.formatPD(store.vod.vodPlayUrl);
     classifyStore.changeQuery(page: 1, limit: guessCount, type: 'score');
     await classifyStore.fetchVodData(typeId: store.vod.typeId);
   }

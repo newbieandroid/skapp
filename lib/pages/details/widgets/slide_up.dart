@@ -21,8 +21,8 @@ class SlideUpPage extends StatelessWidget {
         MediaQuery.of(context).padding.bottom -
         MediaQueryData.fromWindow(window).padding.top;
     // if ios need -34 (unknown)
-    if(Platform.isIOS){
-      _panelHeightOpen = _panelHeightOpen - 34;
+    if (Platform.isIOS) {
+      // _panelHeightOpen = _panelHeightOpen - 34;
     }
     return Observer(builder: (_) {
       return SingleChildScrollView(
@@ -60,7 +60,7 @@ class SlideUpPage extends StatelessWidget {
                     child: Center(
                       child: Text(
                         store.vod.vodName,
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),
                   ),
@@ -108,7 +108,7 @@ class SlideUpPage extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         '简介',
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(
                         '${store.vod.vodContent.replaceAll(RegExp(r"<\/?[^>]*>"), "")}',

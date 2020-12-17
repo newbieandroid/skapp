@@ -45,7 +45,7 @@ Doctor summary (to see all details, run flutter doctor -v):
 ### 支持平台
 
 1.安卓设备
-2.ios 设备未进行测试
+2.ios 设备
 
 ### screenshot
 

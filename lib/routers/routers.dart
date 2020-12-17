@@ -21,6 +21,8 @@ class Routes {
   static String preview = "/preview";
   // 视频解析
   static String vipvideo = "/vipvideo";
+  // 投屏界面
+  static String dlna = "/dlna";
 
   static void configureRoutes(CustomRouter.Router router) {
     router.notFoundHandler = CustomRouter.Handler(
@@ -36,6 +38,7 @@ class Routes {
     router.define(music, handler: musicRouteHandler);
     router.define(preview, handler: previewRouteHandler);
     router.define(vipvideo, handler: vipvideoRouteHandler);
+    router.define(dlna, handler: dlnaRouteHandler);
     // router.define(demoSimpleFixedTrans,
     //     handler: demoRouteHandler, transitionType: TransitionType.inFromLeft);
   }

@@ -156,7 +156,7 @@ class _App extends State<App> {
                 context,
                 "/vipvideo",
                 transition: TransitionType.native,
-                transitionDuration: Duration(milliseconds: 300),
+                transitionDuration: Duration(milliseconds: 100),
               );
             },
           ),
@@ -188,7 +188,7 @@ class _App extends State<App> {
                 context,
                 "/custom",
                 transition: TransitionType.native,
-                transitionDuration: Duration(milliseconds: 300),
+                transitionDuration: Duration(milliseconds: 100),
               );
             },
           ),
@@ -206,6 +206,19 @@ class _App extends State<App> {
             leading: IconFont(IconNames.iconqingchu_1, size: 30),
             onTap: () {
               clearCache();
+            },
+          ),
+          ListTile(
+            title: Text('投屏测试'),
+            leading: IconFont(IconNames.iconqingchu_1, size: 30),
+            onTap: () {
+              Navigator.of(context).pop();
+              Application.router.navigateTo(
+                context,
+                "/dlna",
+                transition: TransitionType.native,
+                transitionDuration: Duration(milliseconds: 100),
+              );
             },
           ),
         ],

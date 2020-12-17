@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 enum IconNames {
-  iconfenxiang, iconshishishipinliujiexi, icon_a, iconzidingyi_2, iconzidingyi_1, iconqingchu_1, iconshipinyingshi, icondianshiju, iconzongyiyule, iconxiangmuicon_dongman, icondianying, iconzidingyi, iconzhibo, iconqingchu, iconyinle, iconyejianduoyun
+  icontouping, iconfenxiang, iconshishishipinliujiexi, icon_a, iconzidingyi_2, iconzidingyi_1, iconqingchu_1, iconshipinyingshi, icondianshiju, iconzongyiyule, iconxiangmuicon_dongman, icondianying, iconzidingyi, iconzhibo, iconqingchu, iconyinle, iconyejianduoyun
 }
 
 class IconFont extends StatelessWidget {
@@ -30,6 +30,20 @@ class IconFont extends StatelessWidget {
     String svgXml;
 
     switch (this.name) {
+      case IconNames.icontouping:
+        svgXml = '''
+          <svg viewBox="0 0 1068 1024" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M572.277384 728.003946a47.1687 47.1687 0 0 0-67.638137 0l-222.493869 226.943747a47.613688 47.613688 0 0 0-11.569681 50.728602 37.37897 37.37897 0 0 0 30.704154 18.244497h467.237125s25.364301 2.224939 33.374081-16.909534a48.948651 48.948651 0 0 0-11.124694-52.063565z"
+              fill="''' + getColor(0, color, colors, '#319161') + '''"
+            />
+            <path
+              d="M1023.494951 44.502779a153.075782 153.075782 0 0 0-108.577008-44.498774H153.543921A153.075782 153.075782 0 0 0 44.521925 44.502779a161.085561 161.085561 0 0 0-44.498774 113.916861v564.689441a161.085561 161.085561 0 0 0 44.498774 112.13691 151.295831 151.295831 0 0 0 108.577008 44.498774h97.452315L457.915535 667.485613a111.246935 111.246935 0 0 1 160.640573 0l207.364287 213.149127h88.997548a151.295831 151.295831 0 0 0 108.577008-44.498774 160.640574 160.640574 0 0 0 44.498774-112.13691V158.41964A161.085561 161.085561 0 0 0 1023.494951 44.502779z"
+              fill="''' + getColor(1, color, colors, '#3EC68E') + '''"
+            />
+          </svg>
+        ''';
+        break;
       case IconNames.iconfenxiang:
         svgXml = '''
           <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
