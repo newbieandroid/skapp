@@ -4,7 +4,8 @@ typedef RequestCallBack<T> = void Function(T value);
 
 class API {
   static SharedPreferences _prefs;
-  static const BASE_SK_URL = 'http://sk.ncer.top';
+  // static const BASE_SK_URL = 'http://sk.ncer.top';
+  static const BASE_SK_URL = 'http://192.168.0.112:8000';
   // static const BASE_SK_URL = 'http://192.168.5.191:8000';
   // static const BASE_SK_URL = 'http://192.168.0.111:8000';
   // static const BASE_SK_URL = 'http://192.168.2.201:8000';

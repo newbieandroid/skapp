@@ -76,19 +76,25 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
 
   Future<dynamic> requestAPI() async {
     await store.fetchVodData();
-    // var paletteGenerator = await PaletteGenerator.fromImageProvider(
-    //     NetworkImage(store.vod.vodPic));
+    var paletteGenerator = await PaletteGenerator.fromImageProvider(
+        NetworkImage(store.vod.vodPic));
     setState(() {
-      // pickColor = paletteGenerator.darkVibrantColor != null
-      //     ? paletteGenerator.darkVibrantColor.color
-      //     : Color(0xff35374c);
-      pickColor = Theme.of(context).primaryColor;
+      pickColor = paletteGenerator.darkVibrantColor != null
+          ? paletteGenerator.darkVibrantColor.color
+          : Color(0xff35374c);
+      // pickColor = Theme.of(context).primaryColor;
     });
     store.changePickColor(true);
     // store.formatPDTbas(store.vod.vodPlayFrom);
     // store.formatPD(store.vod.vodPlayUrl);
     classifyStore.changeQuery(page: 1, limit: guessCount, type: 'score');
-    await classifyStore.fetchVodData(typeId: store.vod.typeId);
+    // 猜你喜欢
+    classifyStore.fetchVodData(typeId: store.vod.typeId);
+    // 相似推荐
+    classifyStore.fetchVodSameData(typeId: store.vod.typeId);
+    // 同演员(默认获取第一个)
+    String actor = store.vod.vodActor.split(',')[0];
+    classifyStore.fetchVodSameActorData(actor: actor);
   }
 
   // 滚动
@@ -180,7 +186,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                                 sliverRating(),
                                 sliverDesc(),
                                 sliverCasts(),
-                                sliverBottom()
+                                sliverBottom(classifyStore)
                               ],
                             ),
                             Opacity(
@@ -230,7 +236,8 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                                 )
                               : Container(
                                   child: OverscrollNotificationWidget(
-                                    child: LongCommentWidget(
+                                    child: LongCommentTabView(
+                                      store: classifyStore,
                                       scroll: true,
                                     ),
                                   ),
@@ -467,14 +474,15 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
   }
 
   // 底部话题讨论
-  SliverToBoxAdapter sliverBottom() {
+  SliverToBoxAdapter sliverBottom(ClassifyStore store) {
     return SliverToBoxAdapter(
       child: Container(
         key: globalKey,
         height: screenH - appBarHeight,
         child: Container(
           child: OverscrollNotificationWidget(
-            child: LongCommentWidget(
+            child: LongCommentTabView(
+              store: store,
               scroll: isScrollTop,
             ),
           ),

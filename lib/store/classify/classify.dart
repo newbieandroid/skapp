@@ -39,10 +39,22 @@ abstract class ClassifyStoreMobx with Store {
   VodListDao vodData; // 获取电影列表
 
   @observable
+  VodListDao vodSameData; // 获取电影列表
+
+  @observable
+  VodListDao vodSameActorData; // 获取电影列表
+
+  @observable
   bool hasNextPage = true;
 
   @observable
   ObservableList vodDataLists = ObservableList(); // 获取电影列表
+
+  @observable
+  ObservableList vodDataSameLists = ObservableList(); // 相似推荐
+
+  @observable
+  ObservableList vodDataSameActorLists = ObservableList(); // 相同主演
 
   @observable
   num qPage = 1;
@@ -81,6 +93,34 @@ abstract class ClassifyStoreMobx with Store {
       // 代表返回的数据不到要求的数据
       hasNextPage = false;
     }
+  }
+
+  // 相似推荐(人气)
+  @action
+  Future<dynamic> fetchVodSameData({@required typeId}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
+    bool isMusic = prefs.getBool('isMusic') ?? false;
+    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
+    var req = HttpRequest(cIp);
+    String query = '?typeId=$typeId&page=1&limit=9&type=monthHits';
+    final res = await req.get(preApiUrl + vodUrl + query);
+    this.vodSameData = VodListDao.fromJson(res);
+    vodDataSameLists.addAll(this.vodSameData.data);
+  }
+
+  // 相同主演
+  @action
+  Future<dynamic> fetchVodSameActorData({@required actor}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
+    bool isMusic = prefs.getBool('isMusic') ?? false;
+    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
+    var req = HttpRequest(cIp);
+    String query = '?page=1&limit=9&type=monthHits&actor=$actor';
+    final res = await req.get(preApiUrl + vodUrl + query);
+    this.vodSameActorData = VodListDao.fromJson(res);
+    vodDataSameActorLists.addAll(this.vodSameActorData.data);
   }
 
   @action

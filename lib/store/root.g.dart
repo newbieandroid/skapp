@@ -174,6 +174,21 @@ mixin _$Global on GlobalMobx, Store {
     });
   }
 
+  final _$isShowListAtom = Atom(name: 'GlobalMobx.isShowList');
+
+  @override
+  bool get isShowList {
+    _$isShowListAtom.reportRead();
+    return super.isShowList;
+  }
+
+  @override
+  set isShowList(bool value) {
+    _$isShowListAtom.reportWrite(value, super.isShowList, () {
+      super.isShowList = value;
+    });
+  }
+
   final _$getAppConfigAsyncAction = AsyncAction('GlobalMobx.getAppConfig');
 
   @override
@@ -196,6 +211,17 @@ mixin _$Global on GlobalMobx, Store {
         name: 'GlobalMobx.changeShowAd');
     try {
       return super.changeShowAd(showAd);
+    } finally {
+      _$GlobalMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeShowList(bool b) {
+    final _$actionInfo = _$GlobalMobxActionController.startAction(
+        name: 'GlobalMobx.changeShowList');
+    try {
+      return super.changeShowList(b);
     } finally {
       _$GlobalMobxActionController.endAction(_$actionInfo);
     }
@@ -280,6 +306,7 @@ theme: ${theme},
 isDark: ${isDark},
 isMusic: ${isMusic},
 showPause: ${showPause},
+isShowList: ${isShowList},
 themeMode: ${themeMode},
 imageCasheSize: ${imageCasheSize}
     ''';
