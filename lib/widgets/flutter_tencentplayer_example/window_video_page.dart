@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skapp/store/details/details.dart';
 import 'package:skapp/store/root.dart';
 import 'package:skapp/utils/screen_utils.dart';

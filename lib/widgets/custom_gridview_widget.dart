@@ -36,7 +36,7 @@ class CustomGridView extends StatelessWidget {
                     context,
                     "/music?songInfo=${Uri.encodeComponent(json.encode(vod.songInfo))}",
                     transition: TransitionType.native,
-                    transitionDuration: Duration(milliseconds: 300),
+                    transitionDuration: Duration(milliseconds: 100),
                     replace: true,
                   );
                 } else {
@@ -50,14 +50,14 @@ class CustomGridView extends StatelessWidget {
                   context,
                   "/preview?vodId=${vod.vodId}",
                   transition: TransitionType.native,
-                  transitionDuration: Duration(milliseconds: 300),
+                  transitionDuration: Duration(milliseconds: 100),
                   replace: true,
                 );
                 // Application.router.navigateTo(
                 //   context,
                 //   "/details?vodId=${vod.vodId}",
                 //   transition: TransitionType.native,
-                //   transitionDuration: Duration(milliseconds: 300),
+                //   transitionDuration: Duration(milliseconds: 100),
                 //   replace: true,
                 // );
               }

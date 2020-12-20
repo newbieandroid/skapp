@@ -9,6 +9,8 @@
               3. 实时更新.g文件: flutter packages pub run build_runner watch
  */
 
+import 'dart:convert';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -107,7 +109,7 @@ abstract class DetailsStoreMobx with Store {
       }
     }
     // 更改当前播放路径
-    setCurrentUrl();
+    setCurrentUrl('init');
   }
 
   @action
@@ -158,7 +160,7 @@ abstract class DetailsStoreMobx with Store {
   void changeCurrentPlayers(int current) {
     isClickPlayers = true;
     currentPlayers = current;
-    setCurrentUrl();
+    setCurrentUrl('change');
   }
 
   @action
@@ -172,7 +174,9 @@ abstract class DetailsStoreMobx with Store {
   }
 
   @action
-  Future<dynamic> setCurrentUrl() async {
+  Future<dynamic> setCurrentUrl(String status) async {
+    // 保存历史记录
+    await handleHistory(status);
     currentUrl = "";
     String url = players[currentTabs][currentPlayers]['url'];
     // test
@@ -208,6 +212,51 @@ abstract class DetailsStoreMobx with Store {
     } else {
       currentUrl = url;
     }
+  }
+
+  Future<dynamic> handleHistory(String status) async {
+    // status init or change
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> historyLists = prefs.getStringList('historyLists') ?? [];
+    // 判断是否重复
+    // if (historyLists.length >= 200) {
+    //     Fluttertoast.showToast(
+    //       msg: '',
+    //       toastLength: Toast.LENGTH_LONG,
+    //     );
+    //   } else {
+// 循环判断是否有重复数据
+    bool isRepeat = false;
+    for (int i = 0; i < historyLists.length; i++) {
+      var js = json.decode(historyLists[i]);
+      if (js['vodId'] == vodId) {
+        // 电影重复，历史记录中有这条记录
+        if (status == 'init') {
+          currentTabs = js['sid'] ?? 0;
+          currentPlayers = js['nid'] ?? 0;
+        } else if (status == 'change') {
+          js['sid'] = currentTabs;
+          js['nid'] = currentPlayers;
+          //historyLists.fillRange(i, i, json.encode(js));
+          historyLists[i] = json.encode(js);
+          prefs.setStringList('historyLists', historyLists);
+        }
+
+        isRepeat = true;
+      }
+    }
+    if (!isRepeat) {
+      // 重新构造数据
+      var obj = {
+        'sid': currentTabs,
+        'nid': currentPlayers,
+        'vodId': vodId,
+        'vod': vod
+      };
+      historyLists.insert(0, json.encode(obj));
+      prefs.setStringList('historyLists', historyLists);
+    } else {}
+    //}
   }
 
   static bool isVipVideo(String url) {

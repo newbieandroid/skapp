@@ -405,7 +405,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                             context,
                             "/preview?vodId=${classifyStore.vodDataLists[index].vodId}",
                             transition: TransitionType.native,
-                            transitionDuration: Duration(milliseconds: 300),
+                            transitionDuration: Duration(milliseconds: 100),
                             replace: true,
                           );
                         },
@@ -499,6 +499,7 @@ class BtnWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      padding: EdgeInsets.only(left: 4, right: 16),
       height: 34,
       color: Colors.white,
       textColor: Colors.black,
@@ -515,7 +516,7 @@ class BtnWidget extends StatelessWidget {
               text,
               style: TextStyle(
                 fontSize: 13,
-                fontWeight: FontWeight.bold,
+                //fontWeight: FontWeight.bold,
               ),
             ),
           )
@@ -526,7 +527,7 @@ class BtnWidget extends StatelessWidget {
           context,
           "/details?vodId=${this.vodId}",
           transition: TransitionType.native,
-          transitionDuration: Duration(milliseconds: 300),
+          transitionDuration: Duration(milliseconds: 100),
           replace: true,
         );
       },
@@ -634,7 +635,7 @@ class GrowTransition extends StatelessWidget {
                             child: Text(
                               '影片',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 15,
                                 color: Colors.white,
                               ),
                             )),

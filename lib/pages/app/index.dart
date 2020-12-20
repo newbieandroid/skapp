@@ -48,10 +48,12 @@ class _App extends State<App> {
               icon: typeMap[item.typeEn] != null
                   ? typeMap[item.typeEn]['normalIcon']
                   : typeMap['normal']['normalIcon'],
+              // ignore: deprecated_member_use
               title: Text(
                 item.typeName,
-                style: TextStyle(fontSize: 10),
+                style: TextStyle(fontSize: 11),
               ),
+              // label: item.typeName,
               activeIcon: typeMap[item.typeEn] != null
                   ? typeMap[item.typeEn]['activeIcon']
                   : typeMap['normal']['activeIcon']))
@@ -108,7 +110,7 @@ class _App extends State<App> {
                 Padding(
                   padding: EdgeInsets.only(left: 16),
                   child:
-                      Text('换肤', style: Theme.of(context).textTheme.subtitle2),
+                      Text('换肤', style: Theme.of(context).textTheme.bodyText2),
                 ),
                 Expanded(
                   flex: 1,
@@ -170,7 +172,7 @@ class _App extends State<App> {
                       context,
                       "/live",
                       transition: TransitionType.native,
-                      transitionDuration: Duration(milliseconds: 300),
+                      transitionDuration: Duration(milliseconds: 100),
                     );
                   },
                 )
@@ -208,19 +210,6 @@ class _App extends State<App> {
               clearCache();
             },
           ),
-          ListTile(
-            title: Text('投屏测试'),
-            leading: IconFont(IconNames.iconqingchu_1, size: 30),
-            onTap: () {
-              Navigator.of(context).pop();
-              Application.router.navigateTo(
-                context,
-                "/dlna",
-                transition: TransitionType.native,
-                transitionDuration: Duration(milliseconds: 100),
-              );
-            },
-          ),
         ],
       ),
     );
@@ -228,7 +217,7 @@ class _App extends State<App> {
 
   renderAppBar() {
     return AppBar(
-      elevation: 1,
+      elevation: 0,
       title: Container(
         child: Row(
           children: <Widget>[
@@ -240,12 +229,25 @@ class _App extends State<App> {
                     context,
                     "/search",
                     transition: TransitionType.native,
-                    transitionDuration: Duration(milliseconds: 300),
+                    transitionDuration: Duration(milliseconds: 100),
                   );
                   // Router.push(context, Router.searchPage, '电影/电视剧/影人');
                 },
               ),
             ),
+            IconButton(
+              icon: Icon(Icons.history),
+              color: Colors.white,
+              padding: EdgeInsets.only(left: 18),
+              onPressed: () {
+                Application.router.navigateTo(
+                  context,
+                  "/history",
+                  transition: TransitionType.native,
+                  transitionDuration: Duration(milliseconds: 100),
+                );
+              },
+            )
           ],
         ),
         alignment: Alignment(0.0, 0.0),

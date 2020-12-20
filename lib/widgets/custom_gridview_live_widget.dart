@@ -30,7 +30,7 @@ class CustomGridView extends StatelessWidget {
                 context,
                 "/showLives?address=${Uri.encodeComponent(vod.address)}&index=$index&url=$url",
                 transition: TransitionType.native,
-                transitionDuration: Duration(milliseconds: 300),
+                transitionDuration: Duration(milliseconds: 100),
               );
             },
             child: Container(

@@ -48,7 +48,7 @@ abstract class ClassifyStoreMobx with Store {
   num qPage = 1;
 
   @observable
-  num qLimit = 10;
+  num qLimit = 15;
 
   @observable
   String qType = 'updateTime';

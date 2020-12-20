@@ -60,6 +60,7 @@ dependencies:
   palette_generator: ^0.2.3
   share: ^0.6.5+4
   flutter_dlna: ^0.0.1+1
+  giffy_dialog: ^1.8.0
 
 dev_dependencies:
   flutter_test:

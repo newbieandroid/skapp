@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pk_skeleton/pk_skeleton.dart';
 import 'package:provider/provider.dart';
+import 'package:skapp/utils/screen_utils.dart';
 import './../../widgets/custom_gridview_widget.dart';
 import './../../store/root.dart';
 import './../../widgets/search_text_field_widget.dart';
@@ -108,7 +109,11 @@ class _SearchState extends State<Search> {
                   padding: EdgeInsets.only(left: 10),
                   child: Text(
                     '搜索',
-                    style: Theme.of(context).textTheme.bodyText2,
+                    //style: Theme.of(context).textTheme.bodyText2,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               )
@@ -122,30 +127,53 @@ class _SearchState extends State<Search> {
 
   renderResult(_global) {
     return Observer(
-        builder: (_) => store.isLoading
-            ? _global.isDark
-                ? PKDarkCardListSkeleton(
-                    isCircularImage: true,
-                    isBottomLinesActive: true,
-                  )
-                : PKCardListSkeleton(
-                    isCircularImage: true,
-                    isBottomLinesActive: true,
-                  )
-            : ListView(
-                children: <Widget>[
-                  SizedBox(
-                    height: 20,
+      builder: (_) => store.isLoading
+          ? _global.isDark
+              ? PKDarkCardListSkeleton(
+                  isCircularImage: true,
+                  isBottomLinesActive: true,
+                )
+              : PKCardListSkeleton(
+                  isCircularImage: true,
+                  isBottomLinesActive: true,
+                )
+          : store.searchLists.length == 0
+              ? Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Container(
+                      // height: ScreenUtils.screenH(context),
+                      decoration: new BoxDecoration(
+                        //color: Colors.grey,
+                        //border: new Border.all(width: 2.0, color: Colors.red),
+                        //borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
+                        image: new DecorationImage(
+                          image:
+                              new AssetImage('assets/images/search_null.png'),
+                          //这里是从assets静态文件中获取的，也可以new NetworkImage(）从网络上获取
+                          // centerSlice: new Rect.fromLTRB(270.0, 180.0, 1360.0, 730.0),
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                    ),
                   ),
-                  CustomGridView(store.searchLists, _global),
-                ],
-              ));
+                )
+              : ListView(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 20,
+                    ),
+                    CustomGridView(store.searchLists, _global),
+                  ],
+                ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final Global _global = Provider.of<Global>(context);
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: renderAppBar(_global),
       body: SafeArea(
         child: renderResult(_global),

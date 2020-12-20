@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pk_skeleton/pk_skeleton.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skapp/pages/details/widgets/slide_up_dlna.dart';
+import 'package:skapp/pages/details/widgets/slide_up_sid.dart';
 // import 'package:skapp/pages/details/widgets/dlna.dart';
 import 'package:skapp/store/root.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -27,6 +29,7 @@ class _DetailsState extends State<Details> {
   final ClassifyStore classifyStore = ClassifyStore();
   PanelController pc = new PanelController();
   PanelController pcdlna = new PanelController();
+  PanelController pcsid = new PanelController();
 
   Future<dynamic> requestAPI() async {
     await store.fetchVodData();
@@ -48,21 +51,21 @@ class _DetailsState extends State<Details> {
   Widget build(BuildContext context) {
     final Global _global = Provider.of<Global>(context);
     return Observer(
-      builder: (_) => store.isLoading
-          ? _global.isDark
-              ? PKDarkCardProfileSkeleton(
-                  isCircularImage: true,
-                  isBottomLinesActive: true,
-                )
-              : PKCardProfileSkeleton(
-                  isCircularImage: true,
-                  isBottomLinesActive: true,
-                )
-          : Scaffold(
-              // appBar: AppBar(
-              //   title: Text(store.vod.vodName),
-              // ),
-              body: SafeArea(
+      builder: (_) => Scaffold(
+        // appBar: AppBar(
+        //   title: Text(store.vod.vodName),
+        // ),
+        body: store.isLoading
+            ? _global.isDark
+                ? PKDarkCardProfileSkeleton(
+                    isCircularImage: false,
+                    isBottomLinesActive: true,
+                  )
+                : PKCardProfileSkeleton(
+                    isCircularImage: false,
+                    isBottomLinesActive: true,
+                  )
+            : SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -105,6 +108,8 @@ class _DetailsState extends State<Details> {
                     ),
                     Expanded(
                       child: Container(
+                        decoration:
+                            BoxDecoration(color: Theme.of(context).cardColor),
                         child: ListView.separated(
                           padding: new EdgeInsets.all(5.0),
                           itemCount: 3,
@@ -116,7 +121,10 @@ class _DetailsState extends State<Details> {
                                 return Desc(store: store, pc: pc);
                               case 1:
                                 return Players(
-                                    store: store, global: _global, pc: pcdlna);
+                                    store: store,
+                                    global: _global,
+                                    pc: pcdlna,
+                                    pcsid: pcsid);
                               case 2:
                                 return Like(
                                   vodDataLists: classifyStore.vodDataLists,
@@ -131,7 +139,8 @@ class _DetailsState extends State<Details> {
                           },
                           separatorBuilder: (context, index) {
                             return Divider(
-                              height: .1,
+                              height: 0.0,
+                              thickness: 0.0,
                               indent: 0,
                               color: Theme.of(context).dividerColor,
                             );
@@ -140,11 +149,12 @@ class _DetailsState extends State<Details> {
                       ),
                     ),
                     SlideUpPage(store: store, pc: pc),
-                    DlnaPage(store: store, pc: pcdlna, global: _global)
+                    DlnaPage(store: store, pc: pcdlna, global: _global),
+                    SidUpPage(store: store, pc: pcsid, global: _global),
                   ],
                 ),
               ),
-            ),
+      ),
     );
   }
 }

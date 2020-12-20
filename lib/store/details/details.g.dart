@@ -216,8 +216,8 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
       AsyncAction('DetailsStoreMobx.setCurrentUrl');
 
   @override
-  Future<dynamic> setCurrentUrl() {
-    return _$setCurrentUrlAsyncAction.run(() => super.setCurrentUrl());
+  Future<dynamic> setCurrentUrl(String status) {
+    return _$setCurrentUrlAsyncAction.run(() => super.setCurrentUrl(status));
   }
 
   final _$DetailsStoreMobxActionController =

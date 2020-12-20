@@ -8,6 +8,7 @@ import './../pages/vipvideo/index.dart';
 import './../pages/music/index.dart';
 import './../pages/preview/index.dart';
 import './../pages/dlna/index.dart';
+import './../pages/history/index.dart';
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
@@ -70,4 +71,9 @@ Handler previewRouteHandler = Handler(
 Handler dlnaRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return Dlna();
+});
+
+Handler historyRouteHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return HistoryPage();
 });
