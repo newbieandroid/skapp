@@ -323,6 +323,17 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
   }
 
   @override
+  void playNext() {
+    final _$actionInfo = _$DetailsStoreMobxActionController.startAction(
+        name: 'DetailsStoreMobx.playNext');
+    try {
+      return super.playNext();
+    } finally {
+      _$DetailsStoreMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},

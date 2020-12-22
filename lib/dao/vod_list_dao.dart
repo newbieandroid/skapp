@@ -74,9 +74,9 @@ class Data {
   int vodHitsWeek;
   int vodHitsMonth;
   String vodDuration;
-  int vodUp;
+  num vodUp;
   int vodDown;
-  int vodScore;
+  var vodScore;
   int vodScoreAll;
   int vodScoreNum;
   int vodTime;
@@ -85,7 +85,7 @@ class Data {
   int vodTimeMake;
   int vodTrysee;
   int vodDoubanId;
-  int vodDoubanScore;
+  num vodDoubanScore;
   String vodReurl;
   String vodRelVod;
   String vodRelArt;

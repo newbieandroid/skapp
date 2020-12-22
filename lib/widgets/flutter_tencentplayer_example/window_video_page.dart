@@ -124,23 +124,29 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
   @override
   Widget build(BuildContext context) {
     // 判断是否切换了源
-    if (dataSource != widget.store.currentUrl) {
-      dataSource = widget.store.currentUrl;
-      // 切换播放源
-      controller?.removeListener(listener);
-      controller?.pause();
-      controller = TencentPlayerController.network(
-        dataSource,
-      );
-      controller?.initialize()?.then((_) {
-        if (mounted) setState(() {});
-      });
-      controller?.addListener(listener);
-    }
+    // if (dataSource != widget.store.currentUrl) {
+    //   dataSource = widget.store.currentUrl;
+    //   // 切换播放源
+    //   controller?.removeListener(listener);
+    //   controller?.pause();
+    //   controller = TencentPlayerController.network(
+    //     dataSource,
+    //   );
+    //   controller?.initialize()?.then((_) {
+    //     if (mounted) setState(() {});
+    //   });
+    //   controller?.addListener(listener);
+    // }
 
     // 判断是否投屏
     if (widget.store.isDlna) {
       controller?.pause();
+    }
+
+    // 监听是否播放完毕
+    if ((controller.value.position == controller.value.duration) &&
+        (controller.value.position.inSeconds != 0)) {
+      widget.store.playNext();
     }
 
     return Observer(builder: (_) {
@@ -354,6 +360,7 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
                               currentUrl: widget.store.currentUrl,
                               controller: controller,
                               showClearBtn: widget.showClearBtn,
+                              store: widget.store,
                               behavingCallBack: () {
                                 delayHideCover();
                               },

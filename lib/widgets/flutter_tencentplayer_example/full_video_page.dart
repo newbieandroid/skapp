@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:skapp/store/details/details.dart';
 import 'package:skapp/utils/screen_utils.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -19,6 +20,7 @@ import 'package:url_launcher/url_launcher.dart';
 // ignore: must_be_immutable
 class FullVideoPage extends StatefulWidget {
   final Global global;
+  final DetailsStore store;
   PlayType playType;
   String dataSource;
   TencentPlayerController controller;
@@ -29,6 +31,7 @@ class FullVideoPage extends StatefulWidget {
 
   FullVideoPage(
       {this.global,
+      this.store,
       this.controller,
       this.showBottomWidget = true,
       this.showClearBtn = true,
@@ -113,6 +116,13 @@ class _FullVideoPageState extends State<FullVideoPage> {
 
   @override
   Widget build(BuildContext context) {
+    // 监听是否播放完毕
+    if ((controller.value.position == controller.value.duration) &&
+        (controller.value.position.inSeconds != 0)) {
+      Navigator.of(context).pop();
+      // widget.store.playNext();
+    }
+
     return Scaffold(
         body: SafeArea(
       child: GestureDetector(
@@ -272,6 +282,7 @@ class _FullVideoPageState extends State<FullVideoPage> {
                           controller: controller,
                           showClearBtn: widget.showClearBtn,
                           showFullBtn: false,
+                          store: widget.store,
                           behavingCallBack: () {
                             delayHideCover();
                           },

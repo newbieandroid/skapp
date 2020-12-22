@@ -37,7 +37,7 @@ class CustomGridView extends StatelessWidget {
                     "/music?songInfo=${Uri.encodeComponent(json.encode(vod.songInfo))}",
                     transition: TransitionType.native,
                     transitionDuration: Duration(milliseconds: 100),
-                    replace: true,
+                    // replace: true,
                   );
                 } else {
                   Fluttertoast.showToast(
@@ -51,7 +51,7 @@ class CustomGridView extends StatelessWidget {
                   "/preview?vodId=${vod.vodId}",
                   transition: TransitionType.native,
                   transitionDuration: Duration(milliseconds: 100),
-                  replace: true,
+                  // replace: true,
                 );
                 // Application.router.navigateTo(
                 //   context,

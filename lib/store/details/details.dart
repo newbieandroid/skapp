@@ -160,6 +160,7 @@ abstract class DetailsStoreMobx with Store {
   void changeCurrentPlayers(int current) {
     isClickPlayers = true;
     currentPlayers = current;
+    currentUrl = "";
     setCurrentUrl('change');
   }
 
@@ -171,6 +172,18 @@ abstract class DetailsStoreMobx with Store {
   @action
   void changeDlna(bool v) {
     isDlna = v;
+  }
+
+  // 自动播放下一集
+  @action
+  void playNext() {
+    // 判断当前和总数
+    if (currentPlayers < players[currentTabs].length - 1) {
+      currentPlayers = currentPlayers + 1;
+      Future.delayed(Duration(milliseconds: 600), () {
+        changeCurrentPlayers(currentPlayers);
+      });
+    }
   }
 
   @action
@@ -200,7 +213,7 @@ abstract class DetailsStoreMobx with Store {
         code: 404|200
         type: hls
       */
-        if (res['code'] == 200) {
+        if (int.parse(res['code']) == 200) {
           // Fluttertoast.showToast(
           //   msg: '连接成功,即将开始播放',
           // );
@@ -210,7 +223,10 @@ abstract class DetailsStoreMobx with Store {
         }
       }
     } else {
-      currentUrl = url;
+      // 延迟
+      Future.delayed(Duration(milliseconds: 600), () {
+        currentUrl = url;
+      });
     }
   }
 
