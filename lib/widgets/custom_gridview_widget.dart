@@ -32,7 +32,7 @@ class CustomGridView extends StatelessWidget {
                 "/preview?vodId=${vod.vodId}",
                 transition: TransitionType.native,
                 transitionDuration: Duration(milliseconds: 100),
-                // replace: true,
+                replace: true,
               );
             },
             child: Container(
