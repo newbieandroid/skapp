@@ -18,6 +18,7 @@ class API {
   static const VOD_LIST_URL = '/vod/list'; // 列表页
   static const VOD_DETAILS_URL = '/vod/one?vodId='; // 详情页
   static const SEARCH_URL = '/search/list?keyword='; // 搜索
+  static const SEARCH_PAGES_URL = '/search/pages?keyword='; // 搜索分页
   static const MUSIC_URL = '/vod/one?songInfoStr='; // 音乐详情页
   static const MUSIC_DOWNLOAD_URL = '/vod/musicurl?songInfoStr='; // 音乐详情页
   // app配置

@@ -139,16 +139,16 @@ class _App extends State<App> {
             secondary: IconFont(IconNames.iconyejianduoyun, size: 30),
             selected: _global.isDark,
           ),
-          SwitchListTile(
-            value: _global.isMusic ?? false,
-            onChanged: (value) {
-              _global.changeAppMode(value);
-              RestartWidget.restartApp(context);
-            },
-            title: Text('音乐助手'),
-            secondary: IconFont(IconNames.iconyinle, size: 30),
-            selected: _global.isMusic,
-          ),
+          // SwitchListTile(
+          //   value: _global.isMusic ?? false,
+          //   onChanged: (value) {
+          //     _global.changeAppMode(value);
+          //     RestartWidget.restartApp(context);
+          //   },
+          //   title: Text('音乐助手'),
+          //   secondary: IconFont(IconNames.iconyinle, size: 30),
+          //   selected: _global.isMusic,
+          // ),
           ListTile(
             title: Text('视频解析'),
             leading: IconFont(IconNames.iconshishishipinliujiexi, size: 30),

@@ -101,7 +101,7 @@ abstract class GlobalMobx with Store {
   bool showPause;
 
   @observable
-  bool isShowList = true; // 首页列表展示（默认grid展示）
+  bool isShowList = false; // 首页列表展示（默认grid展示）
 
   GlobalMobx(this.prefs) {
     if (this.prefs != null) {
