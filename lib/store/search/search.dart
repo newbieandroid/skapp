@@ -55,27 +55,13 @@ abstract class SearchStoreMobx with Store {
     qLimit = limit;
   }
 
-  // @action
-  // Future<dynamic> fetchData(String keyword) async {
-  //   this.isLoading = true;
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-  //   bool isMusic = prefs.getBool('isMusic') ?? false;
-  //   String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
-  //   var req = HttpRequest(cIp);
-  //   final res = await req.get(preApiUrl + searchUrl + keyword);
-  //   searchLists.addAll(SearchDao.fromJson(res).data);
-  //   this.isLoading = false;
-  // }
-
   @action
   Future<dynamic> fetchData({@required searchKey}) async {
     this.isLoading = true;
     this.first = false;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-    bool isMusic = prefs.getBool('isMusic') ?? false;
-    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
+    String preApiUrl = API.PRE_API_URL;
     var req = HttpRequest(cIp);
     String query = '$searchKey&page=$qPage&limit=$qLimit';
     final res = await req.get(preApiUrl + searchUrl + query);
@@ -94,8 +80,7 @@ abstract class SearchStoreMobx with Store {
     this.isLoading = true;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-    bool isMusic = prefs.getBool('isMusic') ?? false;
-    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
+    String preApiUrl = API.PRE_API_URL;
     var req = HttpRequest(cIp);
     final res =
         await req.get(preApiUrl + searchUrl + keyword + '&type=' + type);

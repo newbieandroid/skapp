@@ -5,7 +5,6 @@ import 'package:pk_skeleton/pk_skeleton.dart';
 import 'package:provider/provider.dart';
 import 'package:skapp/pages/classify/skgriditem.dart';
 import 'package:skapp/store/root.dart';
-import 'package:skapp/widgets/network_img_widget.dart';
 import './../../store/classify/classify.dart';
 import './skitem.dart';
 

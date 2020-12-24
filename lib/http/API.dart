@@ -12,15 +12,12 @@ class API {
   // static const BASE_SK_URL = 'http://192.168.2.127:8000';
   // static const BASE_SK_URL = 'http://192.168.43.237:8000';
   static const PRE_API_URL = '/sk-api';
-  static const PRE_MUSIC_API_URL = '/sk-music-api';
   static const TYPE_URL = '/type/list'; // 分类
   static const CLASSIFY_TYPE_URL = '/type/one?typeId='; // 子分类
   static const VOD_LIST_URL = '/vod/list'; // 列表页
   static const VOD_DETAILS_URL = '/vod/one?vodId='; // 详情页
   static const SEARCH_URL = '/search/list?keyword='; // 搜索
   static const SEARCH_PAGES_URL = '/search/pages?keyword='; // 搜索分页
-  static const MUSIC_URL = '/vod/one?songInfoStr='; // 音乐详情页
-  static const MUSIC_DOWNLOAD_URL = '/vod/musicurl?songInfoStr='; // 音乐详情页
   // app配置
   static const APP_CONFIG = '/app/config';
   static const APP_ADS = '/app/ads';

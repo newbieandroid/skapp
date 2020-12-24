@@ -15,8 +15,6 @@ class Routes {
   static String showLives = "/showLives";
   // 自定义设置
   static String custom = "/custom";
-  // 音乐播放器页面
-  static String music = "/music";
   // 电影预览界面
   static String preview = "/preview";
   // 视频解析
@@ -37,7 +35,6 @@ class Routes {
     router.define(live, handler: liveRouteHandler);
     router.define(showLives, handler: showLivesRouteHandler);
     router.define(custom, handler: customRouteHandler);
-    router.define(music, handler: musicRouteHandler);
     router.define(preview, handler: previewRouteHandler);
     router.define(vipvideo, handler: vipvideoRouteHandler);
     router.define(dlna, handler: dlnaRouteHandler);

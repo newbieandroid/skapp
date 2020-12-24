@@ -70,8 +70,7 @@ abstract class ClassifyStoreMobx with Store {
     this.isLoading = true;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-    bool isMusic = prefs.getBool('isMusic') ?? false;
-    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
+    String preApiUrl = API.PRE_API_URL;
     var req = HttpRequest(cIp);
     final res = await req.get(preApiUrl + typeUrl + typeId.toString());
     this.type = ClassifyTypeDao.fromJson(res);
@@ -81,8 +80,7 @@ abstract class ClassifyStoreMobx with Store {
   Future<dynamic> fetchVodData({@required typeId}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-    bool isMusic = prefs.getBool('isMusic') ?? false;
-    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
+    String preApiUrl = API.PRE_API_URL;
     var req = HttpRequest(cIp);
     String query = '?typeId=$typeId&page=$qPage&limit=$qLimit&type=$qType';
     final res = await req.get(preApiUrl + vodUrl + query);
@@ -100,8 +98,7 @@ abstract class ClassifyStoreMobx with Store {
   Future<dynamic> fetchVodSameData({@required typeId}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-    bool isMusic = prefs.getBool('isMusic') ?? false;
-    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
+    String preApiUrl = API.PRE_API_URL;
     var req = HttpRequest(cIp);
     String query = '?typeId=$typeId&page=1&limit=9&type=monthHits';
     final res = await req.get(preApiUrl + vodUrl + query);
@@ -114,8 +111,7 @@ abstract class ClassifyStoreMobx with Store {
   Future<dynamic> fetchVodSameActorData({@required actor}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-    bool isMusic = prefs.getBool('isMusic') ?? false;
-    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
+    String preApiUrl = API.PRE_API_URL;
     var req = HttpRequest(cIp);
     String query = '?page=1&limit=9&type=monthHits&actor=$actor';
     final res = await req.get(preApiUrl + vodUrl + query);

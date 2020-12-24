@@ -39,6 +39,21 @@ mixin _$SearchStore on SearchStoreMobx, Store {
     });
   }
 
+  final _$firstAtom = Atom(name: 'SearchStoreMobx.first');
+
+  @override
+  bool get first {
+    _$firstAtom.reportRead();
+    return super.first;
+  }
+
+  @override
+  set first(bool value) {
+    _$firstAtom.reportWrite(value, super.first, () {
+      super.first = value;
+    });
+  }
+
   final _$qPageAtom = Atom(name: 'SearchStoreMobx.qPage');
 
   @override
@@ -172,6 +187,7 @@ mixin _$SearchStore on SearchStoreMobx, Store {
     return '''
 isLoading: ${isLoading},
 hasNextPage: ${hasNextPage},
+first: ${first},
 qPage: ${qPage},
 qLimit: ${qLimit},
 searchKey: ${searchKey},
