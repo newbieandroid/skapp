@@ -31,7 +31,13 @@ class _ClassifyState extends State<Classify>
         myTabs = store.type.data
             .map(
               (item) => Tab(
+                // icon: Icon(Icons.local_florist),
                 text: item.typeName,
+                // iconMargin: EdgeInsets.only(bottom: 6),
+                // child: Text(
+                //   item.typeName,
+                //   style: Theme.of(context).textTheme.bodyText2,
+                // ),
               ),
             )
             .cast<Tab>()
@@ -78,24 +84,42 @@ class _ClassifyState extends State<Classify>
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Material(
-                    color: Theme.of(context).cardColor,
-                    child: TabBar(
-                      indicatorColor: _global.isDark
-                          ? Colors.white
-                          : Theme.of(context).primaryColorDark,
-                      controller: tabController,
-                      isScrollable: true,
-                      labelColor: _global.isDark
-                          ? Colors.white
-                          : Theme.of(context).primaryColorDark,
-                      unselectedLabelColor:
-                          Theme.of(context).textTheme.subtitle2.color,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      indicatorWeight: 2,
-                      // labelStyle: TextStyle(fontSize: 12),
-                      tabs: myTabs,
-                    ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Material(
+                          color: Theme.of(context).cardColor,
+                          child: TabBar(
+                            indicatorColor: _global.isDark
+                                ? Colors.white
+                                : Theme.of(context).primaryColorDark,
+                            controller: tabController,
+                            isScrollable: true,
+                            labelColor: _global.isDark
+                                ? Colors.white
+                                : Theme.of(context).primaryColorDark,
+                            unselectedLabelColor:
+                                Theme.of(context).textTheme.subtitle2.color,
+                            indicatorSize: TabBarIndicatorSize.label,
+                            indicatorWeight: 2,
+                            // labelStyle: TextStyle(fontSize: 12),
+                            tabs: myTabs,
+                          ),
+                        ),
+                      ),
+                      // Container(
+                      //   color: Theme.of(context).cardColor,
+                      //   child: IconButton(
+                      //     padding: EdgeInsets.only(left: 10, right: 10),
+                      //     icon: Icon(Icons.art_track),
+                      //     iconSize: 16,
+                      //     onPressed: () {
+                      //       // 修改展示方式
+                      //       _global.changeShowList(!_global.isShowList);
+                      //     },
+                      //   ),
+                      // )
+                    ],
                   ),
                   Expanded(
                     flex: 1,

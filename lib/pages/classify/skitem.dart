@@ -13,7 +13,8 @@ import './../../dao/vod_list_dao.dart';
 // ignore: must_be_immutable
 class SKItem extends StatefulWidget {
   Data vod;
-  SKItem({Key key, @required this.vod}) : super(key: key);
+  String type; // preview or details
+  SKItem({Key key, @required this.vod, @required this.type}) : super(key: key);
 
   @override
   _SKItemState createState() => _SKItemState();
@@ -39,7 +40,7 @@ class _SKItemState extends State<SKItem> {
               context,
               "/music?songInfo=${Uri.encodeComponent(json.encode(vod.songInfo))}",
               transition: TransitionType.native,
-              transitionDuration: Duration(milliseconds: 300),
+              transitionDuration: Duration(milliseconds: 100),
             );
           } else {
             Fluttertoast.showToast(
@@ -48,18 +49,21 @@ class _SKItemState extends State<SKItem> {
             );
           }
         } else {
-          Application.router.navigateTo(
-            context,
-            "/preview?vodId=${vod.vodId}",
-            transition: TransitionType.native,
-            transitionDuration: Duration(milliseconds: 300),
-          );
-          // Application.router.navigateTo(
-          //   context,
-          //   "/details?vodId=${vod.vodId}",
-          //   transition: TransitionType.native,
-          //   transitionDuration: Duration(milliseconds: 300),
-          // );
+          if (widget.type == 'preview') {
+            Application.router.navigateTo(
+              context,
+              "/preview?vodId=${vod.vodId}",
+              transition: TransitionType.native,
+              transitionDuration: Duration(milliseconds: 100),
+            );
+          } else if (widget.type == 'details') {
+            Application.router.navigateTo(
+              context,
+              "/details?vodId=${vod.vodId}",
+              transition: TransitionType.native,
+              transitionDuration: Duration(milliseconds: 100),
+            );
+          }
         }
       },
       child: Container(
@@ -96,7 +100,7 @@ class _SKItemState extends State<SKItem> {
                     Text(
                       vod.vodName,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.subtitle2,
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                     Container(
                       padding: EdgeInsets.only(top: 4, bottom: 4),

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:skapp/iconfont/IconFont.dart';
 
 var typeMap = {

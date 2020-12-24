@@ -45,7 +45,7 @@ Doctor summary (to see all details, run flutter doctor -v):
 ### 支持平台
 
 1.安卓设备
-2.ios 设备未进行测试
+2.ios 设备
 
 ### screenshot
 
@@ -61,12 +61,21 @@ Doctor summary (to see all details, run flutter doctor -v):
 
 ### 待开发功能
 
-- [x] 投屏
 - [x] 登录注册
-- [x] 收藏，历史记录
+- [x] 收藏
 - [x] 会员
 
 ### 版本更新历史
+
+##### V2.1.1
+
+- 去掉音乐助手
+
+- 增加投屏功能
+
+- 增加观看历史记录及搜索历史记录，搜索增加分页功能
+
+- 列表展示采用 Grid
 
 ##### V2.0.4
 

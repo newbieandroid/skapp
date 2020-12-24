@@ -38,12 +38,14 @@ abstract class GlobalMobx with Store {
     Colors.lightBlue,
     Colors.cyan,
     Colors.teal,
-    Colors.green,
+    Colors.lightGreen,
     Colors.lime,
     Colors.amber,
     Colors.orange,
     Colors.deepOrange,
     Colors.blueGrey,
+    Colors.indigo,
+    Colors.brown,
   ];
 
   String url = API.APP_CONFIG;
@@ -98,12 +100,16 @@ abstract class GlobalMobx with Store {
   @observable
   bool showPause;
 
+  @observable
+  bool isShowList = false; // 首页列表展示（默认grid展示）
+
   GlobalMobx(this.prefs) {
     if (this.prefs != null) {
-      theme = colorList[prefs.getInt('themeIndex') ?? 4];
+      theme = colorList[prefs.getInt('themeIndex') ?? 5];
       isDark = prefs.getBool('isDark') ?? false;
       isMusic = prefs.getBool('isMusic') ?? false;
       isAllowProtocol = prefs.getBool('isAllowProtocol') ?? false;
+      // isShowList = prefs.getBool('isShowList') ?? false;
       FlutterStatusbarcolor.setStatusBarColor(theme);
     }
   }
@@ -111,6 +117,11 @@ abstract class GlobalMobx with Store {
   @action
   void changeShowAd(bool showAd) {
     this.showAd = showAd;
+  }
+
+  @action
+  void changeShowList(bool b) {
+    this.isShowList = b;
   }
 
   @action

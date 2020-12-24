@@ -2,14 +2,16 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:skapp/store/root.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import './../../../store/details/details.dart';
 
 // ignore: must_be_immutable
-class SlideUpPage extends StatelessWidget {
+class SidUpPage extends StatelessWidget {
+  final Global global;
   final DetailsStore store;
   final PanelController pc;
-  SlideUpPage({Key key, this.store, this.pc}) : super(key: key);
+  SidUpPage({Key key, this.store, this.pc, this.global}) : super(key: key);
   double _panelHeightOpen;
   double _panelHeightClosed = 0;
 
@@ -49,7 +51,7 @@ class SlideUpPage extends StatelessWidget {
       removeBottom: true,
       child: ListView.separated(
         padding: new EdgeInsets.all(5.0),
-        itemCount: 3,
+        itemCount: 2,
         itemBuilder: (BuildContext context, int index) {
           switch (index) {
             case 0:
@@ -59,7 +61,7 @@ class SlideUpPage extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Center(
                       child: Text(
-                        store.vod.vodName,
+                        '选集',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),
@@ -85,41 +87,33 @@ class SlideUpPage extends StatelessWidget {
               return Container(
                 child: Padding(
                   padding: EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${store.vod.vodScore}分 / ${store.vod.vodArea} / ${store.vod.vodYear} / ${store.vod.vodClass}',
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                      Text(
-                        '导演：${store.vod.vodDirector}',
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                      Text(
-                        '主演：${store.vod.vodActor}',
-                        style: Theme.of(context).textTheme.caption,
-                      )
-                    ],
-                  ),
-                ),
-              );
-            case 2:
-              return Container(
-                child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '简介',
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                      Text(
-                        '${store.vod.vodContent.replaceAll(RegExp(r"<\/?[^>]*>"), "")}',
-                        style: Theme.of(context).textTheme.caption,
-                      )
-                    ],
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: store.players[store.currentTabs].length,
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0,
+                      childAspectRatio: 1.8,
+                    ),
+                    itemBuilder: (context, index) {
+                      return MaterialButton(
+                        elevation: 0,
+                        color: Theme.of(context).cardColor,
+                        textColor: index == store.currentPlayers
+                            ? global.isDark
+                                ? Theme.of(context).accentColor
+                                : Theme.of(context).primaryColorDark
+                            : Theme.of(context).textTheme.bodyText2.color,
+                        child: Text(
+                            store.players[store.currentTabs][index]['label']),
+                        onPressed: () {
+                          store.changeCurrentPlayers(index);
+                        },
+                      );
+                    },
                   ),
                 ),
               );

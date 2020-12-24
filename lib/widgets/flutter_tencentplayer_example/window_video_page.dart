@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skapp/store/details/details.dart';
 import 'package:skapp/store/root.dart';
 import 'package:skapp/utils/screen_utils.dart';
@@ -91,10 +92,26 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
     dataSource = widget.store.currentUrl;
     switch (widget.playType) {
       case PlayType.network:
+        // 芒果和哔哩哔哩增加header
+        Map<String, String> headers = {};
+        if (dataSource.indexOf('mgtv.com') >= 0) {
+          headers = {
+            'Referer': 'https://www.mgtv.com/',
+            'User-Agent':
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
+          };
+        }
+        if (dataSource.indexOf('bilivideo.com') >= 0) {
+          headers = {
+            'Referer': 'https://www.bilibili.com',
+            'User-Agent':
+                'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) imgotv-client/6.3.4 Chrome/69.0.3497.106 Electron/4.0.5 Safari/'
+          };
+        }
         controller = TencentPlayerController.network(
           dataSource,
-          playerConfig:
-              PlayerConfig(autoPlay: !widget.global.appAds.prestrain.show),
+          playerConfig: PlayerConfig(
+              autoPlay: !widget.global.appAds.prestrain.show, headers: headers),
         );
         break;
       case PlayType.asset:
@@ -123,18 +140,29 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
   @override
   Widget build(BuildContext context) {
     // 判断是否切换了源
-    if (dataSource != widget.store.currentUrl) {
-      dataSource = widget.store.currentUrl;
-      // 切换播放源
-      controller?.removeListener(listener);
+    // if (dataSource != widget.store.currentUrl) {
+    //   dataSource = widget.store.currentUrl;
+    //   // 切换播放源
+    //   controller?.removeListener(listener);
+    //   controller?.pause();
+    //   controller = TencentPlayerController.network(
+    //     dataSource,
+    //   );
+    //   controller?.initialize()?.then((_) {
+    //     if (mounted) setState(() {});
+    //   });
+    //   controller?.addListener(listener);
+    // }
+
+    // 判断是否投屏
+    if (widget.store.isDlna) {
       controller?.pause();
-      controller = TencentPlayerController.network(
-        dataSource,
-      );
-      controller?.initialize()?.then((_) {
-        if (mounted) setState(() {});
-      });
-      controller?.addListener(listener);
+    }
+
+    // 监听是否播放完毕
+    if ((controller.value.position == controller.value.duration) &&
+        (controller.value.position.inSeconds != 0)) {
+      widget.store.playNext();
     }
 
     return Observer(builder: (_) {
@@ -348,6 +376,7 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
                               currentUrl: widget.store.currentUrl,
                               controller: controller,
                               showClearBtn: widget.showClearBtn,
+                              store: widget.store,
                               behavingCallBack: () {
                                 delayHideCover();
                               },

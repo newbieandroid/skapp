@@ -5,6 +5,7 @@ typedef RequestCallBack<T> = void Function(T value);
 class API {
   static SharedPreferences _prefs;
   static const BASE_SK_URL = 'http://sk.ncer.top';
+  // static const BASE_SK_URL = 'http://192.168.0.112:8000';
   // static const BASE_SK_URL = 'http://192.168.5.191:8000';
   // static const BASE_SK_URL = 'http://192.168.0.111:8000';
   // static const BASE_SK_URL = 'http://192.168.2.201:8000';
@@ -17,6 +18,7 @@ class API {
   static const VOD_LIST_URL = '/vod/list'; // 列表页
   static const VOD_DETAILS_URL = '/vod/one?vodId='; // 详情页
   static const SEARCH_URL = '/search/list?keyword='; // 搜索
+  static const SEARCH_PAGES_URL = '/search/pages?keyword='; // 搜索分页
   static const MUSIC_URL = '/vod/one?songInfoStr='; // 音乐详情页
   static const MUSIC_DOWNLOAD_URL = '/vod/musicurl?songInfoStr='; // 音乐详情页
   // app配置

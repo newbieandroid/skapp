@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tencentplayer/flutter_tencentplayer.dart';
+import 'package:skapp/store/details/details.dart';
 import 'package:skapp/store/root.dart';
 import '../full_video_page.dart';
 import '../main.dart';
@@ -14,6 +15,7 @@ const List<double> rateList = [1.0, 1.2, 1.5, 2.0];
 
 class TencentPlayerBottomWidget extends StatefulWidget {
   final Global global;
+  final DetailsStore store;
   final isShow;
   final showCover;
   final currentUrl;
@@ -27,6 +29,7 @@ class TencentPlayerBottomWidget extends StatefulWidget {
 
   TencentPlayerBottomWidget({
     this.global,
+    this.store,
     this.isShow,
     this.showCover,
     this.currentUrl,
@@ -173,6 +176,7 @@ class _TencentPlayerBottomWidgetState extends State<TencentPlayerBottomWidget> {
                                         playType: PlayType.network,
                                         dataSource: widget.currentUrl,
                                         global: widget.global,
+                                        store: widget.store,
                                       ),
                                     ),
                                   )

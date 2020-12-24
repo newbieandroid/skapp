@@ -49,7 +49,7 @@ class VodDao {
   String vodDuration;
   int vodUp;
   int vodDown;
-  int vodScore;
+  num vodScore;
   int vodScoreAll;
   int vodScoreNum;
   int vodTime;
@@ -58,7 +58,7 @@ class VodDao {
   int vodTimeMake;
   int vodTrysee;
   int vodDoubanId;
-  int vodDoubanScore;
+  num vodDoubanScore;
   String vodReurl;
   String vodRelVod;
   String vodRelArt;

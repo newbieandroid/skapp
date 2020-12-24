@@ -191,7 +191,7 @@ class _MusicState extends State<Music> with TickerProviderStateMixin {
                         Application.router.navigateTo(context,
                             "/music?songInfo=${Uri.encodeComponent(store.musicLists[index])}",
                             // transition: TransitionType.native,
-                            transitionDuration: Duration(milliseconds: 300),
+                            transitionDuration: Duration(milliseconds: 100),
                             replace: true);
                       },
                     ),
@@ -358,7 +358,7 @@ class _MusicState extends State<Music> with TickerProviderStateMixin {
                                   "/music?songInfo=${Uri.encodeComponent(store.musicLists[index])}",
                                   // transition: TransitionType.native,
                                   transitionDuration:
-                                      Duration(milliseconds: 300),
+                                      Duration(milliseconds: 100),
                                   replace: true);
                             }
                           },
@@ -375,7 +375,7 @@ class _MusicState extends State<Music> with TickerProviderStateMixin {
                                   "/music?songInfo=${Uri.encodeComponent(store.musicLists[index])}",
                                   // transition: TransitionType.native,
                                   transitionDuration:
-                                      Duration(milliseconds: 300),
+                                      Duration(milliseconds: 100),
                                   replace: true);
                             }
                           },

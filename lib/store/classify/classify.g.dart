@@ -69,6 +69,37 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
     });
   }
 
+  final _$vodSameDataAtom = Atom(name: 'ClassifyStoreMobx.vodSameData');
+
+  @override
+  VodListDao get vodSameData {
+    _$vodSameDataAtom.reportRead();
+    return super.vodSameData;
+  }
+
+  @override
+  set vodSameData(VodListDao value) {
+    _$vodSameDataAtom.reportWrite(value, super.vodSameData, () {
+      super.vodSameData = value;
+    });
+  }
+
+  final _$vodSameActorDataAtom =
+      Atom(name: 'ClassifyStoreMobx.vodSameActorData');
+
+  @override
+  VodListDao get vodSameActorData {
+    _$vodSameActorDataAtom.reportRead();
+    return super.vodSameActorData;
+  }
+
+  @override
+  set vodSameActorData(VodListDao value) {
+    _$vodSameActorDataAtom.reportWrite(value, super.vodSameActorData, () {
+      super.vodSameActorData = value;
+    });
+  }
+
   final _$hasNextPageAtom = Atom(name: 'ClassifyStoreMobx.hasNextPage');
 
   @override
@@ -96,6 +127,39 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
   set vodDataLists(ObservableList<dynamic> value) {
     _$vodDataListsAtom.reportWrite(value, super.vodDataLists, () {
       super.vodDataLists = value;
+    });
+  }
+
+  final _$vodDataSameListsAtom =
+      Atom(name: 'ClassifyStoreMobx.vodDataSameLists');
+
+  @override
+  ObservableList<dynamic> get vodDataSameLists {
+    _$vodDataSameListsAtom.reportRead();
+    return super.vodDataSameLists;
+  }
+
+  @override
+  set vodDataSameLists(ObservableList<dynamic> value) {
+    _$vodDataSameListsAtom.reportWrite(value, super.vodDataSameLists, () {
+      super.vodDataSameLists = value;
+    });
+  }
+
+  final _$vodDataSameActorListsAtom =
+      Atom(name: 'ClassifyStoreMobx.vodDataSameActorLists');
+
+  @override
+  ObservableList<dynamic> get vodDataSameActorLists {
+    _$vodDataSameActorListsAtom.reportRead();
+    return super.vodDataSameActorLists;
+  }
+
+  @override
+  set vodDataSameActorLists(ObservableList<dynamic> value) {
+    _$vodDataSameActorListsAtom.reportWrite(value, super.vodDataSameActorLists,
+        () {
+      super.vodDataSameActorLists = value;
     });
   }
 
@@ -162,6 +226,24 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
         .run(() => super.fetchVodData(typeId: typeId));
   }
 
+  final _$fetchVodSameDataAsyncAction =
+      AsyncAction('ClassifyStoreMobx.fetchVodSameData');
+
+  @override
+  Future<dynamic> fetchVodSameData({@required dynamic typeId}) {
+    return _$fetchVodSameDataAsyncAction
+        .run(() => super.fetchVodSameData(typeId: typeId));
+  }
+
+  final _$fetchVodSameActorDataAsyncAction =
+      AsyncAction('ClassifyStoreMobx.fetchVodSameActorData');
+
+  @override
+  Future<dynamic> fetchVodSameActorData({@required dynamic actor}) {
+    return _$fetchVodSameActorDataAsyncAction
+        .run(() => super.fetchVodSameActorData(actor: actor));
+  }
+
   final _$ClassifyStoreMobxActionController =
       ActionController(name: 'ClassifyStoreMobx');
 
@@ -216,8 +298,12 @@ isLoading: ${isLoading},
 isVodLoading: ${isVodLoading},
 type: ${type},
 vodData: ${vodData},
+vodSameData: ${vodSameData},
+vodSameActorData: ${vodSameActorData},
 hasNextPage: ${hasNextPage},
 vodDataLists: ${vodDataLists},
+vodDataSameLists: ${vodDataSameLists},
+vodDataSameActorLists: ${vodDataSameActorLists},
 qPage: ${qPage},
 qLimit: ${qLimit},
 qType: ${qType}

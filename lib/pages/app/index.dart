@@ -48,10 +48,12 @@ class _App extends State<App> {
               icon: typeMap[item.typeEn] != null
                   ? typeMap[item.typeEn]['normalIcon']
                   : typeMap['normal']['normalIcon'],
+              // ignore: deprecated_member_use
               title: Text(
                 item.typeName,
-                style: TextStyle(fontSize: 10),
+                style: TextStyle(fontSize: 11),
               ),
+              // label: item.typeName,
               activeIcon: typeMap[item.typeEn] != null
                   ? typeMap[item.typeEn]['activeIcon']
                   : typeMap['normal']['activeIcon']))
@@ -108,7 +110,7 @@ class _App extends State<App> {
                 Padding(
                   padding: EdgeInsets.only(left: 16),
                   child:
-                      Text('换肤', style: Theme.of(context).textTheme.subtitle2),
+                      Text('换肤', style: Theme.of(context).textTheme.bodyText2),
                 ),
                 Expanded(
                   flex: 1,
@@ -137,16 +139,16 @@ class _App extends State<App> {
             secondary: IconFont(IconNames.iconyejianduoyun, size: 30),
             selected: _global.isDark,
           ),
-          SwitchListTile(
-            value: _global.isMusic ?? false,
-            onChanged: (value) {
-              _global.changeAppMode(value);
-              RestartWidget.restartApp(context);
-            },
-            title: Text('音乐助手'),
-            secondary: IconFont(IconNames.iconyinle, size: 30),
-            selected: _global.isMusic,
-          ),
+          // SwitchListTile(
+          //   value: _global.isMusic ?? false,
+          //   onChanged: (value) {
+          //     _global.changeAppMode(value);
+          //     RestartWidget.restartApp(context);
+          //   },
+          //   title: Text('音乐助手'),
+          //   secondary: IconFont(IconNames.iconyinle, size: 30),
+          //   selected: _global.isMusic,
+          // ),
           ListTile(
             title: Text('视频解析'),
             leading: IconFont(IconNames.iconshishishipinliujiexi, size: 30),
@@ -156,7 +158,7 @@ class _App extends State<App> {
                 context,
                 "/vipvideo",
                 transition: TransitionType.native,
-                transitionDuration: Duration(milliseconds: 300),
+                transitionDuration: Duration(milliseconds: 100),
               );
             },
           ),
@@ -170,7 +172,7 @@ class _App extends State<App> {
                       context,
                       "/live",
                       transition: TransitionType.native,
-                      transitionDuration: Duration(milliseconds: 300),
+                      transitionDuration: Duration(milliseconds: 100),
                     );
                   },
                 )
@@ -188,7 +190,7 @@ class _App extends State<App> {
                 context,
                 "/custom",
                 transition: TransitionType.native,
-                transitionDuration: Duration(milliseconds: 300),
+                transitionDuration: Duration(milliseconds: 100),
               );
             },
           ),
@@ -215,7 +217,7 @@ class _App extends State<App> {
 
   renderAppBar() {
     return AppBar(
-      elevation: 1,
+      elevation: 0,
       title: Container(
         child: Row(
           children: <Widget>[
@@ -227,12 +229,25 @@ class _App extends State<App> {
                     context,
                     "/search",
                     transition: TransitionType.native,
-                    transitionDuration: Duration(milliseconds: 300),
+                    transitionDuration: Duration(milliseconds: 100),
                   );
                   // Router.push(context, Router.searchPage, '电影/电视剧/影人');
                 },
               ),
             ),
+            IconButton(
+              icon: Icon(Icons.history),
+              color: Colors.white,
+              padding: EdgeInsets.only(left: 18),
+              onPressed: () {
+                Application.router.navigateTo(
+                  context,
+                  "/history",
+                  transition: TransitionType.native,
+                  transitionDuration: Duration(milliseconds: 100),
+                );
+              },
+            )
           ],
         ),
         alignment: Alignment(0.0, 0.0),

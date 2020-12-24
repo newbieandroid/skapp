@@ -3,7 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:incrementally_loading_listview/incrementally_loading_listview.dart';
 import 'package:pk_skeleton/pk_skeleton.dart';
 import 'package:provider/provider.dart';
+import 'package:skapp/pages/classify/skgriditem.dart';
 import 'package:skapp/store/root.dart';
+import 'package:skapp/widgets/network_img_widget.dart';
 import './../../store/classify/classify.dart';
 import './skitem.dart';
 
@@ -85,27 +87,64 @@ class _SKListState extends State<SKList> with AutomaticKeepAliveClientMixin {
                     await loadMoreData();
                   },
                   hasMore: () => store.hasNextPage,
-                  itemCount: () => store.vodDataLists.length + 1 ?? 1,
+                  itemCount: () => _global.isShowList
+                      ? store.vodDataLists.length + 1 ?? 1
+                      : ((store.vodDataLists.length + 1) / 3).ceil() ?? 1,
                   itemBuilder: (BuildContext context, int index) {
-                    if (index < store.vodDataLists.length) {
-                      return Column(
-                        children: <Widget>[
-                          SKItem(
-                            vod: store.vodDataLists[index],
-                          )
-                        ],
-                      );
-                    } else {
-                      return Center(
-                          child: Container(
-                        padding: EdgeInsets.all(14.0),
-                        child: Text(
-                          '-- THE END --',
-                          style: TextStyle(
-                            fontSize: 12,
+                    if (_global.isShowList) {
+                      if (index < store.vodDataLists.length) {
+                        return Column(
+                          children: <Widget>[
+                            SKItem(
+                              vod: store.vodDataLists[index],
+                              type: 'preview',
+                            )
+                          ],
+                        );
+                      } else {
+                        return Center(
+                            child: Container(
+                          padding: EdgeInsets.all(14.0),
+                          child: Text(
+                            '-- THE END --',
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
-                      ));
+                        ));
+                      }
+                    } else {
+                      if (index < (store.vodDataLists.length / 3).ceil()) {
+                        return GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: 3,
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.symmetric(horizontal: 8),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
+                              childAspectRatio: 0.5,
+                            ),
+                            itemBuilder: (context, gridiIndex) {
+                              return SKGridItem(
+                                vod: store.vodDataLists[index * 3 + gridiIndex],
+                                type: 'preview',
+                              );
+                            });
+                      } else {
+                        return Center(
+                            child: Container(
+                          padding: EdgeInsets.all(14.0),
+                          child: Text(
+                            '-- THE END --',
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                        ));
+                      }
                     }
                   }),
         ),

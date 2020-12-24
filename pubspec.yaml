@@ -14,7 +14,7 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 2.0.4
+version: 2.1.1
 
 environment:
   sdk: ">=2.2.0 <3.0.0"
@@ -59,14 +59,15 @@ dependencies:
   shimmer: ^1.1.1
   palette_generator: ^0.2.3
   share: ^0.6.5+4
-  # flutter_dlna: ^0.0.1+1
+  flutter_dlna: ^0.0.1+1
+  giffy_dialog: ^1.8.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   # 用于mobx代码生成
   mobx_codegen: ^1.0.3
-  build_runner: ^1.7.1
+  build_runner: ^1.10.10
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -82,12 +82,19 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
       pickColor = paletteGenerator.darkVibrantColor != null
           ? paletteGenerator.darkVibrantColor.color
           : Color(0xff35374c);
+      // pickColor = Theme.of(context).primaryColor;
     });
     store.changePickColor(true);
-    store.formatPDTbas(store.vod.vodPlayFrom);
-    store.formatPD(store.vod.vodPlayUrl);
+    // store.formatPDTbas(store.vod.vodPlayFrom);
+    // store.formatPD(store.vod.vodPlayUrl);
     classifyStore.changeQuery(page: 1, limit: guessCount, type: 'score');
-    await classifyStore.fetchVodData(typeId: store.vod.typeId);
+    // 猜你喜欢
+    classifyStore.fetchVodData(typeId: store.vod.typeId);
+    // 相似推荐
+    classifyStore.fetchVodSameData(typeId: store.vod.typeId);
+    // 同演员(默认获取第一个)
+    String actor = store.vod.vodActor.split(',')[0];
+    classifyStore.fetchVodSameActorData(actor: actor);
   }
 
   // 滚动
@@ -179,7 +186,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                                 sliverRating(),
                                 sliverDesc(),
                                 sliverCasts(),
-                                sliverBottom()
+                                sliverBottom(classifyStore)
                               ],
                             ),
                             Opacity(
@@ -229,7 +236,8 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                                 )
                               : Container(
                                   child: OverscrollNotificationWidget(
-                                    child: LongCommentWidget(
+                                    child: LongCommentTabView(
+                                      store: classifyStore,
                                       scroll: true,
                                     ),
                                   ),
@@ -404,7 +412,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                             context,
                             "/preview?vodId=${classifyStore.vodDataLists[index].vodId}",
                             transition: TransitionType.native,
-                            transitionDuration: Duration(milliseconds: 300),
+                            transitionDuration: Duration(milliseconds: 100),
                             replace: true,
                           );
                         },
@@ -466,14 +474,15 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
   }
 
   // 底部话题讨论
-  SliverToBoxAdapter sliverBottom() {
+  SliverToBoxAdapter sliverBottom(ClassifyStore store) {
     return SliverToBoxAdapter(
       child: Container(
         key: globalKey,
         height: screenH - appBarHeight,
         child: Container(
           child: OverscrollNotificationWidget(
-            child: LongCommentWidget(
+            child: LongCommentTabView(
+              store: store,
               scroll: isScrollTop,
             ),
           ),
@@ -498,6 +507,7 @@ class BtnWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      padding: EdgeInsets.only(left: 4, right: 16),
       height: 34,
       color: Colors.white,
       textColor: Colors.black,
@@ -514,7 +524,7 @@ class BtnWidget extends StatelessWidget {
               text,
               style: TextStyle(
                 fontSize: 13,
-                fontWeight: FontWeight.bold,
+                //fontWeight: FontWeight.bold,
               ),
             ),
           )
@@ -525,7 +535,7 @@ class BtnWidget extends StatelessWidget {
           context,
           "/details?vodId=${this.vodId}",
           transition: TransitionType.native,
-          transitionDuration: Duration(milliseconds: 300),
+          transitionDuration: Duration(milliseconds: 100),
           replace: true,
         );
       },
@@ -633,7 +643,7 @@ class GrowTransition extends StatelessWidget {
                             child: Text(
                               '影片',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 15,
                                 color: Colors.white,
                               ),
                             )),

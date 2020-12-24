@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:skapp/store/details/details.dart';
 import 'package:skapp/utils/screen_utils.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -19,6 +20,7 @@ import 'package:url_launcher/url_launcher.dart';
 // ignore: must_be_immutable
 class FullVideoPage extends StatefulWidget {
   final Global global;
+  final DetailsStore store;
   PlayType playType;
   String dataSource;
   TencentPlayerController controller;
@@ -29,6 +31,7 @@ class FullVideoPage extends StatefulWidget {
 
   FullVideoPage(
       {this.global,
+      this.store,
       this.controller,
       this.showBottomWidget = true,
       this.showClearBtn = true,
@@ -113,12 +116,21 @@ class _FullVideoPageState extends State<FullVideoPage> {
 
   @override
   Widget build(BuildContext context) {
+    // 监听是否播放完毕
+    if ((controller.value.position == controller.value.duration) &&
+        (controller.value.position.inSeconds != 0)) {
+      Navigator.of(context).pop();
+      // widget.store.playNext();
+    }
+
     return Scaffold(
         body: SafeArea(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
+          //if (isLock == false) {
           hideCover();
+          //}
         },
         onDoubleTap: () {
           if (!widget.showBottomWidget || isLock) return;
@@ -140,7 +152,10 @@ class _FullVideoPageState extends State<FullVideoPage> {
                       aspectRatio: controller.value.aspectRatio,
                       child: TencentPlayer(controller),
                     )
-                  : SizedBox(),
+                  : Container(
+                      width: 0,
+                      height: 0,
+                    ),
 
               /// 支撑全屏
               Container(
@@ -149,7 +164,9 @@ class _FullVideoPageState extends State<FullVideoPage> {
               ),
 
               /// 半透明浮层
-              showCover ? Container(color: Color(0x1f000000)) : SizedBox(),
+              showCover
+                  ? Container(color: Color(0x1f000000))
+                  : Container(color: Colors.transparent),
 
               /// 处理滑动手势
               Offstage(
@@ -189,7 +206,10 @@ class _FullVideoPageState extends State<FullVideoPage> {
                         ),
                       ),
                     )
-                  : SizedBox(),
+                  : Container(
+                      width: 0,
+                      height: 0,
+                    ),
 
               /// 锁
               showCover
@@ -204,21 +224,21 @@ class _FullVideoPageState extends State<FullVideoPage> {
                             });
                           }
                           delayHideCover();
-                          if (Platform.isAndroid) {
-                            DeviceOrientation deviceOrientation =
-                                controller.value.orientation < 180
-                                    ? DeviceOrientation.landscapeRight
-                                    : DeviceOrientation.landscapeLeft;
-                            if (isLock) {
-                              SystemChrome.setPreferredOrientations(
-                                  [deviceOrientation]);
-                            } else {
-                              SystemChrome.setPreferredOrientations([
-                                DeviceOrientation.landscapeLeft,
-                                DeviceOrientation.landscapeRight,
-                              ]);
-                            }
-                          }
+                          // if (Platform.isAndroid) {
+                          //   DeviceOrientation deviceOrientation =
+                          //       controller.value.orientation < 180
+                          //           ? DeviceOrientation.landscapeRight
+                          //           : DeviceOrientation.landscapeLeft;
+                          //   if (isLock) {
+                          //     SystemChrome.setPreferredOrientations(
+                          //         [deviceOrientation]);
+                          //   } else {
+                          //     SystemChrome.setPreferredOrientations([
+                          //       DeviceOrientation.landscapeLeft,
+                          //       DeviceOrientation.landscapeRight,
+                          //     ]);
+                          //   }
+                          // }
                         },
                         child: Container(
                           color: Colors.transparent,
@@ -242,31 +262,40 @@ class _FullVideoPageState extends State<FullVideoPage> {
                         ),
                       ),
                     )
-                  : SizedBox(),
+                  : Container(
+                      width: 0,
+                      height: 0,
+                    ),
 
               /// 进度、清晰度、速度
-              Offstage(
-                offstage: !widget.showBottomWidget,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).padding.top,
-                      right: MediaQuery.of(context).padding.bottom),
-                  child: TencentPlayerBottomWidget(
-                    isShow: !isLock && showCover,
-                    showCover: showCover,
-                    currentUrl: widget.dataSource,
-                    controller: controller,
-                    showClearBtn: widget.showClearBtn,
-                    showFullBtn: false,
-                    behavingCallBack: () {
-                      delayHideCover();
-                    },
-                    changeClear: (int index) {
-                      changeClear(index);
-                    },
-                  ),
-                ),
-              ),
+              !isLock && showCover
+                  ? Offstage(
+                      offstage: !widget.showBottomWidget,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).padding.top,
+                            right: MediaQuery.of(context).padding.bottom),
+                        child: TencentPlayerBottomWidget(
+                          isShow: showCover,
+                          showCover: showCover,
+                          currentUrl: widget.dataSource,
+                          controller: controller,
+                          showClearBtn: widget.showClearBtn,
+                          showFullBtn: false,
+                          store: widget.store,
+                          behavingCallBack: () {
+                            delayHideCover();
+                          },
+                          changeClear: (int index) {
+                            changeClear(index);
+                          },
+                        ),
+                      ),
+                    )
+                  : Container(
+                      width: 0,
+                      height: 0,
+                    ),
 
               controller.value.isPlaying
                   ? Container(
@@ -276,56 +305,58 @@ class _FullVideoPageState extends State<FullVideoPage> {
                   : widget.global.showPause
                       ? Center(
                           child: Stack(
-                          children: <Widget>[
-                            Container(
-                              width: ScreenUtils.screenW(context) / 2,
-                              height: ScreenUtils.screenW(context) / 3,
-                              child: GestureDetector(
-                                onTap: () {
-                                  if (widget.global.appAds.pause.href != '') {
-                                    launch(widget.global.appAds.pause.href);
-                                  }
-                                },
-                                child: widget.global.appAds.pause.type == 'img'
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(0)),
-                                        child: FadeInImage(
-                                          placeholder:
-                                              MemoryImage(kTransparentImage),
-                                          image: CachedNetworkImageProvider(
-                                            widget.global.appAds.pause.src,
-                                          ),
-                                          fit: BoxFit.fill,
-                                        ))
-                                    : Container(
-                                        color: Colors.black,
-                                        child: WebView(
-                                          initialUrl: widget.global.appAds.pause
-                                              .src, // 加载的url
-                                        ),
-                                      ),
-                              ),
-                            ),
-                            Positioned(
-                              right: -8,
-                              top: -8,
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: IconButton(
-                                  iconSize: 18,
-                                  icon: Icon(
-                                    Icons.close,
-                                  ),
-                                  padding: EdgeInsets.all(0.0),
-                                  onPressed: () {
-                                    widget.global.changeAppAdsPause(false);
+                            children: <Widget>[
+                              Container(
+                                width: ScreenUtils.screenW(context) / 2,
+                                height: ScreenUtils.screenW(context) / 3,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    if (widget.global.appAds.pause.href != '') {
+                                      launch(widget.global.appAds.pause.href);
+                                    }
                                   },
+                                  child: widget.global.appAds.pause.type ==
+                                          'img'
+                                      ? ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(0)),
+                                          child: FadeInImage(
+                                            placeholder:
+                                                MemoryImage(kTransparentImage),
+                                            image: CachedNetworkImageProvider(
+                                              widget.global.appAds.pause.src,
+                                            ),
+                                            fit: BoxFit.fill,
+                                          ))
+                                      : Container(
+                                          color: Colors.black,
+                                          child: WebView(
+                                            initialUrl: widget.global.appAds
+                                                .pause.src, // 加载的url
+                                          ),
+                                        ),
                                 ),
                               ),
-                            )
-                          ],
-                        ))
+                              Positioned(
+                                right: -8,
+                                top: -8,
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: IconButton(
+                                    iconSize: 18,
+                                    icon: Icon(
+                                      Icons.close,
+                                    ),
+                                    padding: EdgeInsets.all(0.0),
+                                    onPressed: () {
+                                      widget.global.changeAppAdsPause(false);
+                                    },
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                       : Container(
                           width: 0,
                           height: 0,
