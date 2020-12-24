@@ -92,10 +92,26 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
     dataSource = widget.store.currentUrl;
     switch (widget.playType) {
       case PlayType.network:
+        // 芒果和哔哩哔哩增加header
+        Map<String, String> headers = {};
+        if (dataSource.indexOf('mgtv.com') >= 0) {
+          headers = {
+            'Referer': 'https://www.mgtv.com/',
+            'User-Agent':
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
+          };
+        }
+        if (dataSource.indexOf('bilivideo.com') >= 0) {
+          headers = {
+            'Referer': 'https://www.bilibili.com',
+            'User-Agent':
+                'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) imgotv-client/6.3.4 Chrome/69.0.3497.106 Electron/4.0.5 Safari/'
+          };
+        }
         controller = TencentPlayerController.network(
           dataSource,
-          playerConfig:
-              PlayerConfig(autoPlay: !widget.global.appAds.prestrain.show),
+          playerConfig: PlayerConfig(
+              autoPlay: !widget.global.appAds.prestrain.show, headers: headers),
         );
         break;
       case PlayType.asset:

@@ -213,7 +213,7 @@ abstract class DetailsStoreMobx with Store {
         code: 404|200
         type: hls
       */
-        if (int.parse(res['code']) == 200) {
+        if (res['code'] == 200 || res['code'] == '200') {
           // Fluttertoast.showToast(
           //   msg: '连接成功,即将开始播放',
           // );
@@ -277,7 +277,7 @@ abstract class DetailsStoreMobx with Store {
 
   static bool isVipVideo(String url) {
     RegExp checkUrl = new RegExp(
-        r'(tv.cctv.com)|(www.le.com)|(www.mgtv.com)|(v.youku.com)|(v.qq.com)|(www.iqiyi.com)|(tv.sohu.com)|(www.m1905.com)|(v.pptv.com)');
+        r'(tv.cctv.com)|(www.le.com)|(www.mgtv.com)|(v.youku.com)|(v.qq.com)|(www.iqiyi.com)|(tv.sohu.com)|(www.m1905.com)|(v.pptv.com)|(.bilibili.com)');
     return checkUrl.hasMatch(url);
   }
 }

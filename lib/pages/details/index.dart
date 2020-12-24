@@ -88,7 +88,9 @@ class _DetailsState extends State<Details> {
                                 )
                               : (store.currentUrl.indexOf('.m3u8') >= 0) ||
                                       (store.currentUrl.indexOf('.mp4') >= 0) ||
-                                      (store.currentUrl.indexOf('.rtmp') >= 0)
+                                      (store.currentUrl.indexOf('rtmp:') >=
+                                          0) ||
+                                      (store.currentUrl.indexOf('.flv') >= 0)
                                   ? WindowVideoPage(
                                       store: store, global: _global)
                                   : WebViewPage(

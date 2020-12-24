@@ -163,7 +163,8 @@ class _DlnaState extends State<DlnaPage> {
               onTap: () async {
                 if ((store.currentUrl.indexOf('.m3u8') >= 0) ||
                     (store.currentUrl.indexOf('.mp4') >= 0) ||
-                    (store.currentUrl.indexOf('.rtmp') >= 0)) {
+                    (store.currentUrl.indexOf('rtmp:') >= 0) ||
+                    (store.currentUrl.indexOf('.flv') >= 0)) {
                   if (this.currentDeviceUUID == e["id"]) {
                     return;
                   }
