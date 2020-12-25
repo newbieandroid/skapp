@@ -89,8 +89,13 @@ abstract class ClassifyStoreMobx with Store {
     // 判断是否加载完成
     if (this.vodData.data.length < qLimit) {
       // 代表返回的数据不到要求的数据
-      hasNextPage = false;
+      changeNextPage(false);
     }
+  }
+
+  @action
+  void changeNextPage(bool v) {
+    hasNextPage = v;
   }
 
   // 相似推荐(人气)
@@ -141,6 +146,7 @@ abstract class ClassifyStoreMobx with Store {
     qPage = 1;
     qLimit = 10;
     qType = 'updateTime';
+    changeNextPage(true);
     vodDataLists.clear();
   }
 }

@@ -137,15 +137,6 @@ mixin _$SearchStore on SearchStoreMobx, Store {
         .run(() => super.fetchData(searchKey: searchKey));
   }
 
-  final _$fetchMusicDataAsyncAction =
-      AsyncAction('SearchStoreMobx.fetchMusicData');
-
-  @override
-  Future<dynamic> fetchMusicData(String keyword, String type) {
-    return _$fetchMusicDataAsyncAction
-        .run(() => super.fetchMusicData(keyword, type));
-  }
-
   final _$SearchStoreMobxActionController =
       ActionController(name: 'SearchStoreMobx');
 
@@ -166,6 +157,17 @@ mixin _$SearchStore on SearchStoreMobx, Store {
         name: 'SearchStoreMobx.changeSearchKey');
     try {
       return super.changeSearchKey(key);
+    } finally {
+      _$SearchStoreMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeNextPage(bool v) {
+    final _$actionInfo = _$SearchStoreMobxActionController.startAction(
+        name: 'SearchStoreMobx.changeNextPage');
+    try {
+      return super.changeNextPage(v);
     } finally {
       _$SearchStoreMobxActionController.endAction(_$actionInfo);
     }

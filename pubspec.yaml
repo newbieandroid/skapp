@@ -61,6 +61,8 @@ dependencies:
   share: ^0.6.5+4
   flutter_dlna: ^0.0.1+1
   giffy_dialog: ^1.8.0
+  encrypt: ^4.1.0
+  pangolin: ^0.2.7
 
 dev_dependencies:
   flutter_test:
