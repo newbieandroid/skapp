@@ -208,7 +208,9 @@ class _SearchState extends State<Search> {
                           search(searchController.text, _global);
                         },
                         child: Chip(
-                          backgroundColor: Theme.of(context).buttonColor,
+                          backgroundColor: _global.isDark
+                              ? Theme.of(context).cardColor
+                              : Theme.of(context).buttonColor,
                           label: Text(historyLists[index],
                               style: Theme.of(context).textTheme.bodyText2),
                         ),

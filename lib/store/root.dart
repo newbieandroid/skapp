@@ -106,7 +106,9 @@ abstract class GlobalMobx with Store {
       isDark = prefs.getBool('isDark') ?? false;
       isAllowProtocol = prefs.getBool('isAllowProtocol') ?? false;
       // isShowList = prefs.getBool('isShowList') ?? false;
-      FlutterStatusbarcolor.setStatusBarColor(theme);
+      isDark
+          ? FlutterStatusbarcolor.setStatusBarColor(Colors.transparent)
+          : FlutterStatusbarcolor.setStatusBarColor(theme);
     }
   }
 
@@ -126,7 +128,9 @@ abstract class GlobalMobx with Store {
     // 获取index存储
     int index = colorList.indexOf(color);
     prefs.setInt('themeIndex', index);
-    FlutterStatusbarcolor.setStatusBarColor(theme);
+    isDark
+        ? FlutterStatusbarcolor.setStatusBarColor(Colors.transparent)
+        : FlutterStatusbarcolor.setStatusBarColor(theme);
   }
 
   @action

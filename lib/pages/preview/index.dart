@@ -373,6 +373,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                   style: TextStyle(fontSize: 14, color: Colors.white)),
             ),
             Text(store.vod.vodContent.replaceAll(RegExp(r"<\/?[^>]*>"), ""),
+                textAlign: TextAlign.justify,
                 style: TextStyle(fontSize: 12, color: Colors.white))
           ],
         ),

@@ -6,7 +6,6 @@ import 'package:package_info/package_info.dart';
 import 'package:skapp/widgets/restart_app.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:fluro/fluro.dart' as CustomRouter;
-import 'package:pangolin/pangolin.dart' as Pangolin;
 import 'package:yin_umeng/yin_umeng.dart';
 import 'routers/routers.dart';
 import 'routers/application.dart';
@@ -18,17 +17,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // 初始化信息
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  // 初始化穿山甲
-  await Pangolin.registerPangolin(
-    appId: "5130527",
-    useTextureView: true,
-    appName: "sk",
-    allowShowNotify: true,
-    allowShowPageWhenScreenLock: true,
-    debug: true,
-    supportMultiProcess: true,
-  );
-
   runApp(RestartWidget(
     child: MultiProvider(
       providers: [

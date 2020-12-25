@@ -101,6 +101,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                         Container(
                           width: ScreenUtils.screenW(context),
                           height: ScreenUtils.screenH(context),
+                          color: Theme.of(context).cardColor,
                           child: GestureDetector(
                             onTap: () {
                               if (_global.appAds.splash.href != '') {
@@ -153,6 +154,7 @@ class _SplashWidgetState extends State<SplashWidget> {
             } else if (_global.appAds.loading.show == true) {
               return Offstage(
                 child: Container(
+                  color: Theme.of(context).cardColor,
                   child: Stack(
                     children: <Widget>[
                       Align(
