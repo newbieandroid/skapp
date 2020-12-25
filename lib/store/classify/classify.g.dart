@@ -248,6 +248,17 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
       ActionController(name: 'ClassifyStoreMobx');
 
   @override
+  void changeNextPage(bool v) {
+    final _$actionInfo = _$ClassifyStoreMobxActionController.startAction(
+        name: 'ClassifyStoreMobx.changeNextPage');
+    try {
+      return super.changeNextPage(v);
+    } finally {
+      _$ClassifyStoreMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void changeQuery({dynamic page, dynamic limit = 10, dynamic type = 'hot'}) {
     final _$actionInfo = _$ClassifyStoreMobxActionController.startAction(
         name: 'ClassifyStoreMobx.changeQuery');

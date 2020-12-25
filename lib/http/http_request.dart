@@ -3,6 +3,7 @@ import 'dart:convert' as Convert;
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:skapp/utils/encrypt_aes.dart';
 
 typedef RequestCallBack = void Function(Map data);
 
@@ -31,7 +32,8 @@ class HttpRequest {
     try {
       http.Response response = await http.get(baseUrl + uri, headers: headers);
       final statusCode = response.statusCode;
-      final body = response.body;
+      final jm = response.body;
+      final body = JhEncryptUtils.aesDecrypt(jm);
       print('[uri=$uri][statusCode=$statusCode][response=$body]');
       var result = Convert.jsonDecode(body);
       return result;
