@@ -28,14 +28,14 @@ class SearchTextFieldWidget extends StatelessWidget {
       alignment: Alignment.center,
       height: kToolbarHeight * 0.7,
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 237, 236, 237),
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: TextField(
         controller: controller,
         onSubmitted: onSubmitted,
         cursorColor: Color.fromARGB(255, 0, 189, 96),
-        style: Theme.of(context).textTheme.body1,
+        style: Theme.of(context).textTheme.bodyText1,
         minLines: 1,
         autofocus: true,
         enableInteractiveSelection: false,
@@ -56,7 +56,7 @@ class SearchTextFieldWidget extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color.fromARGB(255, 237, 236, 237), //边框颜色为白色
+              color: Theme.of(context).cardColor, //边框颜色为白色
               width: 1, //宽度为5
             ),
             borderRadius: BorderRadius.circular(20),

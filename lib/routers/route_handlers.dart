@@ -5,7 +5,6 @@ import './../pages/live/index.dart';
 import './../pages/live/show_lives.dart';
 import './../pages/custom/index.dart';
 import './../pages/vipvideo/index.dart';
-import './../pages/music/index.dart';
 import './../pages/preview/index.dart';
 import './../pages/dlna/index.dart';
 import './../pages/history/index.dart';
@@ -53,11 +52,6 @@ Handler customRouteHandler = Handler(
 Handler vipvideoRouteHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return VipVideo();
-});
-
-Handler musicRouteHandler = Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return Music(songInfo: params['songInfo'].first);
 });
 
 Handler previewRouteHandler = Handler(

@@ -39,6 +39,21 @@ mixin _$SearchStore on SearchStoreMobx, Store {
     });
   }
 
+  final _$firstAtom = Atom(name: 'SearchStoreMobx.first');
+
+  @override
+  bool get first {
+    _$firstAtom.reportRead();
+    return super.first;
+  }
+
+  @override
+  set first(bool value) {
+    _$firstAtom.reportWrite(value, super.first, () {
+      super.first = value;
+    });
+  }
+
   final _$qPageAtom = Atom(name: 'SearchStoreMobx.qPage');
 
   @override
@@ -122,15 +137,6 @@ mixin _$SearchStore on SearchStoreMobx, Store {
         .run(() => super.fetchData(searchKey: searchKey));
   }
 
-  final _$fetchMusicDataAsyncAction =
-      AsyncAction('SearchStoreMobx.fetchMusicData');
-
-  @override
-  Future<dynamic> fetchMusicData(String keyword, String type) {
-    return _$fetchMusicDataAsyncAction
-        .run(() => super.fetchMusicData(keyword, type));
-  }
-
   final _$SearchStoreMobxActionController =
       ActionController(name: 'SearchStoreMobx');
 
@@ -157,6 +163,17 @@ mixin _$SearchStore on SearchStoreMobx, Store {
   }
 
   @override
+  void changeNextPage(bool v) {
+    final _$actionInfo = _$SearchStoreMobxActionController.startAction(
+        name: 'SearchStoreMobx.changeNextPage');
+    try {
+      return super.changeNextPage(v);
+    } finally {
+      _$SearchStoreMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void resetData() {
     final _$actionInfo = _$SearchStoreMobxActionController.startAction(
         name: 'SearchStoreMobx.resetData');
@@ -172,6 +189,7 @@ mixin _$SearchStore on SearchStoreMobx, Store {
     return '''
 isLoading: ${isLoading},
 hasNextPage: ${hasNextPage},
+first: ${first},
 qPage: ${qPage},
 qLimit: ${qLimit},
 searchKey: ${searchKey},

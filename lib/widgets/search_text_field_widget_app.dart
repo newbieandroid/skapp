@@ -22,7 +22,7 @@ class SearchTextFieldWidget extends StatelessWidget {
           alignment: Alignment.center,
           height: kToolbarHeight * 0.7,
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 237, 236, 237),
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(4.0),
           ),
           child: Row(

@@ -55,27 +55,15 @@ abstract class SearchStoreMobx with Store {
     qLimit = limit;
   }
 
-  // @action
-  // Future<dynamic> fetchData(String keyword) async {
-  //   this.isLoading = true;
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-  //   bool isMusic = prefs.getBool('isMusic') ?? false;
-  //   String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
-  //   var req = HttpRequest(cIp);
-  //   final res = await req.get(preApiUrl + searchUrl + keyword);
-  //   searchLists.addAll(SearchDao.fromJson(res).data);
-  //   this.isLoading = false;
-  // }
-
   @action
   Future<dynamic> fetchData({@required searchKey}) async {
-    this.isLoading = true;
+    if (qPage == 1) {
+      this.isLoading = true;
+    }
     this.first = false;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-    bool isMusic = prefs.getBool('isMusic') ?? false;
-    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
+    String preApiUrl = API.PRE_API_URL;
     var req = HttpRequest(cIp);
     String query = '$searchKey&page=$qPage&limit=$qLimit';
     final res = await req.get(preApiUrl + searchUrl + query);
@@ -85,22 +73,8 @@ abstract class SearchStoreMobx with Store {
     // 判断是否加载完成
     if (this.searchData.data.length < qLimit) {
       // 代表返回的数据不到要求的数据
-      hasNextPage = false;
+      changeNextPage(false);
     }
-  }
-
-  @action
-  Future<dynamic> fetchMusicData(String keyword, String type) async {
-    this.isLoading = true;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
-    bool isMusic = prefs.getBool('isMusic') ?? false;
-    String preApiUrl = isMusic ? API.PRE_MUSIC_API_URL : API.PRE_API_URL;
-    var req = HttpRequest(cIp);
-    final res =
-        await req.get(preApiUrl + searchUrl + keyword + '&type=' + type);
-    searchLists.addAll(SearchDao.fromJson(res).data);
-    this.isLoading = false;
   }
 
   @action
@@ -109,9 +83,15 @@ abstract class SearchStoreMobx with Store {
   }
 
   @action
+  void changeNextPage(bool v) {
+    hasNextPage = v;
+  }
+
+  @action
   void resetData() {
     qPage = 1;
     qLimit = 10;
+    changeNextPage(true);
     searchLists.clear();
   }
 }

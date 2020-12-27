@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:skapp/store/root.dart';
 import './../routers/application.dart';
 import 'network_img_widget.dart';
@@ -30,37 +27,13 @@ class CustomGridView extends StatelessWidget {
           var vod = lists[index];
           return GestureDetector(
             onTap: () {
-              if (global.isMusic) {
-                if (vod.songInfo['types'].length > 0) {
-                  Application.router.navigateTo(
-                    context,
-                    "/music?songInfo=${Uri.encodeComponent(json.encode(vod.songInfo))}",
-                    transition: TransitionType.native,
-                    transitionDuration: Duration(milliseconds: 100),
-                    // replace: true,
-                  );
-                } else {
-                  Fluttertoast.showToast(
-                    msg: '该歌曲暂无播放源',
-                    toastLength: Toast.LENGTH_LONG,
-                  );
-                }
-              } else {
-                Application.router.navigateTo(
-                  context,
-                  "/preview?vodId=${vod.vodId}",
-                  transition: TransitionType.native,
-                  transitionDuration: Duration(milliseconds: 100),
-                  // replace: true,
-                );
-                // Application.router.navigateTo(
-                //   context,
-                //   "/details?vodId=${vod.vodId}",
-                //   transition: TransitionType.native,
-                //   transitionDuration: Duration(milliseconds: 100),
-                //   replace: true,
-                // );
-              }
+              Application.router.navigateTo(
+                context,
+                "/preview?vodId=${vod.vodId}",
+                transition: TransitionType.native,
+                transitionDuration: Duration(milliseconds: 100),
+                replace: true,
+              );
             },
             child: Container(
               child: Column(

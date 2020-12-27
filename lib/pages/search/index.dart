@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pk_skeleton/pk_skeleton.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skapp/pages/search/sklist.dart';
-import 'package:skapp/utils/screen_utils.dart';
-import './../../widgets/custom_gridview_widget.dart';
 import './../../store/root.dart';
 import './../../widgets/search_text_field_widget.dart';
 import './../../store/search/search.dart';
@@ -56,17 +52,10 @@ class _SearchState extends State<Search> {
   search(value, _global) {
     if (value.trim() != '') {
       store.resetData();
-      if (_global.isMusic) {
-        if (typeStore.type != null && typeStore.type.data.length > 0) {
-          store.fetchMusicData(value,
-              typeStore.type.data[typeStore.currentSearchTypeIndex].typeEn);
-        }
-      } else {
-        store.changeSearchKey(value);
-        store.fetchData(searchKey: value);
-        // 保存搜索历史
-        handleHistory(value);
-      }
+      store.changeSearchKey(value);
+      store.fetchData(searchKey: value);
+      // 保存搜索历史
+      handleHistory(value);
 
       focus.unfocus();
     }
@@ -94,50 +83,13 @@ class _SearchState extends State<Search> {
                 child: SearchTextFieldWidget(
                   controller: searchController,
                   focus: focus,
-                  hintText: _global.isMusic ? '输入歌曲名称' : '输入影片名称',
+                  hintText: '输入影片名称',
                   margin: EdgeInsets.only(left: 0.0, right: 0.0),
                   onSubmitted: (value) {
                     search(value, _global);
                   },
                 ),
               ),
-              _global.isMusic &&
-                      typeStore.type != null &&
-                      typeStore.type.data.length > 0
-                  ? Padding(
-                      padding: EdgeInsets.only(left: 12),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: typeStore.type
-                              .data[typeStore.currentSearchTypeIndex].typeEn,
-                          onChanged: (String newValue) {
-                            int cur = 0;
-                            for (int i = 0;
-                                i < typeStore.type.data.length;
-                                i++) {
-                              if (typeStore.type.data[i].typeEn == newValue) {
-                                cur = i;
-                              }
-                            }
-                            typeStore.changeCurrentSearchTypeIndex(cur);
-                          },
-                          items: typeStore.type.data
-                              .map<DropdownMenuItem<String>>((value) {
-                            return DropdownMenuItem<String>(
-                              value: value.typeEn,
-                              child: Text(
-                                value.typeName,
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    )
-                  : Container(
-                      width: 0,
-                      height: 0,
-                    ),
               GestureDetector(
                 onTap: () {
                   search(searchController.text, _global);
@@ -256,7 +208,9 @@ class _SearchState extends State<Search> {
                           search(searchController.text, _global);
                         },
                         child: Chip(
-                          backgroundColor: Theme.of(context).buttonColor,
+                          backgroundColor: _global.isDark
+                              ? Theme.of(context).cardColor
+                              : Theme.of(context).buttonColor,
                           label: Text(historyLists[index],
                               style: Theme.of(context).textTheme.bodyText2),
                         ),

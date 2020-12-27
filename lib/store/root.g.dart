@@ -144,21 +144,6 @@ mixin _$Global on GlobalMobx, Store {
     });
   }
 
-  final _$isMusicAtom = Atom(name: 'GlobalMobx.isMusic');
-
-  @override
-  bool get isMusic {
-    _$isMusicAtom.reportRead();
-    return super.isMusic;
-  }
-
-  @override
-  set isMusic(bool value) {
-    _$isMusicAtom.reportWrite(value, super.isMusic, () {
-      super.isMusic = value;
-    });
-  }
-
   final _$showPauseAtom = Atom(name: 'GlobalMobx.showPause');
 
   @override
@@ -250,17 +235,6 @@ mixin _$Global on GlobalMobx, Store {
   }
 
   @override
-  void changeAppMode(bool value) {
-    final _$actionInfo = _$GlobalMobxActionController.startAction(
-        name: 'GlobalMobx.changeAppMode');
-    try {
-      return super.changeAppMode(value);
-    } finally {
-      _$GlobalMobxActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void changeProtocol(bool value) {
     final _$actionInfo = _$GlobalMobxActionController.startAction(
         name: 'GlobalMobx.changeProtocol');
@@ -304,7 +278,6 @@ appAds: ${appAds},
 title: ${title},
 theme: ${theme},
 isDark: ${isDark},
-isMusic: ${isMusic},
 showPause: ${showPause},
 isShowList: ${isShowList},
 themeMode: ${themeMode},
