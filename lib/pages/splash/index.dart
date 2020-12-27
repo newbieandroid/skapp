@@ -11,6 +11,7 @@ import './../../store/root.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_unionad/flutter_unionad.dart' as FlutterUnionad;
 
 enum Action { Ok, Cancel }
 
@@ -41,9 +42,10 @@ class _SplashWidgetState extends State<SplashWidget> {
     );
     Widget continueButton = FlatButton(
       child: Text("确定"),
-      onPressed: () {
+      onPressed: () async {
         _global.changeProtocol(true);
         Navigator.pop(context, Action.Ok);
+        _global.changeShowAd(false);
       },
     );
 
@@ -68,13 +70,45 @@ class _SplashWidgetState extends State<SplashWidget> {
     );
   }
 
+  // 初始化穿山甲
+
+  @override
+  void initState() {
+    super.initState();
+    _initRegister();
+  }
+
+  void _initRegister() async {
+    // 初始化穿山甲
+    await FlutterUnionad.register(
+      androidAppId: "5130527", //穿山甲广告 Android appid 必填
+      iosAppId: "5130527", //穿山甲广告 ios appid 必填
+      useTextureView:
+          true, //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView 选填
+      appName: "sk", //appname 必填
+      allowShowNotify: true, //是否允许sdk展示通知栏提示 选填
+      allowShowPageWhenScreenLock: true, //是否在锁屏场景支持展示广告落地页 选填
+      debug: true, //测试阶段打开，可以通过日志排查问题，上线时去除该调用 选太难
+      supportMultiProcess: true, //是否支持多进程，true支持 选填
+      directDownloadNetworkType: [
+        FlutterUnionad.NETWORK_STATE_2G,
+        FlutterUnionad.NETWORK_STATE_3G,
+        FlutterUnionad.NETWORK_STATE_4G,
+        FlutterUnionad.NETWORK_STATE_WIFI
+      ],
+    ); //允许直接下载的网络状态集合 选填
+    await FlutterUnionad.getSDKVersion();
+    await FlutterUnionad.requestPermissionIfNecessary();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Global _global = Provider.of<Global>(context);
     Timer(Duration(seconds: 1), () => _checkProtocol(_global, context));
     if (_global.appAds != null &&
         _global.appAds.loading.show == false &&
-        _global.appAds.splash.show == false) {
+        _global.appAds.splash.show == false &&
+        _global.appAds.splashCsj.show == false) {
       _global.changeShowAd(false);
     }
     // if (_global.appAds.loading == null) {
@@ -92,7 +126,8 @@ class _SplashWidgetState extends State<SplashWidget> {
         ),
         Observer(builder: (_) {
           if (_global.appAds != null) {
-            if (_global.appAds.splash.show == true) {
+            if ((_global.appAds.splash.show == true) &&
+                (_global.isAllowProtocol == true)) {
               return Offstage(
                   offstage: !_global.showAd,
                   child: SafeArea(
@@ -151,7 +186,8 @@ class _SplashWidgetState extends State<SplashWidget> {
                       ],
                     ),
                   ));
-            } else if (_global.appAds.loading.show == true) {
+            } else if ((_global.appAds.loading.show == true) &&
+                (_global.isAllowProtocol == true)) {
               return Offstage(
                 child: Container(
                   color: Theme.of(context).cardColor,
@@ -220,6 +256,56 @@ class _SplashWidgetState extends State<SplashWidget> {
                         ),
                       )
                     ],
+                  ),
+                  width: ScreenUtils.screenW(context),
+                  height: ScreenUtils.screenH(context),
+                ),
+                offstage: !_global.showAd,
+              );
+            } else if ((_global.appAds.splashCsj.show == true) &&
+                (_global.isAllowProtocol == true)) {
+              return Offstage(
+                child: Container(
+                  child: FlutterUnionad.splashAdView(
+                    androidCodeId: _global
+                        .appAds.splashCsj.androidId, //android 开屏广告广告id 必填
+                    iosCodeId: _global.appAds.splashCsj.iosId, //ios 开屏广告广告id 必填
+                    supportDeepLink: true, //是否支持 DeepLink 选填
+                    expressViewWidth:
+                        ScreenUtils.screenW(context), // 期望view 宽度 dp 必填
+                    expressViewHeight:
+                        ScreenUtils.screenH(context), //期望view高度 dp 必填
+                    callBack: (FlutterUnionad.FlutterUnionadState state) {
+                      //广告事件回调 选填
+                      //广告事件回调 选填
+                      //type onShow广告成功显示  onFail广告加载失败 onAplashClick开屏广告点击 onAplashSkip开屏广告跳过
+                      //  onAplashFinish开屏广告倒计时结束 onAplashTimeout开屏广告加载超时
+                      //params 详细说明
+                      print("到这里 ${state.tojson()}");
+                      switch (state.type) {
+                        case FlutterUnionad.onShow:
+                          print(state.tojson());
+                          break;
+                        case FlutterUnionad.onFail:
+                          _global.changeShowAd(false);
+                          break;
+                        case FlutterUnionad.onAplashClick:
+                          print(state.tojson());
+                          break;
+                        case FlutterUnionad.onAplashSkip:
+                          print(state.tojson());
+                          _global.changeShowAd(false);
+                          break;
+                        case FlutterUnionad.onAplashFinish:
+                          print(state.tojson());
+                          _global.changeShowAd(false);
+                          break;
+                        case FlutterUnionad.onAplashTimeout:
+                          print(state.tojson());
+                          _global.changeShowAd(false);
+                          break;
+                      }
+                    },
                   ),
                   width: ScreenUtils.screenW(context),
                   height: ScreenUtils.screenH(context),

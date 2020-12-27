@@ -17,6 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // 初始化信息
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  // await _initRegister();
   runApp(RestartWidget(
     child: MultiProvider(
       providers: [

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pk_skeleton/pk_skeleton.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skapp/pages/details/widgets/slide_up_dlna.dart';
 import 'package:skapp/pages/details/widgets/slide_up_sid.dart';
 // import 'package:skapp/pages/details/widgets/dlna.dart';
 import 'package:skapp/store/root.dart';
+import 'package:skapp/utils/screen_utils.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import './../../store/details/details.dart';
 import './../../store/classify/classify.dart';
@@ -16,6 +16,7 @@ import './widgets/players.dart';
 import './widgets/webview_widget.dart';
 import './widgets/like_widget.dart';
 import './widgets/slide_up.dart';
+import 'package:flutter_unionad/flutter_unionad.dart' as FlutterUnionad;
 
 class Details extends StatefulWidget {
   final String vodId;
@@ -45,6 +46,35 @@ class _DetailsState extends State<Details> {
     // 改变vodId
     store.changeVodId(widget.vodId);
     requestAPI();
+  }
+
+  Widget nativeAdView(_global) {
+    return //个性化模板信息流广告
+        FlutterUnionad.nativeAdView(
+      androidCodeId:
+          _global.appAds.expressCsj.androidId, //android banner广告id 必填
+      iosCodeId: _global.appAds.expressCsj.iosId, //ios banner广告id 必填
+      supportDeepLink: true, //是否支持 DeepLink 选填
+      expressViewWidth: ScreenUtils.screenW(context), // 期望view 宽度 dp 必填
+      expressViewHeight: 190.5, //期望view高度 dp 必填
+      callBack: (FlutterUnionad.FlutterUnionadState state) {
+        //广告事件回调 选填
+        //广告事件回调 选填
+        //type onShow广告成功显示 onDislike不感兴趣 onFail广告加载失败
+        //params 详细说明
+        switch (state.type) {
+          case FlutterUnionad.onShow:
+            print(state.tojson());
+            break;
+          case FlutterUnionad.onFail:
+            print(state.tojson());
+            break;
+          case FlutterUnionad.onDislike:
+            print(state.tojson());
+            break;
+        }
+      },
+    );
   }
 
   @override

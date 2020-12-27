@@ -3,8 +3,18 @@ class AppAdsDao {
   Splash splash;
   Splash prestrain;
   Pause pause;
+  SplashCsj splashCsj;
+  SplashCsj bannerCsj;
+  SplashCsj expressCsj;
 
-  AppAdsDao({this.loading, this.splash, this.prestrain, this.pause});
+  AppAdsDao(
+      {this.loading,
+      this.splash,
+      this.prestrain,
+      this.pause,
+      this.splashCsj,
+      this.bannerCsj,
+      this.expressCsj});
 
   AppAdsDao.fromJson(Map<String, dynamic> json) {
     loading =
@@ -15,6 +25,15 @@ class AppAdsDao {
         ? new Splash.fromJson(json['prestrain'])
         : null;
     pause = json['pause'] != null ? new Pause.fromJson(json['pause']) : null;
+    splashCsj = json['splash_csj'] != null
+        ? new SplashCsj.fromJson(json['splash_csj'])
+        : null;
+    bannerCsj = json['banner_csj'] != null
+        ? new SplashCsj.fromJson(json['banner_csj'])
+        : null;
+    expressCsj = json['express_csj'] != null
+        ? new SplashCsj.fromJson(json['express_csj'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -30,6 +49,15 @@ class AppAdsDao {
     }
     if (this.pause != null) {
       data['pause'] = this.pause.toJson();
+    }
+    if (this.splashCsj != null) {
+      data['splash_csj'] = this.splashCsj.toJson();
+    }
+    if (this.bannerCsj != null) {
+      data['banner_csj'] = this.bannerCsj.toJson();
+    }
+    if (this.expressCsj != null) {
+      data['express_csj'] = this.expressCsj.toJson();
     }
     return data;
   }
@@ -103,6 +131,28 @@ class Pause {
     data['type'] = this.type;
     data['src'] = this.src;
     data['href'] = this.href;
+    return data;
+  }
+}
+
+class SplashCsj {
+  bool show;
+  String androidId;
+  String iosId;
+
+  SplashCsj({this.show, this.androidId, this.iosId});
+
+  SplashCsj.fromJson(Map<String, dynamic> json) {
+    show = json['show'];
+    androidId = json['androidId'];
+    iosId = json['iosId'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['show'] = this.show;
+    data['androidId'] = this.androidId;
+    data['iosId'] = this.iosId;
     return data;
   }
 }
