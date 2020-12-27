@@ -8,13 +8,15 @@
 ///
 /// https://www.jianshu.com/p/38396c8e82dd
 
-import 'dart:math' as math;
 import 'dart:ui';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:skapp/routers/application.dart';
+import 'package:skapp/store/root.dart';
+import 'package:skapp/utils/screen_utils.dart';
 
 import './../../store/details/details.dart';
 import './../../store/classify/classify.dart';
@@ -28,6 +30,7 @@ import 'package:skapp/widgets/cache_img_radius.dart';
 import './../../widgets/network_img_widget.dart';
 import 'package:skapp/widgets/rating_bar.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:flutter_unionad/flutter_unionad.dart' as FlutterUnionad;
 
 class Preview extends StatefulWidget {
   final vodId;
@@ -152,6 +155,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final Global _global = Provider.of<Global>(context);
     return Observer(
       builder: (_) => (store.isLoading)
           ? SafeArea(
@@ -184,7 +188,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                               slivers: <Widget>[
                                 sliverTitle(),
                                 sliverRating(),
-                                sliverDesc(),
+                                sliverDesc(_global),
                                 sliverCasts(),
                                 sliverBottom(classifyStore)
                               ],
@@ -262,6 +266,34 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                   ),
                 ),
     );
+  }
+
+  Widget bannerWidget(_global) {
+    return FlutterUnionad.bannerAdView(
+        androidCodeId:
+            _global.appAds.bannerCsj.androidId, //andrrid banner广告id 必填
+        iosCodeId: _global.appAds.bannerCsj.iosId, //ios banner广告id 必填
+        supportDeepLink: true, //是否支持 DeepLink 选填
+        expressAdNum: 1, //一次请求广告数量 大于1小于3 选填
+        expressTime: 30, //轮播间隔事件 秒  选填
+        expressViewWidth: ScreenUtils.screenW(context), // 期望view 宽度 dp 必填
+        expressViewHeight: 120.5, //期望view高度 dp 必填
+        callBack: (FlutterUnionad.FlutterUnionadState state) {
+          //广告事件回调 选填
+          //type onShow广告成功显示 onDislike不感兴趣 onFail广告加载失败
+          //params 详细说明
+          switch (state.type) {
+            case FlutterUnionad.onShow:
+              print(state.tojson());
+              break;
+            case FlutterUnionad.onFail:
+              print(state.tojson());
+              break;
+            case FlutterUnionad.onDislike:
+              print(state.tojson());
+              break;
+          }
+        });
   }
 
   SliverToBoxAdapter sliverTitle() {
@@ -360,7 +392,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
     );
   }
 
-  SliverToBoxAdapter sliverDesc() {
+  SliverToBoxAdapter sliverDesc(_global) {
     return SliverToBoxAdapter(
       child: Container(
         padding: padding(),
@@ -372,9 +404,21 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
               child: Text('简介',
                   style: TextStyle(fontSize: 14, color: Colors.white)),
             ),
-            Text(store.vod.vodContent.replaceAll(RegExp(r"<\/?[^>]*>"), ""),
-                textAlign: TextAlign.justify,
-                style: TextStyle(fontSize: 12, color: Colors.white))
+            Text(
+              store.vod.vodContent.replaceAll(RegExp(r"<\/?[^>]*>"), ""),
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: 12, color: Colors.white),
+            ),
+            _global.appAds.expressCsj.show == true
+                ? Container(
+                    margin: EdgeInsets.only(top: 20),
+                    color: Colors.white,
+                    child: bannerWidget(_global),
+                  )
+                : Container(
+                    width: 0,
+                    height: 0,
+                  ),
           ],
         ),
       ),

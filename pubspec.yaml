@@ -61,6 +61,7 @@ dependencies:
   flutter_dlna: ^0.0.1+1
   giffy_dialog: ^1.8.0
   encrypt: ^4.1.0
+  flutter_unionad: ^0.0.7
 
 dev_dependencies:
   flutter_test:
