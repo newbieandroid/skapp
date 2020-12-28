@@ -3,54 +3,74 @@ import 'package:skapp/iconfont/IconFont.dart';
 var typeMap = {
   'dianying': {
     'activeIcon': IconFont(IconNames.icondianying),
-    'normalIcon': IconFont(IconNames.icondianying),
+    'normalIcon': IconFont(
+      IconNames.icondianying_2,
+      color: '#111111',
+    ),
+    'activeDarkIcon': IconFont(IconNames.icondianying_2, color: '#ffffff'),
+    'normalDarkIcon': IconFont(
+      IconNames.icondianying_2,
+      color: '#cccccc',
+    ),
   },
   'lianxuju': {
-    'activeIcon': IconFont(IconNames.icondianshiju),
-    'normalIcon': IconFont(IconNames.icondianshiju),
+    'activeIcon': IconFont(IconNames.icondianshiju_1),
+    'normalIcon': IconFont(
+      IconNames.icondianshiju_1,
+      color: '#111111',
+    ),
+    'activeDarkIcon': IconFont(IconNames.icondianshiju_1, color: '#ffffff'),
+    'normalDarkIcon': IconFont(
+      IconNames.icondianshiju_1,
+      color: '#cccccc',
+    ),
   },
   'zongyi': {
-    'activeIcon': IconFont(IconNames.iconzongyiyule),
-    'normalIcon': IconFont(IconNames.iconzongyiyule),
+    'activeIcon': IconFont(IconNames.iconyinleku),
+    'normalIcon': IconFont(
+      IconNames.iconyinleku,
+      color: '#111111',
+    ),
+    'activeDarkIcon': IconFont(IconNames.iconyinleku, color: '#ffffff'),
+    'normalDarkIcon': IconFont(
+      IconNames.iconyinleku,
+      color: '#cccccc',
+    ),
   },
   'dongman': {
-    'activeIcon': IconFont(IconNames.iconxiangmuicon_dongman),
-    'normalIcon': IconFont(IconNames.iconxiangmuicon_dongman),
+    'activeIcon': IconFont(IconNames.iconzhuanji),
+    'normalIcon': IconFont(
+      IconNames.iconzhuanji,
+      color: '#111111',
+    ),
+    'activeDarkIcon': IconFont(IconNames.iconzhuanji, color: '#ffffff'),
+    'normalDarkIcon': IconFont(
+      IconNames.iconzhuanji,
+      color: '#cccccc',
+    ),
   },
   'zixun': {
-    'activeIcon': IconFont(IconNames.iconxiangmuicon_dongman),
-    'normalIcon': IconFont(IconNames.iconxiangmuicon_dongman),
+    'activeIcon': IconFont(IconNames.iconshipinyingshi),
+    'normalIcon': IconFont(
+      IconNames.iconshipinyingshi,
+      color: '#111111',
+    ),
+    'activeDarkIcon': IconFont(IconNames.iconshipinyingshi, color: '#ffffff'),
+    'normalDarkIcon': IconFont(
+      IconNames.iconshipinyingshi,
+      color: '#cccccc',
+    ),
   },
   'normal': {
     'activeIcon': IconFont(IconNames.iconshipinyingshi),
-    'normalIcon': IconFont(IconNames.iconshipinyingshi),
-  },
-  'kw': {
-    'activeIcon': IconFont(IconNames.iconzongyiyule),
-    'normalIcon': IconFont(IconNames.iconzongyiyule),
-  },
-  'kg': {
-    'activeIcon': IconFont(IconNames.iconzongyiyule),
-    'normalIcon': IconFont(IconNames.iconzongyiyule),
-  },
-  'tx': {
-    'activeIcon': IconFont(IconNames.iconzongyiyule),
-    'normalIcon': IconFont(IconNames.iconzongyiyule),
-  },
-  'wy': {
-    'activeIcon': IconFont(IconNames.iconzongyiyule),
-    'normalIcon': IconFont(IconNames.iconzongyiyule),
-  },
-  'mg': {
-    'activeIcon': IconFont(IconNames.iconzongyiyule),
-    'normalIcon': IconFont(IconNames.iconzongyiyule),
-  },
-  'xm': {
-    'activeIcon': IconFont(IconNames.iconzongyiyule),
-    'normalIcon': IconFont(IconNames.iconzongyiyule),
-  },
-  'bd': {
-    'activeIcon': IconFont(IconNames.iconzongyiyule),
-    'normalIcon': IconFont(IconNames.iconzongyiyule),
-  },
+    'normalIcon': IconFont(
+      IconNames.iconshipinyingshi,
+      color: '#111111',
+    ),
+    'activeDarkIcon': IconFont(IconNames.iconshipinyingshi, color: '#ffffff'),
+    'normalDarkIcon': IconFont(
+      IconNames.iconshipinyingshi,
+      color: '#cccccc',
+    ),
+  }
 };

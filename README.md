@@ -67,6 +67,14 @@ Doctor summary (to see all details, run flutter doctor -v):
 
 ### 版本更新历史
 
+##### V2.1.2
+
+- API 加密
+
+- 对接穿山甲
+
+- 优化图标
+
 ##### V2.1.1
 
 - 去掉音乐助手

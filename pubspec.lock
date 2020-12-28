@@ -36,13 +36,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.5.0-nullsafety.1"
-  audioplayers:
-    dependency: "direct main"
-    description:
-      name: audioplayers
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.15.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -368,6 +361,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_unionad:
+    dependency: "direct main"
+    description:
+      name: flutter_unionad
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.7"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -548,13 +548,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.3"
-  pangolin:
-    dependency: "direct main"
-    description:
-      name: pangolin
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.7"
   path:
     dependency: transitive
     description:

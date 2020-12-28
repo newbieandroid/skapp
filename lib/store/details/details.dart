@@ -210,7 +210,7 @@ abstract class DetailsStoreMobx with Store {
         code: 404|200
         type: hls
       */
-        if (res['code'] == 200 || res['code'] == '200') {
+        if (res != '' && res['code'] == 200 || res['code'] == '200') {
           // Fluttertoast.showToast(
           //   msg: '连接成功,即将开始播放',
           // );

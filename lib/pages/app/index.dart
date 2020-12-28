@@ -34,6 +34,7 @@ class _App extends State<App> {
   List<Widget> _pageList;
 
   List<BottomNavigationBarItem> itemList = [];
+  List<BottomNavigationBarItem> itemDarkList = [];
 
   String size;
 
@@ -56,6 +57,23 @@ class _App extends State<App> {
               activeIcon: typeMap[item.typeEn] != null
                   ? typeMap[item.typeEn]['activeIcon']
                   : typeMap['normal']['activeIcon']))
+          .toList();
+
+      // 暗黑单独处理
+      itemDarkList = store.type.data
+          .map((item) => BottomNavigationBarItem(
+              icon: typeMap[item.typeEn] != null
+                  ? typeMap[item.typeEn]['normalDarkIcon']
+                  : typeMap['normal']['normalDarkIcon'],
+              // ignore: deprecated_member_use
+              title: Text(
+                item.typeName,
+                style: TextStyle(fontSize: 11),
+              ),
+              // label: item.typeName,
+              activeIcon: typeMap[item.typeEn] != null
+                  ? typeMap[item.typeEn]['activeDarkIcon']
+                  : typeMap['normal']['activeDarkIcon']))
           .toList();
       if (_pageList == null) {
         _pageList = store.type.data
@@ -135,12 +153,12 @@ class _App extends State<App> {
               _global.changeThemeMode(value);
             },
             title: Text('暗黑模式'),
-            secondary: IconFont(IconNames.iconyejianduoyun, size: 30),
+            secondary: IconFont(IconNames.iconyejianduoyun, size: 26),
             selected: _global.isDark,
           ),
           ListTile(
             title: Text('视频解析'),
-            leading: IconFont(IconNames.iconshishishipinliujiexi, size: 30),
+            leading: IconFont(IconNames.iconshishishipinliujiexi, size: 26),
             onTap: () {
               Navigator.of(context).pop();
               Application.router.navigateTo(
@@ -154,7 +172,7 @@ class _App extends State<App> {
           /* _global.appConfig.showlive
               ? ListTile(
                   title: Text('直播'),
-                  leading: IconFont(IconNames.iconzhibo, size: 30),
+                  leading: IconFont(IconNames.iconzhibo, size: 26),
                   onTap: () {
                     Navigator.of(context).pop();
                     Application.router.navigateTo(
@@ -172,7 +190,7 @@ class _App extends State<App> {
           ListTile(
             title: Text('自定义片源'),
             // leading: Icon(Icons.extension),
-            leading: IconFont(IconNames.iconzidingyi_2, size: 30),
+            leading: IconFont(IconNames.iconzidingyi_2, size: 26),
             onTap: () {
               Navigator.of(context).pop();
               Application.router.navigateTo(
@@ -185,7 +203,7 @@ class _App extends State<App> {
           ),
           ListTile(
             title: Text('分享SK'),
-            leading: IconFont(IconNames.iconfenxiang, size: 30),
+            leading: IconFont(IconNames.iconfenxiang, size: 26),
             onTap: () {
               Share.share(
                 '【SKAPP，一款视频播放软件】\n https://github.com/Mockingbird1234/skapp',
@@ -194,7 +212,7 @@ class _App extends State<App> {
           ),
           ListTile(
             title: Text('清除缓存($size)'),
-            leading: IconFont(IconNames.iconqingchu_1, size: 30),
+            leading: IconFont(IconNames.iconqingchu_1, size: 26),
             onTap: () {
               clearCache();
             },
@@ -259,7 +277,7 @@ class _App extends State<App> {
     return BottomNavigationBar(
       backgroundColor: Theme.of(context).cardColor,
       elevation: 0,
-      items: itemList,
+      items: _global.isDark ? itemDarkList : itemList,
       onTap: (int index) {
         if (mounted) {
           setState(() {
@@ -276,8 +294,7 @@ class _App extends State<App> {
       //当前选中的索引
       currentIndex: _selectIndex,
       //选中后，底部BottomNavigationBar内容的颜色(选中时，默认为主题色)（仅当type: BottomNavigationBarType.fixed,时生效）
-      fixedColor:
-          _global.isDark ? Colors.white : Theme.of(context).primaryColor,
+      fixedColor: _global.isDark ? Colors.white : Colors.teal,
       type: BottomNavigationBarType.fixed,
       selectedFontSize: 10,
       unselectedFontSize: 10,
