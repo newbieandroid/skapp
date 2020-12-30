@@ -22,7 +22,7 @@ class CacheImgRadius extends StatelessWidget {
           fit: BoxFit.cover,
           placeholder: (context, url) => Container(
               child: Shimmer.fromColors(
-            baseColor: Colors.grey[400],
+            baseColor: Colors.grey[200],
             highlightColor: Colors.white60,
             child: Container(
               color: Colors.black45,

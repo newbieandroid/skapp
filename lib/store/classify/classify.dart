@@ -91,6 +91,7 @@ abstract class ClassifyStoreMobx with Store {
       // 代表返回的数据不到要求的数据
       changeNextPage(false);
     }
+    this.changeVodLoading();
   }
 
   @action
@@ -148,5 +149,6 @@ abstract class ClassifyStoreMobx with Store {
     qType = 'updateTime';
     changeNextPage(true);
     vodDataLists.clear();
+    this.isVodLoading = true;
   }
 }

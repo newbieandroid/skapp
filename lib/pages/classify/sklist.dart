@@ -56,7 +56,7 @@ class _SKListState extends State<SKList> with AutomaticKeepAliveClientMixin {
       // 滑动到底部的关键判断
       if (scrollController.position.pixels >=
           this.scrollController.position.maxScrollExtent) {
-        loadMoreData();
+        // loadMoreData();
       }
     });
   }
@@ -93,63 +93,66 @@ class _SKListState extends State<SKList> with AutomaticKeepAliveClientMixin {
                       : ((store.vodDataLists.length + 1) / 3).ceil() ?? 1,
                   itemBuilder: (BuildContext context, int index) {
                     if (_global.isShowList) {
-                      if (index < store.vodDataLists.length) {
-                        return Column(
-                          children: <Widget>[
-                            SKItem(
-                              vod: store.vodDataLists[index],
-                              type: 'preview',
-                            )
-                          ],
-                        );
+                      if (store.vodDataLists.length == 0) {
+                        return renderEnd();
                       } else {
-                        return Center(
-                            child: Container(
-                          padding: EdgeInsets.all(14.0),
-                          child: Text(
-                            '-- THE END --',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                        ));
-                      }
-                    } else {
-                      if (index < (store.vodDataLists.length / 3).ceil()) {
-                        // 展示banner广告
-                        if (index % 4 == 0 &&
-                            index != 0 &&
-                            _global.appAds.bannerCsj.show == true) {
+                        if (index < store.vodDataLists.length) {
                           return Column(
-                            children: [
-                              bannerWidget(_global),
-                              gridWidget(index),
+                            children: <Widget>[
+                              SKItem(
+                                vod: store.vodDataLists[index],
+                                type: 'preview',
+                              )
                             ],
                           );
                         } else {
-                          return Column(
-                            children: [
-                              gridWidget(index),
-                            ],
-                          );
+                          renderEnd();
                         }
+                      }
+                    } else {
+                      if (store.vodDataLists.length == 0) {
+                        return renderEnd();
                       } else {
-                        return Center(
-                            child: Container(
-                          padding: EdgeInsets.all(14.0),
-                          child: Text(
-                            '-- THE END --',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                        ));
+                        if (index < (store.vodDataLists.length / 3).ceil()) {
+                          // 展示banner广告
+                          if (index % 4 == 0 &&
+                              index != 0 &&
+                              _global.appAds.bannerCsj.show == true) {
+                            return Column(
+                              children: [
+                                bannerWidget(_global),
+                                gridWidget(index),
+                              ],
+                            );
+                          } else {
+                            return Column(
+                              children: [
+                                gridWidget(index),
+                              ],
+                            );
+                          }
+                        } else {
+                          renderEnd();
+                        }
                       }
                     }
                   }),
         ),
       ),
     );
+  }
+
+  Widget renderEnd() {
+    return Center(
+        child: Container(
+      padding: EdgeInsets.all(14.0),
+      child: Text(
+        '-- THE END --',
+        style: TextStyle(
+          fontSize: 12,
+        ),
+      ),
+    ));
   }
 
   Widget bannerWidget(_global) {
@@ -193,10 +196,17 @@ class _SKListState extends State<SKList> with AutomaticKeepAliveClientMixin {
           childAspectRatio: 0.5,
         ),
         itemBuilder: (context, gridiIndex) {
-          return SKGridItem(
-            vod: store.vodDataLists[index * 3 + gridiIndex],
-            type: 'preview',
-          );
+          if (store.vodDataLists.length - 1 >= index * 3 + gridiIndex) {
+            return SKGridItem(
+              vod: store.vodDataLists[index * 3 + gridiIndex],
+              type: 'preview',
+            );
+          } else {
+            return Container(
+              width: 0,
+              height: 0,
+            );
+          }
         });
   }
 
