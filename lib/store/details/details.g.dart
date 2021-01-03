@@ -189,6 +189,21 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
     });
   }
 
+  final _$starttimeAtom = Atom(name: 'DetailsStoreMobx.starttime');
+
+  @override
+  int get starttime {
+    _$starttimeAtom.reportRead();
+    return super.starttime;
+  }
+
+  @override
+  set starttime(int value) {
+    _$starttimeAtom.reportWrite(value, super.starttime, () {
+      super.starttime = value;
+    });
+  }
+
   final _$currentUrlAtom = Atom(name: 'DetailsStoreMobx.currentUrl');
 
   @override
@@ -334,6 +349,17 @@ mixin _$DetailsStore on DetailsStoreMobx, Store {
   }
 
   @override
+  void resetStarttime() {
+    final _$actionInfo = _$DetailsStoreMobxActionController.startAction(
+        name: 'DetailsStoreMobx.resetStarttime');
+    try {
+      return super.resetStarttime();
+    } finally {
+      _$DetailsStoreMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
@@ -348,6 +374,7 @@ vipLists: ${vipLists},
 currentTabs: ${currentTabs},
 currentPlayers: ${currentPlayers},
 isClickPlayers: ${isClickPlayers},
+starttime: ${starttime},
 currentUrl: ${currentUrl}
     ''';
   }

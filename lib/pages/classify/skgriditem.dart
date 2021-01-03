@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:skapp/store/root.dart';
 import 'package:skapp/widgets/cache_img_radius.dart';
 import '../../routers/application.dart';
-import '../../widgets/network_img_widget.dart';
 import '../../dao/vod_list_dao.dart';
 
 // ignore: must_be_immutable

@@ -45,6 +45,9 @@ abstract class ClassifyStoreMobx with Store {
   VodListDao vodSameActorData; // 获取电影列表
 
   @observable
+  VodListDao vodBannerData; // 获取首页电影推荐（banner）
+
+  @observable
   bool hasNextPage = true;
 
   @observable
@@ -55,6 +58,9 @@ abstract class ClassifyStoreMobx with Store {
 
   @observable
   ObservableList vodDataSameActorLists = ObservableList(); // 相同主演
+
+  @observable
+  ObservableList vodBannerDataLists = ObservableList(); // banner
 
   @observable
   num qPage = 1;
@@ -123,6 +129,32 @@ abstract class ClassifyStoreMobx with Store {
     final res = await req.get(preApiUrl + vodUrl + query);
     this.vodSameActorData = VodListDao.fromJson(res);
     vodDataSameActorLists.addAll(this.vodSameActorData.data);
+  }
+
+  // 首页banner电影
+  @action
+  Future<dynamic> fetchBannerData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
+    String preApiUrl = API.PRE_API_URL;
+    var req = HttpRequest(cIp);
+    String query = '?page=1&limit=6&type=updateTime';
+    final res = await req.get(preApiUrl + vodUrl + query);
+    this.vodBannerData = VodListDao.fromJson(res);
+    vodBannerDataLists.addAll(this.vodBannerData.data);
+  }
+
+  // 根据typeId获取首页电影
+  @action
+  Future<dynamic> fetchIndexVodData({@required typeId}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
+    String preApiUrl = API.PRE_API_URL;
+    var req = HttpRequest(cIp);
+    String query = '?typeId=$typeId&page=1&limit=8&type=updateTime';
+    final res = await req.get(preApiUrl + vodUrl + query);
+    this.vodData = VodListDao.fromJson(res);
+    // vodDataLists.addAll(this.vodData.data);
   }
 
   @action

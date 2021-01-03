@@ -100,6 +100,21 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
     });
   }
 
+  final _$vodBannerDataAtom = Atom(name: 'ClassifyStoreMobx.vodBannerData');
+
+  @override
+  VodListDao get vodBannerData {
+    _$vodBannerDataAtom.reportRead();
+    return super.vodBannerData;
+  }
+
+  @override
+  set vodBannerData(VodListDao value) {
+    _$vodBannerDataAtom.reportWrite(value, super.vodBannerData, () {
+      super.vodBannerData = value;
+    });
+  }
+
   final _$hasNextPageAtom = Atom(name: 'ClassifyStoreMobx.hasNextPage');
 
   @override
@@ -160,6 +175,22 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
     _$vodDataSameActorListsAtom.reportWrite(value, super.vodDataSameActorLists,
         () {
       super.vodDataSameActorLists = value;
+    });
+  }
+
+  final _$vodBannerDataListsAtom =
+      Atom(name: 'ClassifyStoreMobx.vodBannerDataLists');
+
+  @override
+  ObservableList<dynamic> get vodBannerDataLists {
+    _$vodBannerDataListsAtom.reportRead();
+    return super.vodBannerDataLists;
+  }
+
+  @override
+  set vodBannerDataLists(ObservableList<dynamic> value) {
+    _$vodBannerDataListsAtom.reportWrite(value, super.vodBannerDataLists, () {
+      super.vodBannerDataLists = value;
     });
   }
 
@@ -244,6 +275,14 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
         .run(() => super.fetchVodSameActorData(actor: actor));
   }
 
+  final _$fetchBannerDataAsyncAction =
+      AsyncAction('ClassifyStoreMobx.fetchBannerData');
+
+  @override
+  Future<dynamic> fetchBannerData() {
+    return _$fetchBannerDataAsyncAction.run(() => super.fetchBannerData());
+  }
+
   final _$ClassifyStoreMobxActionController =
       ActionController(name: 'ClassifyStoreMobx');
 
@@ -311,10 +350,12 @@ type: ${type},
 vodData: ${vodData},
 vodSameData: ${vodSameData},
 vodSameActorData: ${vodSameActorData},
+vodBannerData: ${vodBannerData},
 hasNextPage: ${hasNextPage},
 vodDataLists: ${vodDataLists},
 vodDataSameLists: ${vodDataSameLists},
 vodDataSameActorLists: ${vodDataSameActorLists},
+vodBannerDataLists: ${vodBannerDataLists},
 qPage: ${qPage},
 qLimit: ${qLimit},
 qType: ${qType}

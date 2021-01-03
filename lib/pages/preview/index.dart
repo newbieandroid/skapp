@@ -463,7 +463,7 @@ class _PreviewState extends State<Preview> with SingleTickerProviderStateMixin {
                         },
                         child: Container(
                           width: 100,
-                          margin: EdgeInsets.only(right: 14),
+                          margin: EdgeInsets.only(left: 14),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
