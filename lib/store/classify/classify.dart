@@ -48,6 +48,18 @@ abstract class ClassifyStoreMobx with Store {
   VodListDao vodBannerData; // 获取首页电影推荐（banner）
 
   @observable
+  VodListDao hotMovieData; // 热门电影
+
+  @observable
+  VodListDao hotTvData; // 热门电视剧
+
+  @observable
+  VodListDao hotZyData; // 热门综艺
+
+  @observable
+  VodListDao hotDmData; // 热门动漫
+
+  @observable
   bool hasNextPage = true;
 
   @observable
@@ -61,6 +73,18 @@ abstract class ClassifyStoreMobx with Store {
 
   @observable
   ObservableList vodBannerDataLists = ObservableList(); // banner
+
+  @observable
+  ObservableList vodMovieDataLists = ObservableList();
+
+  @observable
+  ObservableList vodTvDataLists = ObservableList();
+
+  @observable
+  ObservableList vodZyDataLists = ObservableList();
+
+  @observable
+  ObservableList vodDmDataLists = ObservableList();
 
   @observable
   num qPage = 1;
@@ -155,6 +179,37 @@ abstract class ClassifyStoreMobx with Store {
     final res = await req.get(preApiUrl + vodUrl + query);
     this.vodData = VodListDao.fromJson(res);
     // vodDataLists.addAll(this.vodData.data);
+  }
+
+  // 获取热门
+  @action
+  Future<dynamic> fetchVodTypeData({@required type, @required typeId}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
+    String preApiUrl = API.PRE_API_URL;
+    var req = HttpRequest(cIp);
+    String query = '?typeId=$typeId&page=1&limit=9&type=updateTime';
+    final res = await req.get(preApiUrl + vodUrl + query);
+    switch (type) {
+      case 'dianying':
+        this.hotMovieData = VodListDao.fromJson(res);
+        vodMovieDataLists.addAll(this.hotMovieData.data);
+        break;
+      case 'lianxuju':
+        this.hotTvData = VodListDao.fromJson(res);
+        vodTvDataLists.addAll(this.hotTvData.data);
+        break;
+      case 'zongyi':
+        this.hotZyData = VodListDao.fromJson(res);
+        vodZyDataLists.addAll(this.hotZyData.data);
+        break;
+      case 'dongman':
+        this.hotDmData = VodListDao.fromJson(res);
+        vodDmDataLists.addAll(this.hotDmData.data);
+        break;
+      default:
+        break;
+    }
   }
 
   @action

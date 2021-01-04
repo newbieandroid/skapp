@@ -2,14 +2,14 @@ import 'package:skapp/iconfont/IconFont.dart';
 
 var typeMap = {
   'homepage': {
-    'activeIcon': IconFont(IconNames.icondianying),
+    'activeIcon': IconFont(IconNames.iconshouye),
     'normalIcon': IconFont(
-      IconNames.icondianying_2,
+      IconNames.iconshouye,
       color: '#111111',
     ),
-    'activeDarkIcon': IconFont(IconNames.icondianying_2, color: '#ffffff'),
+    'activeDarkIcon': IconFont(IconNames.iconshouye, color: '#ffffff'),
     'normalDarkIcon': IconFont(
-      IconNames.icondianying_2,
+      IconNames.iconshouye,
       color: '#cccccc',
     ),
   },

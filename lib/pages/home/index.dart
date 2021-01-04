@@ -30,13 +30,12 @@ class _HomePageState extends State<HomePage>
     store.fetchMovieInfo(); // 获取影片总数和今日更新数
     classifyStore.fetchBannerData(); // 获取banner
     await store.fetchIndexData(); // 获取首页分类
-    print(store.typeIndex.data);
     // 根据分类获取类型
     if (store.typeIndex != null &&
         store.typeIndex.code == 200 &&
         store.typeIndex.data.length > 1) {
-      store.typeIndex.data.forEach((item) async {
-        print(item.typeName);
+      store.typeIndex.data.forEach((item) {
+        classifyStore.fetchVodTypeData(type: item.typeEn, typeId: item.typeId);
       });
     }
   }
@@ -66,11 +65,54 @@ class _HomePageState extends State<HomePage>
                       height: 164,
                     ),
               baseInfo(_global),
-              hotMovie(),
-              hotMovie(),
-              hotMovie(),
-              hotMovie(),
-              // swiper()
+              hotMovie(
+                typeName: '热播电影',
+                global: _global,
+                typeEn: 'dianying',
+                icon: IconFont(IconNames.icondianying, size: 22),
+                iconDark: IconFont(
+                  IconNames.icondianying_2,
+                  size: 22,
+                  color: '#cccccc',
+                ),
+                data: classifyStore.vodMovieDataLists,
+              ),
+              hotMovie(
+                typeName: '热播电视剧',
+                global: _global,
+                typeEn: 'dianshiju',
+                icon: IconFont(IconNames.icondianshiju_1, size: 22),
+                iconDark: IconFont(
+                  IconNames.icondianshiju_1,
+                  size: 22,
+                  color: '#cccccc',
+                ),
+                data: classifyStore.vodTvDataLists,
+              ),
+              hotMovie(
+                typeName: '热播综艺',
+                global: _global,
+                typeEn: 'zongyi',
+                icon: IconFont(IconNames.iconyinleku, size: 22),
+                iconDark: IconFont(
+                  IconNames.iconyinleku,
+                  size: 22,
+                  color: '#cccccc',
+                ),
+                data: classifyStore.vodZyDataLists,
+              ),
+              hotMovie(
+                typeName: '热播动漫',
+                global: _global,
+                typeEn: 'dongman',
+                icon: IconFont(IconNames.iconzhuanji, size: 22),
+                iconDark: IconFont(
+                  IconNames.iconzhuanji,
+                  size: 22,
+                  color: '#cccccc',
+                ),
+                data: classifyStore.vodDmDataLists,
+              ),
             ],
           ),
         )),
@@ -86,7 +128,7 @@ class _HomePageState extends State<HomePage>
         // Padding(
         //   padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
         //   child: Text(
-        //     '热门影片',
+        //     '热播影片',
         //     textAlign: TextAlign.left,
         //     style: Theme.of(context).textTheme.subtitle1,
         //   ),
@@ -100,93 +142,107 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  void moveTo() {
-    print('aaaa');
-  }
-
-  // 热门
-  Widget hotMovie() {
-    return Padding(
-      padding: EdgeInsets.only(top: 12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: EdgeInsets.only(left: 12.0),
-            child: Row(
-              children: [
-                IconFont(IconNames.icondianying, size: 22),
-                SizedBox(width: 6),
-                Text('热门电影', style: Theme.of(context).textTheme.subtitle2)
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Container(
-            height: 212.0,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              // physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: ((BuildContext context, int index) {
-                return 1 > 0
-                    ? GestureDetector(
-                        onTap: () {
-                          print('dada');
-                          // Application.router.navigateTo(
-                          //   context,
-                          //   "/preview?vodId=${classifyStore.vodDataLists[index].vodId}",
-                          //   transition: TransitionType.native,
-                          //   transitionDuration: Duration(milliseconds: 100),
-                          //   replace: true,
-                          // );
-                        },
-                        child: FadeInUp(
-                          //from: 50,
-                          child: Container(
-                            width: 110,
-                            margin: EdgeInsets.only(left: 14),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                AspectRatio(
-                                  aspectRatio: 0.73, // 宽高比
-                                  child: Container(
-                                    child: CacheImgRadius(
-                                      imgUrl:
-                                          'https://imagestore.ncer.top/upload/vod/20201224-1/51da47f0cb4bb56ad3a421fb0db8b3aa.jpg',
-                                      radius: 6,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 8, left: 6, right: 6, bottom: 8),
-                                  child: Text(
-                                    "精忠报国",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText2,
-                                  ),
-                                )
-                              ],
-                            ),
+  // 热播
+  Widget hotMovie({
+    @required typeEn,
+    @required typeName,
+    @required icon,
+    @required iconDark,
+    @required global,
+    @required data,
+  }) {
+    return Observer(
+        builder: (_) => Padding(
+              padding: EdgeInsets.only(top: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 12.0),
+                    child: Row(
+                      children: [
+                        global.isDark ? iconDark : icon,
+                        SizedBox(width: 6),
+                        Text(typeName,
+                            style: Theme.of(context).textTheme.subtitle2)
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    height: 212.0,
+                    child: data.length > 0
+                        ? ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            // physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: ((BuildContext context, int index) {
+                              return 1 > 0
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        Application.router.navigateTo(
+                                          context,
+                                          "/preview?vodId=${data[index].vodId}",
+                                          transition: TransitionType.native,
+                                          transitionDuration:
+                                              Duration(milliseconds: 100),
+                                        );
+                                      },
+                                      child: FadeInUp(
+                                        //from: 50,
+                                        child: Container(
+                                          width: 110,
+                                          margin: EdgeInsets.only(left: 14),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              AspectRatio(
+                                                aspectRatio: 0.73, // 宽高比
+                                                child: Container(
+                                                  child: CacheImgRadius(
+                                                    imgUrl: data[index].vodPic,
+                                                    radius: 6,
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: 8,
+                                                    left: 6,
+                                                    right: 6,
+                                                    bottom: 8),
+                                                child: Text(
+                                                  data[index].vodName,
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText2,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ))
+                                  : Container(
+                                      width: 0,
+                                      height: 0,
+                                    );
+                            }),
+                            itemCount: data.length,
+                          )
+                        : Container(
+                            width: 0,
+                            height: 0,
                           ),
-                        ))
-                    : Container(
-                        width: 0,
-                        height: 0,
-                      );
-              }),
-              itemCount: 10,
-            ),
-          )
-        ],
-      ),
-    );
+                  )
+                ],
+              ),
+            ));
   }
 
   Widget baseInfo(_global) {
