@@ -14,7 +14,7 @@
 
 此项目是一款基于[MACCMS](https://github.com/magicblack/maccms10/)的影视播放软件。
 
-web 端访问地址：[sk.ncer.top](http://sk.ncer.top)
+web 端访问地址：[sk.ncer.top](https://sk.ncer.top)
 
 ### 源码使用方法
 
@@ -71,6 +71,8 @@ Doctor summary (to see all details, run flutter doctor -v):
 - 增加首页
 
 - 增加播放进度记忆功能
+
+- api 采用 https
 
 ##### V2.1.2
 
