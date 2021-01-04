@@ -48,9 +48,9 @@ class SearchTextFieldWidget extends StatelessWidget {
           // hintStyle: Theme.of(context).textTheme.caption,
           enabledBorder: OutlineInputBorder(
             /*边角*/
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(0),
             borderSide: BorderSide(
-              color: Color.fromARGB(255, 237, 236, 237), //边线颜色为白色
+              color: Colors.transparent, //边线颜色为白色
               width: 1, //边线宽度为2
             ),
           ),

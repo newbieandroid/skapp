@@ -39,6 +39,51 @@ mixin _$Type on TypeMobx, Store {
     });
   }
 
+  final _$typeIndexAtom = Atom(name: 'TypeMobx.typeIndex');
+
+  @override
+  SkType get typeIndex {
+    _$typeIndexAtom.reportRead();
+    return super.typeIndex;
+  }
+
+  @override
+  set typeIndex(SkType value) {
+    _$typeIndexAtom.reportWrite(value, super.typeIndex, () {
+      super.typeIndex = value;
+    });
+  }
+
+  final _$typeAllAtom = Atom(name: 'TypeMobx.typeAll');
+
+  @override
+  ObservableList<dynamic> get typeAll {
+    _$typeAllAtom.reportRead();
+    return super.typeAll;
+  }
+
+  @override
+  set typeAll(ObservableList<dynamic> value) {
+    _$typeAllAtom.reportWrite(value, super.typeAll, () {
+      super.typeAll = value;
+    });
+  }
+
+  final _$movieAllAtom = Atom(name: 'TypeMobx.movieAll');
+
+  @override
+  dynamic get movieAll {
+    _$movieAllAtom.reportRead();
+    return super.movieAll;
+  }
+
+  @override
+  set movieAll(dynamic value) {
+    _$movieAllAtom.reportWrite(value, super.movieAll, () {
+      super.movieAll = value;
+    });
+  }
+
   final _$currentSearchTypeIndexAtom =
       Atom(name: 'TypeMobx.currentSearchTypeIndex');
 
@@ -61,6 +106,28 @@ mixin _$Type on TypeMobx, Store {
   @override
   Future<dynamic> fetchData() {
     return _$fetchDataAsyncAction.run(() => super.fetchData());
+  }
+
+  final _$fetchIndexDataAsyncAction = AsyncAction('TypeMobx.fetchIndexData');
+
+  @override
+  Future<dynamic> fetchIndexData() {
+    return _$fetchIndexDataAsyncAction.run(() => super.fetchIndexData());
+  }
+
+  final _$fetchAllTypeDataAsyncAction =
+      AsyncAction('TypeMobx.fetchAllTypeData');
+
+  @override
+  Future<dynamic> fetchAllTypeData() {
+    return _$fetchAllTypeDataAsyncAction.run(() => super.fetchAllTypeData());
+  }
+
+  final _$fetchMovieInfoAsyncAction = AsyncAction('TypeMobx.fetchMovieInfo');
+
+  @override
+  Future<dynamic> fetchMovieInfo() {
+    return _$fetchMovieInfoAsyncAction.run(() => super.fetchMovieInfo());
   }
 
   final _$TypeMobxActionController = ActionController(name: 'TypeMobx');
@@ -92,6 +159,9 @@ mixin _$Type on TypeMobx, Store {
     return '''
 isLoading: ${isLoading},
 type: ${type},
+typeIndex: ${typeIndex},
+typeAll: ${typeAll},
+movieAll: ${movieAll},
 currentSearchTypeIndex: ${currentSearchTypeIndex}
     ''';
   }

@@ -2,8 +2,8 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skapp/store/root.dart';
+import 'package:skapp/widgets/cache_img_radius.dart';
 import '../../routers/application.dart';
-import '../../widgets/network_img_widget.dart';
 import '../../dao/vod_list_dao.dart';
 
 // ignore: must_be_immutable
@@ -61,10 +61,14 @@ class _SKGridItemState extends State<SKGridItem> {
             AspectRatio(
               aspectRatio: 0.73, // 宽高比
               child: Container(
-                child: NetworkImgWidget(
+                child: CacheImgRadius(
                   imgUrl: vod.vodPic,
                   radius: 4,
                 ),
+                // NetworkImgWidget(
+                //   imgUrl: vod.vodPic,
+                //   radius: 4,
+                // ),
               ),
             ),
             Padding(

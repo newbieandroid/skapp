@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skapp/store/details/details.dart';
 import 'package:skapp/store/root.dart';
 import 'package:skapp/utils/screen_utils.dart';
@@ -19,6 +18,7 @@ import 'package:flutter_tencentplayer/flutter_tencentplayer.dart';
 import './main.dart';
 // import './util/forbidshot_util.dart';
 import 'package:url_launcher/url_launcher.dart';
+import './util/time_util.dart';
 import 'full_video_page.dart';
 
 // widget.store.currentUrl
@@ -71,6 +71,14 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
     _initController();
     controller.initialize();
     controller.addListener(listener);
+    // seekto,延时1.5秒
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      if (widget.store.starttime > 30) {
+        controller.seekTo(Duration(seconds: widget.store.starttime));
+        widget.store.resetStarttime();
+      }
+    });
+
     hideCover();
     // ForbidShotUtil.initForbid(context);
     Screen.keepOn(true);
@@ -82,6 +90,17 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
     super.dispose();
     // SystemChrome.setEnabledSystemUIOverlays(
     //     [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    // 存储播放进度
+    // widget.store.handleDisposePlay(
+    //   controller.value.duration.toString(),
+    //   controller.value.position.toString(),
+    // );
+    widget.store.handleDisposePlay(
+      TimeUtil.formatDuration(controller.value.duration).toString(),
+      TimeUtil.formatDuration(controller.value.position).toString(),
+      controller.value.position.inSeconds,
+    );
+
     controller.removeListener(listener);
     controller.dispose();
     // ForbidShotUtil.disposeForbid();
@@ -108,10 +127,15 @@ class _WindowVideoPageState extends State<WindowVideoPage> {
                 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) imgotv-client/6.3.4 Chrome/69.0.3497.106 Electron/4.0.5 Safari/'
           };
         }
+        // 处理播放进度
+
         controller = TencentPlayerController.network(
           dataSource,
           playerConfig: PlayerConfig(
-              autoPlay: !widget.global.appAds.prestrain.show, headers: headers),
+            autoPlay: !widget.global.appAds.prestrain.show,
+            headers: headers,
+            // startTime: widget.store.starttime,
+          ),
         );
         break;
       case PlayType.asset:

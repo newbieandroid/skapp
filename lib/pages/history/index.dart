@@ -218,7 +218,9 @@ class _HistoryPageState extends State<HistoryPage> {
                                           child: SKItem(
                                             vod: Data.fromJson(json.decode(
                                                 historyArr[index])['vod']),
-                                            type: 'details',
+                                            info:
+                                                json.decode(historyArr[index]),
+                                            type: 'history',
                                           ))
                                     ],
                                   );

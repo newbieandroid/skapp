@@ -39,7 +39,7 @@ class HttpRequest {
       return result;
     } on Exception catch (e) {
       print('[uri=$uri]exception e=${e.toString()}');
-      Fluttertoast.showToast(msg: e.toString());
+      // Fluttertoast.showToast(msg: e.toString());
       return '';
     }
   }

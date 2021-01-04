@@ -44,16 +44,19 @@ class _NetworkImgWidgetState extends State<NetworkImgWidget> {
           ),
         ),
         ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(radius)),
-            child: FadeInImage(
-              placeholder: MemoryImage(kTransparentImage),
-              image: CachedNetworkImageProvider(
-                imgUrl,
-              ),
-              fit: BoxFit.fill,
-              width: double.infinity,
-              height: double.infinity,
-            )),
+          borderRadius: BorderRadius.all(Radius.circular(radius)),
+          child: FadeInImage(
+            fadeInDuration: Duration(milliseconds: 10),
+            fadeOutDuration: Duration(milliseconds: 10),
+            placeholder: MemoryImage(kTransparentImage),
+            image: CachedNetworkImageProvider(
+              imgUrl,
+            ),
+            fit: BoxFit.fill,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ),
       ],
     );
   }

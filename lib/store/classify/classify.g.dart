@@ -100,6 +100,81 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
     });
   }
 
+  final _$vodBannerDataAtom = Atom(name: 'ClassifyStoreMobx.vodBannerData');
+
+  @override
+  VodListDao get vodBannerData {
+    _$vodBannerDataAtom.reportRead();
+    return super.vodBannerData;
+  }
+
+  @override
+  set vodBannerData(VodListDao value) {
+    _$vodBannerDataAtom.reportWrite(value, super.vodBannerData, () {
+      super.vodBannerData = value;
+    });
+  }
+
+  final _$hotMovieDataAtom = Atom(name: 'ClassifyStoreMobx.hotMovieData');
+
+  @override
+  VodListDao get hotMovieData {
+    _$hotMovieDataAtom.reportRead();
+    return super.hotMovieData;
+  }
+
+  @override
+  set hotMovieData(VodListDao value) {
+    _$hotMovieDataAtom.reportWrite(value, super.hotMovieData, () {
+      super.hotMovieData = value;
+    });
+  }
+
+  final _$hotTvDataAtom = Atom(name: 'ClassifyStoreMobx.hotTvData');
+
+  @override
+  VodListDao get hotTvData {
+    _$hotTvDataAtom.reportRead();
+    return super.hotTvData;
+  }
+
+  @override
+  set hotTvData(VodListDao value) {
+    _$hotTvDataAtom.reportWrite(value, super.hotTvData, () {
+      super.hotTvData = value;
+    });
+  }
+
+  final _$hotZyDataAtom = Atom(name: 'ClassifyStoreMobx.hotZyData');
+
+  @override
+  VodListDao get hotZyData {
+    _$hotZyDataAtom.reportRead();
+    return super.hotZyData;
+  }
+
+  @override
+  set hotZyData(VodListDao value) {
+    _$hotZyDataAtom.reportWrite(value, super.hotZyData, () {
+      super.hotZyData = value;
+    });
+  }
+
+  final _$hotDmDataAtom = Atom(name: 'ClassifyStoreMobx.hotDmData');
+
+  @override
+  VodListDao get hotDmData {
+    _$hotDmDataAtom.reportRead();
+    return super.hotDmData;
+  }
+
+  @override
+  set hotDmData(VodListDao value) {
+    _$hotDmDataAtom.reportWrite(value, super.hotDmData, () {
+      super.hotDmData = value;
+    });
+  }
+
   final _$hasNextPageAtom = Atom(name: 'ClassifyStoreMobx.hasNextPage');
 
   @override
@@ -160,6 +235,83 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
     _$vodDataSameActorListsAtom.reportWrite(value, super.vodDataSameActorLists,
         () {
       super.vodDataSameActorLists = value;
+    });
+  }
+
+  final _$vodBannerDataListsAtom =
+      Atom(name: 'ClassifyStoreMobx.vodBannerDataLists');
+
+  @override
+  ObservableList<dynamic> get vodBannerDataLists {
+    _$vodBannerDataListsAtom.reportRead();
+    return super.vodBannerDataLists;
+  }
+
+  @override
+  set vodBannerDataLists(ObservableList<dynamic> value) {
+    _$vodBannerDataListsAtom.reportWrite(value, super.vodBannerDataLists, () {
+      super.vodBannerDataLists = value;
+    });
+  }
+
+  final _$vodMovieDataListsAtom =
+      Atom(name: 'ClassifyStoreMobx.vodMovieDataLists');
+
+  @override
+  ObservableList<dynamic> get vodMovieDataLists {
+    _$vodMovieDataListsAtom.reportRead();
+    return super.vodMovieDataLists;
+  }
+
+  @override
+  set vodMovieDataLists(ObservableList<dynamic> value) {
+    _$vodMovieDataListsAtom.reportWrite(value, super.vodMovieDataLists, () {
+      super.vodMovieDataLists = value;
+    });
+  }
+
+  final _$vodTvDataListsAtom = Atom(name: 'ClassifyStoreMobx.vodTvDataLists');
+
+  @override
+  ObservableList<dynamic> get vodTvDataLists {
+    _$vodTvDataListsAtom.reportRead();
+    return super.vodTvDataLists;
+  }
+
+  @override
+  set vodTvDataLists(ObservableList<dynamic> value) {
+    _$vodTvDataListsAtom.reportWrite(value, super.vodTvDataLists, () {
+      super.vodTvDataLists = value;
+    });
+  }
+
+  final _$vodZyDataListsAtom = Atom(name: 'ClassifyStoreMobx.vodZyDataLists');
+
+  @override
+  ObservableList<dynamic> get vodZyDataLists {
+    _$vodZyDataListsAtom.reportRead();
+    return super.vodZyDataLists;
+  }
+
+  @override
+  set vodZyDataLists(ObservableList<dynamic> value) {
+    _$vodZyDataListsAtom.reportWrite(value, super.vodZyDataLists, () {
+      super.vodZyDataLists = value;
+    });
+  }
+
+  final _$vodDmDataListsAtom = Atom(name: 'ClassifyStoreMobx.vodDmDataLists');
+
+  @override
+  ObservableList<dynamic> get vodDmDataLists {
+    _$vodDmDataListsAtom.reportRead();
+    return super.vodDmDataLists;
+  }
+
+  @override
+  set vodDmDataLists(ObservableList<dynamic> value) {
+    _$vodDmDataListsAtom.reportWrite(value, super.vodDmDataLists, () {
+      super.vodDmDataLists = value;
     });
   }
 
@@ -244,6 +396,33 @@ mixin _$ClassifyStore on ClassifyStoreMobx, Store {
         .run(() => super.fetchVodSameActorData(actor: actor));
   }
 
+  final _$fetchBannerDataAsyncAction =
+      AsyncAction('ClassifyStoreMobx.fetchBannerData');
+
+  @override
+  Future<dynamic> fetchBannerData() {
+    return _$fetchBannerDataAsyncAction.run(() => super.fetchBannerData());
+  }
+
+  final _$fetchIndexVodDataAsyncAction =
+      AsyncAction('ClassifyStoreMobx.fetchIndexVodData');
+
+  @override
+  Future<dynamic> fetchIndexVodData({@required dynamic typeId}) {
+    return _$fetchIndexVodDataAsyncAction
+        .run(() => super.fetchIndexVodData(typeId: typeId));
+  }
+
+  final _$fetchVodTypeDataAsyncAction =
+      AsyncAction('ClassifyStoreMobx.fetchVodTypeData');
+
+  @override
+  Future<dynamic> fetchVodTypeData(
+      {@required dynamic type, @required dynamic typeId}) {
+    return _$fetchVodTypeDataAsyncAction
+        .run(() => super.fetchVodTypeData(type: type, typeId: typeId));
+  }
+
   final _$ClassifyStoreMobxActionController =
       ActionController(name: 'ClassifyStoreMobx');
 
@@ -311,10 +490,20 @@ type: ${type},
 vodData: ${vodData},
 vodSameData: ${vodSameData},
 vodSameActorData: ${vodSameActorData},
+vodBannerData: ${vodBannerData},
+hotMovieData: ${hotMovieData},
+hotTvData: ${hotTvData},
+hotZyData: ${hotZyData},
+hotDmData: ${hotDmData},
 hasNextPage: ${hasNextPage},
 vodDataLists: ${vodDataLists},
 vodDataSameLists: ${vodDataSameLists},
 vodDataSameActorLists: ${vodDataSameActorLists},
+vodBannerDataLists: ${vodBannerDataLists},
+vodMovieDataLists: ${vodMovieDataLists},
+vodTvDataLists: ${vodTvDataLists},
+vodZyDataLists: ${vodZyDataLists},
+vodDmDataLists: ${vodDmDataLists},
 qPage: ${qPage},
 qLimit: ${qLimit},
 qType: ${qType}
