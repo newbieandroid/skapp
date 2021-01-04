@@ -3,15 +3,12 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:screen/screen.dart';
 import 'package:skapp/iconfont/IconFont.dart';
 import 'package:skapp/pages/home/category_list_view.dart';
 import 'package:skapp/routers/application.dart';
 import 'package:skapp/store/classify/classify.dart';
 import 'package:skapp/store/root.dart';
-import 'package:skapp/utils/screen_utils.dart';
 import 'package:skapp/widgets/cache_img_radius.dart';
-import 'package:skapp/widgets/network_img_widget.dart';
 import './../../store/type/type.dart';
 
 class HomePage extends StatefulWidget {
@@ -257,7 +254,7 @@ class _HomePageState extends State<HomePage>
               text: TextSpan(
                   style: Theme.of(context).textTheme.subtitle2,
                   children: <InlineSpan>[
-                    TextSpan(text: '总影片'),
+                    TextSpan(text: '总影片 '),
                     TextSpan(
                         text: store.movieAll != null
                             ? store.movieAll['total'].toString()
@@ -266,7 +263,7 @@ class _HomePageState extends State<HomePage>
                             ? Theme.of(context).textTheme.subtitle2
                             : TextStyle(color: Theme.of(context).primaryColor)),
                     TextSpan(text: '  '),
-                    TextSpan(text: '今日更新'),
+                    TextSpan(text: '今日更新 '),
                     TextSpan(
                         text: store.movieAll != null
                             ? store.movieAll['today'].toString()

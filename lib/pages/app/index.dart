@@ -132,8 +132,7 @@ class _App extends State<App> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(left: 16),
-                  child:
-                      Text('换肤', style: Theme.of(context).textTheme.bodyText2),
+                  child: Text('', style: Theme.of(context).textTheme.bodyText2),
                 ),
                 Expanded(
                   flex: 1,
