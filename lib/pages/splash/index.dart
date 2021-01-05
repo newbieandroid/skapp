@@ -88,7 +88,7 @@ class _SplashWidgetState extends State<SplashWidget> {
       appName: "sk", //appname 必填
       allowShowNotify: true, //是否允许sdk展示通知栏提示 选填
       allowShowPageWhenScreenLock: true, //是否在锁屏场景支持展示广告落地页 选填
-      debug: true, //测试阶段打开，可以通过日志排查问题，上线时去除该调用 选太难
+      debug: false, //测试阶段打开，可以通过日志排查问题，上线时去除该调用 选太难
       supportMultiProcess: true, //是否支持多进程，true支持 选填
       directDownloadNetworkType: [
         FlutterUnionad.NETWORK_STATE_2G,
@@ -97,8 +97,8 @@ class _SplashWidgetState extends State<SplashWidget> {
         FlutterUnionad.NETWORK_STATE_WIFI
       ],
     ); //允许直接下载的网络状态集合 选填
-    await FlutterUnionad.getSDKVersion();
-    await FlutterUnionad.requestPermissionIfNecessary();
+    // await FlutterUnionad.getSDKVersion();
+    // await FlutterUnionad.requestPermissionIfNecessary();
   }
 
   @override

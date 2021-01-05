@@ -321,13 +321,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.0.2"
-  flutter_ijkplayer:
-    dependency: "direct main"
-    description:
-      name: flutter_ijkplayer
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.3.5+1"
   flutter_material_color_picker:
     dependency: "direct main"
     description:

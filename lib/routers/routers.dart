@@ -9,10 +9,6 @@ class Routes {
   static String details = "/details";
   // 搜索页面
   static String search = "/search";
-  // 直播概览
-  static String live = "/live";
-  // 直播详情
-  static String showLives = "/showLives";
   // 自定义设置
   static String custom = "/custom";
   // 电影预览界面
@@ -32,8 +28,6 @@ class Routes {
     router.define(root, handler: rootHandler);
     router.define(details, handler: detailsRouteHandler);
     router.define(search, handler: searchRouteHandler);
-    router.define(live, handler: liveRouteHandler);
-    router.define(showLives, handler: showLivesRouteHandler);
     router.define(custom, handler: customRouteHandler);
     router.define(preview, handler: previewRouteHandler);
     router.define(vipvideo, handler: vipvideoRouteHandler);

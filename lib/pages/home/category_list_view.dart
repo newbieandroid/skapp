@@ -1,11 +1,9 @@
 import 'package:fluro/fluro.dart';
-import 'package:skapp/dao/vod_dao.dart';
 import 'package:skapp/pages/home/utils.dart';
 import 'package:skapp/routers/application.dart';
 import 'package:skapp/store/root.dart';
 import 'package:skapp/widgets/rating_bar.dart';
 import 'package:skapp/widgets/cache_img_radius.dart';
-import './design_course_app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CategoryListView extends StatefulWidget {
@@ -233,9 +231,7 @@ class CategoryView extends StatelessWidget {
                                                             4.0),
                                                     child: Icon(
                                                       Icons.play_arrow,
-                                                      color:
-                                                          DesignCourseAppTheme
-                                                              .nearlyWhite,
+                                                      color: Colors.white,
                                                     ),
                                                   ),
                                                 ),
