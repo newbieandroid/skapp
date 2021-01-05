@@ -66,13 +66,15 @@ Doctor summary (to see all details, run flutter doctor -v):
 
 ### 版本更新历史
 
-##### V2.1.3
+##### V2.1.4
 
 - 增加首页
 
 - 增加播放进度记忆功能
 
 - api 采用 https
+
+- 去掉无用插件（打包后 13.7M）
 
 ##### V2.1.2
 

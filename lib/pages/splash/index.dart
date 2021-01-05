@@ -88,7 +88,7 @@ class _SplashWidgetState extends State<SplashWidget> {
       appName: "sk", //appname 必填
       allowShowNotify: true, //是否允许sdk展示通知栏提示 选填
       allowShowPageWhenScreenLock: true, //是否在锁屏场景支持展示广告落地页 选填
-      debug: true, //测试阶段打开，可以通过日志排查问题，上线时去除该调用 选太难
+      debug: false, //测试阶段打开，可以通过日志排查问题，上线时去除该调用 选太难
       supportMultiProcess: true, //是否支持多进程，true支持 选填
       directDownloadNetworkType: [
         FlutterUnionad.NETWORK_STATE_2G,
@@ -97,8 +97,8 @@ class _SplashWidgetState extends State<SplashWidget> {
         FlutterUnionad.NETWORK_STATE_WIFI
       ],
     ); //允许直接下载的网络状态集合 选填
-    await FlutterUnionad.getSDKVersion();
-    await FlutterUnionad.requestPermissionIfNecessary();
+    // await FlutterUnionad.getSDKVersion();
+    // await FlutterUnionad.requestPermissionIfNecessary();
   }
 
   @override
@@ -201,7 +201,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                             CircleAvatar(
                               radius: ScreenUtils.screenW(context) / 4,
                               backgroundImage:
-                                  AssetImage('assets/images/home.png'),
+                                  AssetImage('assets/images/home.jpg'),
                             ),
                             Padding(
                               padding: EdgeInsets.only(
@@ -210,9 +210,9 @@ class _SplashWidgetState extends State<SplashWidget> {
                                 right: 20.0,
                                 bottom: 0,
                               ),
-                              child: Text(
-                                  '    所以我选择了你，因为强者的力量与生俱来，他们失去了对力量的敬畏，而弱者才懂得力量的价值。有爱心，懂得怜悯。',
-                                  maxLines: 3,
+                              child: Text('何必如此认真？\nWHY SO SERIOUS? ',
+                                  textAlign: TextAlign.center,
+                                  maxLines: 6,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context).textTheme.caption),
                             )

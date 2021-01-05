@@ -60,6 +60,6 @@ ndk {
 }
 ```
 
-3. 运行`flutter build apk --release --no-shrink`命令即可打包 apk 文件。
+3. 运行`flutter build apk --release --no-shrink --obfuscate --split-debug-info=./symbols`命令即可打包 apk 文件。
 
 > 如果安装有问题欢迎 issue
