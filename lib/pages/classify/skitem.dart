@@ -11,7 +11,9 @@ import './../../dao/vod_list_dao.dart';
 class SKItem extends StatefulWidget {
   Data vod;
   String type; // preview or details
-  SKItem({Key key, @required this.vod, @required this.type}) : super(key: key);
+  var info;
+  SKItem({Key key, @required this.vod, @required this.type, this.info})
+      : super(key: key);
 
   @override
   _SKItemState createState() => _SKItemState();
@@ -19,10 +21,28 @@ class SKItem extends StatefulWidget {
 
 class _SKItemState extends State<SKItem> {
   Data vod;
+  var info;
   @override
   void initState() {
     vod = widget.vod;
+    info = widget.info ?? null;
     super.initState();
+  }
+
+  Widget renderRate() {
+    return Container(
+      padding: EdgeInsets.only(top: 4, bottom: 4),
+      child: vod.vodScore < 0
+          ? Text('暂无评分',
+              style: TextStyle(
+                fontSize: 11,
+              ))
+          : RatingBar(
+              vod.vodScore,
+              size: 13,
+              fontSize: 11,
+            ),
+    );
   }
 
   @override
@@ -37,7 +57,7 @@ class _SKItemState extends State<SKItem> {
             transition: TransitionType.native,
             transitionDuration: Duration(milliseconds: 100),
           );
-        } else if (widget.type == 'details') {
+        } else if (widget.type == 'details' || widget.type == 'history') {
           Application.router.navigateTo(
             context,
             "/details?vodId=${vod.vodId}",
@@ -82,19 +102,52 @@ class _SKItemState extends State<SKItem> {
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
-                    Container(
-                      padding: EdgeInsets.only(top: 4, bottom: 4),
-                      child: vod.vodScore < 0
-                          ? Text('暂无评分',
-                              style: TextStyle(
-                                fontSize: 11,
-                              ))
-                          : RatingBar(
-                              vod.vodScore,
-                              size: 13,
-                              fontSize: 11,
-                            ),
-                    ),
+                    renderRate(),
+                    info != null
+                        ? Row(
+                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                child: Text(
+                                    info['progress'] + '/' + info['duration'],
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 13)),
+                              ),
+                              info['players'] > 1
+                                  ? SizedBox(
+                                      width: 10,
+                                      child: Text(
+                                        '|',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 13),
+                                      ),
+                                    )
+                                  : Container(
+                                      width: 0,
+                                      height: 0,
+                                    ),
+                              info['players'] > 1
+                                  ? Container(
+                                      child: Text(
+                                          (info['nid'] + 1).toString() +
+                                              '集/' +
+                                              info['players'].toString() +
+                                              '集',
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 13)),
+                                    )
+                                  : Container(
+                                      width: 0,
+                                      height: 0,
+                                    )
+                            ],
+                          )
+                        : Container(
+                            width: 0,
+                            height: 0,
+                          ),
                     Text(
                       //item.casts[0].name,
                       '${vod.vodArea} / ${vod.vodClass} / ${vod.vodYear} / ${vod.vodLang}',
@@ -109,7 +162,7 @@ class _SKItemState extends State<SKItem> {
                       vod.vodContent.replaceAll(RegExp(r"<\/?[^>]*>"), ""),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
-                      maxLines: 3,
+                      maxLines: 2,
                       style: Theme.of(context).textTheme.caption,
                     ),
                   ],

@@ -112,7 +112,9 @@ class _DlnaState extends State<DlnaPage> {
                 Positioned(
                   right: 0,
                   child: RaisedButton.icon(
-                    icon: IconFont(IconNames.icontouping, size: 18),
+                    icon: IconFont(IconNames.icontelevision_01,
+                        size: 18,
+                        color: widget.global.isDark ? '#ffffff' : '#129c90'),
                     color: Colors.transparent,
                     elevation: 0,
                     label: Text(

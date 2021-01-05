@@ -14,7 +14,7 @@
 
 此项目是一款基于[MACCMS](https://github.com/magicblack/maccms10/)的影视播放软件。
 
-web 端访问地址：[sk.ncer.top](http://sk.ncer.top)
+web 端访问地址：[sk.ncer.top](https://sk.ncer.top)
 
 ### 源码使用方法
 
@@ -50,13 +50,12 @@ Doctor summary (to see all details, run flutter doctor -v):
 ### screenshot
 
 <div>
-<img width="300" src="./images/splash.jpg" alt="sk-splash" style="margin-right:10px;display:inline-block;"/>
-<img width="300" src="./images/index.jpg" alt="sk-index"  style="margin-right:10px;display:inline-block;"/>
-<img width="300" src="./images/preview.jpg" alt="sk-preview"  style="margin-right:10px;display:inline-block;"/>
-<img width="300" src="./images/details.jpg" alt="sk-details"  style="margin-right:10px;display:inline-block;"/>
-<img width="300" src="./images/slider.jpg" alt="sk-slider"  style="margin-right:10px;display:inline-block;"/>
-<img width="300" src="./images/music_index.jpg" alt="sk-music_index"  style="margin-right:10px;display:inline-block;"/>
-<img width="300" src="./images/music_play.jpg" alt="sk-music_play"  style="margin-right:10px;display:inline-block;"/>
+<img width="300" src="./images/sk-home.jpg" alt="sk-home" style="margin-right:10px;display:inline-block;"/>
+<img width="300" src="./images/sk-classify.jpg" alt="sk-classify"  style="margin-right:10px;display:inline-block;"/>
+<img width="300" src="./images/sk-preview.jpg" alt="sk-preview"  style="margin-right:10px;display:inline-block;"/>
+<img width="300" src="./images/sk-play.jpg" alt="sk-play"  style="margin-right:10px;display:inline-block;"/>
+<img width="300" src="./images/sk-dark.jpg" alt="sk-dark"  style="margin-right:10px;display:inline-block;"/>
+<img width="300" src="./images/sk-history.jpg" alt="sk-history"  style="margin-right:10px;display:inline-block;"/>
 </div>
 
 ### 待开发功能
@@ -66,6 +65,14 @@ Doctor summary (to see all details, run flutter doctor -v):
 - [x] 会员
 
 ### 版本更新历史
+
+##### V2.1.3
+
+- 增加首页
+
+- 增加播放进度记忆功能
+
+- api 采用 https
 
 ##### V2.1.2
 

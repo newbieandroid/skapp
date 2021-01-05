@@ -30,6 +30,15 @@ abstract class TypeMobx with Store {
   SkType type; // 分类
 
   @observable
+  SkType typeIndex; // 首页分类
+
+  @observable
+  ObservableList typeAll = ObservableList();
+
+  @observable
+  var movieAll;
+
+  @observable
   int currentSearchTypeIndex = 0;
 
   @action
@@ -41,6 +50,49 @@ abstract class TypeMobx with Store {
     var req = HttpRequest(cIp);
     final res = await req.get(preApiUrl + url);
     this.type = SkType.fromJson(res);
+    /* 
+      首页
+      data['type_id'] = this.typeId;
+      data['type_name'] = this.typeName;
+      data['type_en'] = this.typeEn;
+     */
+    var home = {'type_id': 10000, 'type_name': '首页', 'type_en': 'homepage'};
+    this.type.data.insert(0, Data.fromJson(home));
+  }
+
+  // 获取首页分类
+  @action
+  Future<dynamic> fetchIndexData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
+    String preApiUrl = API.PRE_API_URL;
+    var req = HttpRequest(cIp);
+    final res = await req.get(preApiUrl + url);
+    this.typeIndex = SkType.fromJson(res);
+  }
+
+  // 获取所有分类信息
+  @action
+  Future<dynamic> fetchAllTypeData() async {
+    this.isLoading = true;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
+    String preApiUrl = API.PRE_API_URL;
+    var req = HttpRequest(cIp);
+    final res = await req.get(preApiUrl + API.TYPE_ALL);
+    typeAll.addAll(res['data']);
+  }
+
+  // 获取影片信息
+  @action
+  Future<dynamic> fetchMovieInfo() async {
+    this.isLoading = true;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String cIp = prefs.getString('ip') ?? API.BASE_SK_URL;
+    String preApiUrl = API.PRE_API_URL;
+    var req = HttpRequest(cIp);
+    final res = await req.get(preApiUrl + API.MOVIE_ALL);
+    movieAll = res['data'];
   }
 
   @action

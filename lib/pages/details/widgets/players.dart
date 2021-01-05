@@ -78,7 +78,7 @@ class _PlayersState extends State<Players> {
                     ],
                   )),
                   RaisedButton.icon(
-                    icon: IconFont(IconNames.icontouping,
+                    icon: IconFont(IconNames.icontelevision_01,
                         size: 18,
                         color: widget.global.isDark ? '#ffffff' : '#129c90'),
                     color: Colors.transparent,

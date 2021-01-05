@@ -65,6 +65,9 @@ abstract class DetailsStoreMobx with Store {
   @observable
   bool isClickPlayers = false; // 是否点击了切换
 
+  @observable
+  int starttime = 0; // 播放进度
+
   // @computed
   // String get currentUrl {
   //   return players[currentTabs][currentPlayers]['url'] ?? '';
@@ -210,7 +213,9 @@ abstract class DetailsStoreMobx with Store {
         code: 404|200
         type: hls
       */
-        if (res != '' && res['code'] == 200 || res['code'] == '200') {
+        if (res == "") {
+          Fluttertoast.showToast(msg: '解析错误，请切换播放源');
+        } else if (res != '' && (res['code'] == 200 || res['code'] == '200')) {
           // Fluttertoast.showToast(
           //   msg: '连接成功,即将开始播放',
           // );
@@ -247,9 +252,15 @@ abstract class DetailsStoreMobx with Store {
         if (status == 'init') {
           currentTabs = js['sid'] ?? 0;
           currentPlayers = js['nid'] ?? 0;
+          starttime = js['starttime'] ?? 0;
         } else if (status == 'change') {
           js['sid'] = currentTabs;
           js['nid'] = currentPlayers;
+          js['duration'] = '00:00';
+          js['progress'] = '00:00';
+          js['starttime'] = 0;
+          js['islong'] = players[currentTabs].length > 1 ? true : false;
+          js['players'] = players[currentTabs].length;
           //historyLists.fillRange(i, i, json.encode(js));
           historyLists[i] = json.encode(js);
           prefs.setStringList('historyLists', historyLists);
@@ -264,12 +275,45 @@ abstract class DetailsStoreMobx with Store {
         'sid': currentTabs,
         'nid': currentPlayers,
         'vodId': vodId,
-        'vod': vod
+        'vod': vod,
+        'duration': '00:00',
+        'progress': '00:00',
+        'starttime': 0,
+        'islong': players[currentTabs].length > 1 ? true : false,
+        'players': players[currentTabs].length
       };
       historyLists.insert(0, json.encode(obj));
       prefs.setStringList('historyLists', historyLists);
     } else {}
     //}
+  }
+
+  //存储播放进度
+
+  Future<dynamic> handleDisposePlay(
+      String duration, String progress, num starttime) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> historyLists = prefs.getStringList('historyLists') ?? [];
+    for (int i = 0; i < historyLists.length; i++) {
+      var js = json.decode(historyLists[i]);
+      if (js['vodId'] == vodId) {
+        js['sid'] = currentTabs;
+        js['nid'] = currentPlayers;
+        js['duration'] = duration;
+        js['progress'] = progress;
+        js['starttime'] = starttime;
+        js['islong'] = players[currentTabs].length > 1 ? true : false;
+        js['players'] = players[currentTabs].length;
+        //historyLists.fillRange(i, i, json.encode(js));
+        historyLists[i] = json.encode(js);
+        prefs.setStringList('historyLists', historyLists);
+      }
+    }
+  }
+
+  @action
+  void resetStarttime() {
+    starttime = 0;
   }
 
   static bool isVipVideo(String url) {

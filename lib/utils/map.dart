@@ -1,6 +1,18 @@
 import 'package:skapp/iconfont/IconFont.dart';
 
 var typeMap = {
+  'homepage': {
+    'activeIcon': IconFont(IconNames.iconshouye),
+    'normalIcon': IconFont(
+      IconNames.iconshouye,
+      color: '#111111',
+    ),
+    'activeDarkIcon': IconFont(IconNames.iconshouye, color: '#ffffff'),
+    'normalDarkIcon': IconFont(
+      IconNames.iconshouye,
+      color: '#cccccc',
+    ),
+  },
   'dianying': {
     'activeIcon': IconFont(IconNames.icondianying),
     'normalIcon': IconFont(

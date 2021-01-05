@@ -5,6 +5,7 @@ import 'package:flutter_material_color_picker/flutter_material_color_picker.dart
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:skapp/iconfont/IconFont.dart';
+import 'package:skapp/pages/home/index.dart';
 import 'package:skapp/routers/application.dart';
 import 'package:skapp/utils/cache.dart';
 import './../../store/type/type.dart';
@@ -31,7 +32,7 @@ class _App extends State<App> {
   PageController _pageController;
   int _selectIndex = 0;
 
-  List<Widget> _pageList;
+  List<Widget> _pageList = [];
 
   List<BottomNavigationBarItem> itemList = [];
   List<BottomNavigationBarItem> itemDarkList = [];
@@ -75,12 +76,17 @@ class _App extends State<App> {
                   ? typeMap[item.typeEn]['activeDarkIcon']
                   : typeMap['normal']['activeDarkIcon']))
           .toList();
-      if (_pageList == null) {
-        _pageList = store.type.data
-            .map((f) => Classify(
-                  typeId: f.typeId,
-                ))
-            .toList();
+      if (_pageList.length == 0) {
+        for (var i = 0; i < store.type.data.length; i++) {
+          if (store.type.data[i].typeEn == 'homepage') {
+            // 首页单独处理
+            _pageList.add(HomePage());
+          } else {
+            _pageList.add(Classify(
+              typeId: store.type.data[i].typeId,
+            ));
+          }
+        }
       }
       store.changeLoading();
     }
@@ -126,8 +132,7 @@ class _App extends State<App> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(left: 16),
-                  child:
-                      Text('换肤', style: Theme.of(context).textTheme.bodyText2),
+                  child: Text('', style: Theme.of(context).textTheme.bodyText2),
                 ),
                 Expanded(
                   flex: 1,
