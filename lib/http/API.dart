@@ -21,14 +21,14 @@ class API {
   static const TYPE_ALL = '/type/all'; // 所有分类信息
   static const MOVIE_ALL = '/vod/total'; // 所有电影总数和今日更新数
   // app配置
-  static const APP_CONFIG = '/app/config';
+  // static const APP_CONFIG = '/app/config';
   static const APP_ADS = '/app/ads';
   static const APP_VIDEO_INFO = '/app/vipvideoforapp';
-  static const APP_SECRET_LIVE_KEY = 'app/secretlivecheck';
+  // static const APP_SECRET_LIVE_KEY = 'app/secretlivecheck';
   // app更新配置
   static const APP_UPDATE_URL = '/assets/app/appcast.xml';
 
   // 直播接口
-  static const BASE_LIVE_URL = 'http://api.vipmisss.com:81/xcdsw';
-  static const LIVE_ALL_URL = '/json.txt';
+  // static const BASE_LIVE_URL = 'http://api.vipmisss.com:81/xcdsw';
+  // static const LIVE_ALL_URL = '/json.txt';
 }

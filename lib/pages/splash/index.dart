@@ -201,7 +201,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                             CircleAvatar(
                               radius: ScreenUtils.screenW(context) / 4,
                               backgroundImage:
-                                  AssetImage('assets/images/home.png'),
+                                  AssetImage('assets/images/home.jpg'),
                             ),
                             Padding(
                               padding: EdgeInsets.only(
@@ -210,9 +210,9 @@ class _SplashWidgetState extends State<SplashWidget> {
                                 right: 20.0,
                                 bottom: 0,
                               ),
-                              child: Text(
-                                  '    所以我选择了你，因为强者的力量与生俱来，他们失去了对力量的敬畏，而弱者才懂得力量的价值。有爱心，懂得怜悯。',
-                                  maxLines: 3,
+                              child: Text('何必如此认真？\nWHY SO SERIOUS? ',
+                                  textAlign: TextAlign.center,
+                                  maxLines: 6,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context).textTheme.caption),
                             )

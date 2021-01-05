@@ -4,18 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:pk_skeleton/pk_skeleton.dart';
 import 'package:provider/provider.dart';
 import 'package:skapp/dao/vod_list_dao.dart';
-import 'package:skapp/http/http_request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skapp/pages/classify/skitem.dart';
 import 'package:skapp/store/details/details.dart';
 import 'package:skapp/store/root.dart';
 // import 'package:skapp/widgets/flutter_tencentplayer_example/download_page.dart';
-import 'package:skapp/widgets/flutter_tencentplayer_example/window_video_page.dart';
-import './../../http/API.dart';
 
 //http://jx.idc126.net/jx/?url=https://v.youku.com/v_show/id_XMjI2OTc2OTE2.html?spm=a2h03.12024492.drawer3.dzj1_1&scm=20140719.rcmd.1694.show_cbfccde2962411de83b1&s=cbfccde2962411de83b1
 
@@ -113,50 +109,77 @@ class _HistoryPageState extends State<HistoryPage> {
                                     : Color.fromRGBO(128, 128, 128, 1),
                               ),
                             ),
-                            onPressed: () {
+                            onPressed: () async {
                               // 删除全部历史记录
                               // 判断使用有数据
                               if (historyArr.length > 0) {
-                                showDialog(
-                                    context: context,
-                                    builder: (_) => AssetGiffyDialog(
-                                          buttonRadius: 4.0,
-                                          key: Key("AssetDialog"),
-                                          image: Image.asset(
-                                            "assets/images/gif12.gif",
-                                            fit: BoxFit.cover,
-                                          ),
-                                          entryAnimation: EntryAnimation.BOTTOM,
-                                          buttonOkText: Text('确定',
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                          buttonCancelText: Text('取消',
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                          //buttonOkColor: Colors.redAccent,
-                                          title: Text(
-                                            '确定删除全部观影记录？',
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle1,
-                                          ),
-                                          description: Text(
-                                            'Are you sure to delete all viewing records ?',
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          onOkButtonPressed: () async {
-                                            SharedPreferences prefs =
-                                                await SharedPreferences
-                                                    .getInstance();
-                                            prefs.setStringList(
-                                                'historyLists', []);
-                                            setState(() {
-                                              historyArr = [];
-                                              Navigator.of(context).pop();
-                                            });
-                                          },
-                                        ));
+                                //弹出对话框并等待其关闭
+                                bool delete = await showDeleteConfirmDialog();
+                                if (delete == null) {
+                                  //print("取消删除");
+                                } else {
+                                  // print("已确认删除");
+                                  //... 删除文件
+                                }
+                                // AlertDialog(
+                                //   title: Text("提示"),
+                                //   content: Text("您确定要删除当前文件吗?"),
+                                //   actions: <Widget>[
+                                //     FlatButton(
+                                //       child: Text("取消"),
+                                //       onPressed: () =>
+                                //           Navigator.of(context).pop(), //关闭对话框
+                                //     ),
+                                //     FlatButton(
+                                //       child: Text("删除"),
+                                //       onPressed: () {
+                                //         // ... 执行删除操作
+                                //         Navigator.of(context).pop(true); //关闭对话框
+                                //       },
+                                //     ),
+                                //   ],
+                                // );
+
+                                // showDialog(
+                                //     context: context,
+                                //     builder: (_) => AssetGiffyDialog(
+                                //           buttonRadius: 4.0,
+                                //           key: Key("AssetDialog"),
+                                //           image: Image.asset(
+                                //             "assets/images/delete.png",
+                                //             fit: BoxFit.contain,
+                                //           ),
+                                //           entryAnimation: EntryAnimation.BOTTOM,
+                                //           buttonOkText: Text('确定',
+                                //               style: TextStyle(
+                                //                   color: Colors.white)),
+                                //           buttonCancelText: Text('取消',
+                                //               style: TextStyle(
+                                //                   color: Colors.white)),
+                                //           //buttonOkColor: Colors.redAccent,
+                                //           title: Text(
+                                //             '确定删除全部观影记录？',
+                                //             textAlign: TextAlign.center,
+                                //             style: Theme.of(context)
+                                //                 .textTheme
+                                //                 .subtitle1,
+                                //           ),
+                                //           description: Text(
+                                //             'Are you sure to delete all viewing records ?',
+                                //             textAlign: TextAlign.center,
+                                //           ),
+                                //           onOkButtonPressed: () async {
+                                //             SharedPreferences prefs =
+                                //                 await SharedPreferences
+                                //                     .getInstance();
+                                //             prefs.setStringList(
+                                //                 'historyLists', []);
+                                //             setState(() {
+                                //               historyArr = [];
+                                //               Navigator.of(context).pop();
+                                //             });
+                                //           },
+                                //         ));
                               }
                             },
                           ),
@@ -240,6 +263,39 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
               ),
       ),
+    );
+  }
+
+  // 弹出对话框
+  Future<bool> showDeleteConfirmDialog() {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            "提示",
+            //style: Theme.of(context).textTheme.headline6,
+          ),
+          content: Text("确定删除观影历史？"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("取消"),
+              onPressed: () => Navigator.of(context).pop(), // 关闭对话框
+            ),
+            FlatButton(
+              child: Text("确定"),
+              onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setStringList('historyLists', []);
+                setState(() {
+                  historyArr = [];
+                  Navigator.of(context).pop();
+                });
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
