@@ -4,6 +4,10 @@
 
 此APP直接操作苹果cms数据库，所以你只需要一个数据库就可完美运行。所有配置都在yaml文件中操作，提供APP端个性化配置。
 
+## 网页版
+
+https://sk.ncer.top
+
 ## 淘宝店铺直达
 
 https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.50111debmvIFBe&ft=t&id=637993247789
@@ -14,12 +18,9 @@ https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.50111debmvIFBe&ft=t&id=6
 
 ## apk演示版：
 
-链接: https://pan.baidu.com/s/1QLUj_UnB3iTGFbzu4s6hHA 提取码: 1wfr
-
 链接：https://sk.ncer.top/assets/app/app-release.apk
 
 ## ios演示版（ipa文件需要自行签名安装）：
-链接: https://pan.baidu.com/s/123MbGh7hKWDpSsfZZiKz2w 提取码: 2tq9
 
 链接：https://sk.ncer.top/assets/app/Payload.ipa
 
