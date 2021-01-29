@@ -33,7 +33,7 @@ https://item.taobao.com/item.htm?spm=a2oq0.12575281.0.0.50111debmvIFBe&ft=t&id=6
 
 - 4.暗黑模式，晚上就要用晚上的颜色，做到暗黑全覆盖，
 
-- 5.强大的解析能力，支持mp4，m3u8，avi，rmtp，rtmp协议，支持vip视频解析播放，爱奇艺，优酷，腾讯，芒果，BiliBili等等，支持webview形式的视频嵌套。
+- 5.强大的解析能力，支持mp4，m3u8，avi，rmtp，rtmp协议，支持vip视频解析播放，爱奇艺，优酷，腾讯，芒果，BiliBili等等，自定义特征解析。
 
 - 6.API加密，让你的数据更安全，密钥可在后端配置，
 
